@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
@@ -14,8 +13,10 @@ import {
 
 // Subpages
 import AILiteracy from './ai101/AILiteracy'
+import AILiteracyWizard from './ai101/AILiteracyWizard'
 import PlatformComparison from './ai101/PlatformComparison'
 import PolicyExplainer from './ai101/PolicyExplainer'
+import AIEthicsCompass from './ai101/AIEthicsCompass'
 import AIWatch from './ai101/AIWatch'
 
 const AI101 = () => {
@@ -26,10 +27,10 @@ const AI101 = () => {
     {
       icon: <BookOpen className="h-8 w-8" />,
       title: "AI Literacy",
-      description: "Learn AI basics, LLM, prompt engineering, and other important concepts in easy-to-understand language",
+      description: "Pelajari konsep AI dengan pendekatan step-by-step yang interaktif. Setiap modul dipecah menjadi video, kartu analogi, dan kuis skenario dunia nyata.",
       href: "/ai101/literacy",
       color: "from-blue-500 to-cyan-500",
-      highlights: ["AI Basics", "Machine Learning", "Prompt Engineering", "Interactive Quiz"]
+      highlights: ["Wizard Learning Flow", "Interactive Analogy Cards", "Real-World Quiz", "Step Completion"]
     },
     {
       icon: <BarChart3 className="h-8 w-8" />,
@@ -41,11 +42,11 @@ const AI101 = () => {
     },
     {
       icon: <FileText className="h-8 w-8" />,
-      title: "AI Policy Explainer",
-      description: "Understand the latest AI regulations and policies in Indonesia with easy-to-digest visual explanations",
+      title: "Kompas Etika AI",
+      description: "Tidak memberikan jawaban 'boleh/tidak boleh', tapi mengajukan pertanyaan Sokratik untuk membantu Anda menemukan wisdom dalam setiap dilema etika AI.",
       href: "/ai101/policy",
       color: "from-green-500 to-teal-500",
-      highlights: ["Data Protection Law", "Deepfake Regulations", "Digital Campaigns", "Compliance"]
+      highlights: ["Socratic Method", "Personal Guidance", "Context-Aware", "Non-Judgmental"]
     },
     {
       icon: <Eye className="h-8 w-8" />,
@@ -60,9 +61,11 @@ const AI101 = () => {
   if (!isMainPage) {
     return (
       <Routes>
-        <Route path="/literacy" element={<AILiteracy />} />
+        <Route path="/literacy" element={<AILiteracyWizard />} />
+        <Route path="/literacy-classic" element={<AILiteracy />} />
         <Route path="/comparison" element={<PlatformComparison />} />
-        <Route path="/policy" element={<PolicyExplainer />} />
+        <Route path="/policy" element={<AIEthicsCompass />} />
+        <Route path="/policy-classic" element={<PolicyExplainer />} />
         <Route path="/watch" element={<AIWatch />} />
       </Routes>
     )

@@ -46,7 +46,7 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-white/20' 
-          : 'bg-transparent'
+          : 'bg-white/90 backdrop-blur-sm shadow-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +63,9 @@ const Header = () => {
             </div>
             <div>
               <span className="text-2xl font-bold gradient-text">EIRA</span>
-              <p className="text-xs text-neutral-600 -mt-1">Ethical AI Reflection & Awareness</p>
+              <p className={`text-xs -mt-1 transition-colors duration-300 ${
+                isScrolled ? 'text-neutral-600' : 'text-neutral-700'
+              }`}>Ethical AI Reflection & Awareness</p>
             </div>
           </Link>
 
@@ -76,7 +78,9 @@ const Header = () => {
                   className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors duration-300 ${
                     location.pathname.startsWith(item.href)
                       ? 'text-primary-600'
-                      : 'text-neutral-700 hover:text-primary-600'
+                      : isScrolled 
+                        ? 'text-neutral-700 hover:text-primary-600'
+                        : 'text-neutral-800 hover:text-primary-600'
                   }`}
                 >
                   <span>{item.name}</span>
@@ -106,7 +110,11 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-300"
+            className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
+              isScrolled
+                ? 'text-neutral-700 hover:text-primary-600 hover:bg-primary-50'
+                : 'text-neutral-800 hover:text-primary-600 hover:bg-primary-50'
+            }`}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
