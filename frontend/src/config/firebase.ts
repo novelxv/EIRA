@@ -21,6 +21,13 @@ export const auth = getAuth(app)
 // Initialize Google Auth Provider
 export const googleProvider = new GoogleAuthProvider()
 
+// Configure Google provider settings
+googleProvider.addScope('profile')
+googleProvider.addScope('email')
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+})
+
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app)
 
