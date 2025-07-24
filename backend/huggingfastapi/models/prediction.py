@@ -1,11 +1,10 @@
 from pydantic import BaseModel
-from huggingfastapi.core.config import QUESTION_ANSWER_MODEL
+from huggingfastapi.core.config import AI_DETECTION_MODEL
 
 
-class QAPredictionResult(BaseModel):
-
-    score: float
-    start: int
-    end: int
-    answer: str
-    model: str = QUESTION_ANSWER_MODEL
+class AIDetectionResult(BaseModel):
+    
+    probability: float
+    label: int
+    prediction: str
+    model: str = AI_DETECTION_MODEL
