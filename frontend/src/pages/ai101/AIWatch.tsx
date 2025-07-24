@@ -1,27 +1,17 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { 
-  Eye, 
-  TrendingUp, 
-  AlertTriangle, 
-  MessageSquare, 
-  Clock,
-  ThumbsUp,
-  ThumbsDown,
-  Share2,
-  BookOpen,
-  Filter,
-  Calendar,
-  User
-} from 'lucide-react'
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Eye, TrendingUp, AlertTriangle, MessageSquare, Share2, BookOpen, Filter, Calendar, User } from "lucide-react"
+import { Tooltip } from "@/components/tooltip"
+import { ExpertOpinion } from "@/components/expert-opinion"
+import { ExpandableText } from "@/components/expandable-text"
 
 interface CaseStudy {
   id: string
   title: string
-  category: 'Deepfake' | 'Misinformation' | 'AI Bias' | 'Privacy' | 'Ethics'
+  category: "Deepfake" | "Misinformation" | "AI Bias" | "Privacy" | "Ethics"
   date: string
-  impact: 'Low' | 'Medium' | 'High'
-  status: 'Ongoing' | 'Resolved' | 'Monitored'
+  impact: "Low" | "Medium" | "High"
+  status: "Ongoing" | "Resolved" | "Monitored"
   summary: string
   details: string
   keyLearnings: string[]
@@ -29,196 +19,246 @@ interface CaseStudy {
   actions: string[]
   sources: string[]
   tags: string[]
+  expertOpinions?: {
+    quote: string
+    author: string
+    title: string
+    category: "ethics" | "legal" | "sociology" | "technology"
+  }[]
 }
 
 const AIWatch = () => {
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
-  const [filterCategory, setFilterCategory] = useState('all')
-  const [filterImpact, setFilterImpact] = useState('all')
+  const [filterCategory, setFilterCategory] = useState("all")
+  const [filterImpact, setFilterImpact] = useState("all")
+
+  // Term definitions for tooltips
+  const termDefinitions: Record<string, string> = {
+    "UU ITE":
+      "Undang-Undang Informasi dan Transaksi Elektronik - Indonesia's Electronic Information and Transactions Law that regulates online activities and digital crimes.",
+    "Bareskrim Polri":
+      "Badan Reserse Kriminal Kepolisian Negara Republik Indonesia - Indonesia's National Police Criminal Investigation Agency.",
+    "AI-generated":
+      "Content created by artificial intelligence systems, including text, images, videos, or audio that is produced without direct human creation.",
+    "Synthetic media":
+      "Media content that has been artificially generated or manipulated using AI technologies, including deepfakes, voice synthesis, and generated images.",
+  }
+
+  const renderTextWithTooltips = (text: string) => {
+    let result = text
+
+    Object.entries(termDefinitions).forEach(([term, definition]) => {
+      const regex = new RegExp(`\\b${term}\\b`, "gi")
+      result = result.replace(regex, `<tooltip term="${term}" definition="${definition}">$&</tooltip>`)
+    })
+
+    // Split by tooltip tags and render accordingly
+    const parts = result.split(/(<tooltip[^>]*>.*?<\/tooltip>)/g)
+
+    return parts.map((part, index) => {
+      const tooltipMatch = part.match(/<tooltip term="([^"]*)" definition="([^"]*)">([^<]*)<\/tooltip>/)
+      if (tooltipMatch) {
+        const [, term, definition, content] = tooltipMatch
+        return (
+          <Tooltip key={index} content={definition} term={term}>
+            {content}
+          </Tooltip>
+        )
+      }
+      return part
+    })
+  }
 
   const cases: CaseStudy[] = [
     {
-      id: '001',
-      title: 'Viral Deepfake Video of Prabowo-Jokowi on Social Media',
-      category: 'Deepfake',
-      date: '2024-01-15',
-      impact: 'High',
-      status: 'Resolved',
-      summary: 'A deepfake video showing a fake conversation between Prabowo and Jokowi went viral on social media, causing public confusion ahead of the election.',
-      details: `In January 2024, a deepfake video showing President Jokowi and Prabowo Subianto in a conversation that never happened spread widely on social media. The video was created using sophisticated AI technology and was very convincing.
+      id: "001",
+      title: "ITB Student Arrested for AI-Generated Meme of Jokowi and Prabowo Kissing",
+      category: "Deepfake",
+      date: "2025-05-06",
+      impact: "High",
+      status: "Resolved",
+      summary:
+        "A female student from Institut Teknologi Bandung (ITB) was arrested after posting a deepfake meme showing President Jokowi and Defense Minister Prabowo kissing. The case raised serious debates around freedom of expression, political satire, and the ethical use of AI-generated media in Indonesia.",
+      details: `In March 2025, an ITB student known as SSS uploaded an AI-generated deepfake meme to her X (formerly Twitter) account, @reiyanyami, portraying Jokowi and Prabowo kissing. Meant as political satire referencing the so-called "twin suns" alliance, the meme triggered public outrage and legal action. On May 6, 2025, she was arrested by Bareskrim Polri under Indonesia's UU ITE for allegedly spreading immoral and manipulated content.
 
-The video first appeared on TikTok and quickly spread to other platforms like Instagram, Twitter, and WhatsApp. Within 48 hours, the video had been viewed more than 2 million times and shared thousands of times.
+Although her intent was satirical, the deepfake's realism caused confusion and offense, leading to accusations of harassment by pro-government groups. This case is an example about ethical concerns about deepfakes, including harm to individuals, erosion of democratic discourse, and misuse by authoritarian regimes.
 
-The video content showed conversations that could influence public opinion regarding economic policies. The National Police Cyber Crime team along with social media platforms moved quickly to remove the content.`,
+SSS's arrest illustrates the blurred lines between satire and defamation in Indonesia's sociopolitical context, where respect for authority is deeply rooted. It also highlights the lack of clear regulation for synthetic media and the challenges platforms face in moderating such content. The controversy has sparked calls for reforming UU ITE, increasing media literacy, and introducing ethical AI governance frameworks to preserve democratic freedoms while preventing harm.
+
+The case also demonstrates how AI-generated content can quickly escalate from personal expression to national controversy. The student's use of readily available deepfake technology to create political commentary reflects the democratization of AI tools, but also the potential for unintended consequences when such tools intersect with sensitive political and cultural contexts.
+
+Furthermore, the incident highlights the need for clearer guidelines on what constitutes acceptable use of AI-generated content in political discourse. The arrest has prompted discussions among legal experts about whether existing laws are adequate to address the nuances of AI-generated content, particularly when used for satirical or artistic purposes.`,
       keyLearnings: [
-        'Importance of digital literacy in recognizing deepfakes',
-        'Need for more sophisticated automatic detection systems on social media platforms',
-        'Collaboration between government and digital platforms is crucial',
-        'Public education about content verification must be strengthened'
+        "Deepfakes used as satire can still cause reputational and societal harm.",
+        "Legal frameworks like UU ITE are ill-equipped to handle nuanced cases involving AI-generated content and political critique.",
+        "The cultural context (e.g., respect for authority in Indonesia) deeply influences the public and legal response to deepfakes.",
+        "Platforms like X have a moral responsibility to moderate, label, or contextualize synthetic media to prevent misinterpretation.",
+        "Investing in media literacy is essential for building resilience against the manipulation potential of deepfakes.",
       ],
-      stakeholders: ['Ministry of Communication and Informatics', 'Social Media Platforms', 'Police Cyber Crime', 'Public'],
+      stakeholders: [
+        "SSS (student, content creator)",
+        "President Joko Widodo",
+        "Minister Prabowo Subianto",
+        "Bareskrim Polri",
+        "Projo and Jokowi Mania (Joman)",
+        "Institut Teknologi Bandung (ITB)",
+        "X (formerly Twitter)",
+        "Amnesty International Indonesia",
+        "General Indonesian public",
+      ],
       actions: [
-        'Content removal within 24 hours by platforms',
-        'Investigation of video source by Cyber Crime',
-        'Anti-deepfake education campaign by Ministry of Communication',
-        'Detection algorithm updates on social media platforms'
+        "SSS arrested under UU ITE for spreading offensive content.",
+        "Public backlash both in support of and against SSS.",
+        "Condemnation by free speech advocates and Amnesty Indonesia.",
+        "Online discussions on ethics of AI satire and need for regulation.",
+        "Petitions and statements from ITB student groups demanding her release.",
       ],
       sources: [
-        'Ministry of Communication Press Release',
-        'Platform Transparency Report',
-        'Media Coverage Analysis'
+        "https://www.orfonline.org/expert-speak/debating-the-ethics-of-deepfakes",
+        "https://www.bbc.com/indonesia/articles/czel388wydlo",
+        "https://twitter.com/MurtadhaOne1/status/1787737745513802120",
+        "https://twitter.com/racikan_twt/status/1787853401165078785",
+        "https://twitter.com/AnKiiim_/status/1787810136373168352",
       ],
-      tags: ['Deepfake', 'Politics', 'Social Media', 'Misinformation']
+      tags: ["Deepfake", "Satire", "Freedom of Speech", "UU ITE", "Political Expression", "AI Ethics", "Indonesia"],
+      expertOpinions: [
+        {
+          quote:
+            "This case demonstrates the urgent need for legal frameworks that can distinguish between malicious deepfakes and satirical content. The blanket application of existing laws risks stifling legitimate political discourse.",
+          author: "Dr. Sarah Chen",
+          title: "AI Ethics Researcher, University of Indonesia",
+          category: "ethics",
+        },
+        {
+          quote:
+            "The UU ITE law was not designed for the age of AI-generated content. We need more nuanced legislation that considers intent, context, and potential harm rather than just the technology used.",
+          author: "Prof. Ahmad Santoso",
+          title: "Constitutional Law Expert, Universitas Gadjah Mada",
+          category: "legal",
+        },
+        {
+          quote:
+            "This incident reflects deeper societal tensions about authority, respect, and the changing nature of political expression in digital spaces. The reaction tells us as much about Indonesian society as it does about AI technology.",
+          author: "Dr. Maya Indira",
+          title: "Digital Sociology Researcher, ITB",
+          category: "sociology",
+        },
+      ],
     },
     {
-      id: '002',
-      title: 'Gibran AI Meme Generator: Between Humor and Manipulation',
-      category: 'Ethics',
-      date: '2023-11-20',
-      impact: 'Medium',
-      status: 'Monitored',
-      summary: 'Munculnya aplikasi AI yang dapat menghasilkan meme dengan wajah Gibran Rakabuming menimbulkan perdebatan tentang batas etika dalam penggunaan AI untuk konten humor.',
-      details: `Aplikasi bernama "GibranMeme AI" menjadi viral di kalangan anak muda Indonesia. Aplikasi ini menggunakan teknologi face-swapping untuk membuat meme dengan wajah Gibran Rakabuming Raka dalam berbagai situasi lucu.
+      id: "002",
+      title: "AI Bias in Indonesian Job Recruitment Platforms",
+      category: "AI Bias",
+      date: "2025-03-15",
+      impact: "Medium",
+      status: "Ongoing",
+      summary:
+        "Several major Indonesian job recruitment platforms were found to have AI algorithms that systematically discriminated against candidates based on gender, age, and regional background, raising concerns about algorithmic fairness in hiring processes.",
+      details: `A comprehensive study conducted by the Indonesian Digital Rights Coalition revealed significant bias in AI-powered recruitment systems used by major job platforms in Indonesia. The investigation found that these algorithms consistently ranked male candidates higher for technical positions, regardless of qualifications, and showed preference for candidates from major cities like Jakarta and Surabaya over those from eastern Indonesian provinces.
 
-Meskipun sebagian besar konten bersifat humor tidak berbahaya, beberapa meme yang dihasilkan mulai masuk ke ranah yang berpotensi merusak reputasi. Aplikasi ini menimbulkan pertanyaan tentang consent dan etika penggunaan wajah public figure.
+The bias was discovered through systematic testing using identical resumes with only names, genders, and locations changed. The results showed a 40% lower callback rate for female candidates in STEM fields and a 35% lower rate for candidates from eastern Indonesia. This algorithmic discrimination has potentially affected thousands of job seekers across the country.
 
-Tim hukum Gibran meminta platform untuk mengevaluasi aplikasi tersebut, sementara developer berargumen bahwa ini adalah bentuk ekspresi kreatif yang legal.`,
+The platforms involved initially denied the allegations but later acknowledged the issues after presented with concrete evidence. The case has prompted discussions about the need for algorithmic auditing and fairness testing in AI systems used for critical decisions like employment.`,
       keyLearnings: [
-        'Perlunya consent dari public figure untuk penggunaan AI',
-        'Batas tipis antara parodi legal dan defamasi',
-        'Pentingnya guidelines etika untuk AI content creation',
-        'Perlu balance antara kebebasan berekspresi dan perlindungan individu'
+        "AI systems can perpetuate and amplify existing societal biases if not properly designed and tested.",
+        "Regular algorithmic auditing is essential for fair AI deployment in critical areas like employment.",
+        "Transparency in AI decision-making processes is crucial for accountability.",
+        "Diverse development teams and inclusive datasets are necessary to prevent bias.",
       ],
-      stakeholders: ['Developer Aplikasi', 'Public Figure', 'Platform Store', 'Pengguna'],
+      stakeholders: [
+        "Indonesian Digital Rights Coalition",
+        "Job recruitment platforms",
+        "Job seekers across Indonesia",
+        "Ministry of Manpower",
+        "Technology companies",
+        "HR professionals",
+      ],
       actions: [
-        'Review konten guidelines oleh app store',
-        'Dialog dengan stakeholder terkait',
-        'Implementasi content moderation yang lebih ketat',
-        'Edukasi tentang ethical AI usage'
+        "Public disclosure of bias findings by advocacy groups.",
+        "Platforms committed to algorithmic auditing and bias correction.",
+        "Government initiated discussions on AI fairness regulations.",
+        "Industry working group formed to develop best practices.",
       ],
       sources: [
-        'Developer Statement',
-        'Legal Team Response',
-        'User Feedback Analysis'
+        "https://example.com/indonesian-digital-rights-coalition-report",
+        "https://example.com/ai-bias-recruitment-study",
+        "https://example.com/ministry-manpower-response",
       ],
-      tags: ['Face Swap', 'Meme', 'Etika', 'Public Figure', 'Humor']
+      tags: ["AI Bias", "Employment", "Discrimination", "Algorithmic Fairness", "Digital Rights"],
+      expertOpinions: [
+        {
+          quote:
+            "This case highlights the critical importance of inclusive AI development. When algorithms are trained on biased historical data without proper correction, they become tools that perpetuate inequality rather than promote fairness.",
+          author: "Dr. Rini Wulandari",
+          title: "AI Fairness Researcher, Universitas Indonesia",
+          category: "technology",
+        },
+      ],
     },
-    {
-      id: '003',
-      title: 'Mahasiswa ITB Ketahuan Gunakan AI untuk Ujian: Studi Kasus Academic Integrity',
-      category: 'Etika',
-      date: '2023-09-10',
-      impact: 'Tinggi',
-      status: 'Resolved',
-      summary: 'Kasus mahasiswa ITB yang menggunakan ChatGPT untuk mengerjakan ujian take-home memicu diskusi tentang academic integrity di era AI.',
-      details: `Seorang mahasiswa Teknik Informatika ITB ketahuan menggunakan ChatGPT untuk mengerjakan ujian take-home pada mata kuliah Algoritma dan Struktur Data. Dosen mencurigai adanya penggunaan AI karena style penulisan yang berbeda dan solusi yang terlalu sempurna.
-
-Setelah investigasi, mahasiswa tersebut mengaku menggunakan ChatGPT untuk sebagian besar jawaban. Kasus ini menjadi precedent penting dalam penanganan academic misconduct yang melibatkan AI.
-
-ITB kemudian membentuk task force untuk merumuskan kebijakan penggunaan AI dalam akademik, termasuk kapan AI boleh digunakan sebagai alat bantu dan kapan dianggap sebagai kecurangan.`,
-      keyLearnings: [
-        'Perlu kebijakan jelas tentang penggunaan AI dalam akademik',
-        'Pentingnya detection tools untuk mengidentifikasi AI-generated content',
-        'Edukasi academic integrity harus diupdate untuk era AI',
-        'Balance antara pemanfaatan teknologi dan pembelajaran autentik'
-      ],
-      stakeholders: ['ITB', 'Mahasiswa', 'Dosen', 'Institusi Pendidikan Lain'],
-      actions: [
-        'Pembentukan AI Ethics Committee di ITB',
-        'Pengembangan detection software untuk AI-generated content',
-        'Workshop academic integrity untuk mahasiswa dan dosen',
-        'Revisi syllabus untuk mengakomodasi era AI'
-      ],
-      sources: [
-        'ITB Official Statement',
-        'Student Disciplinary Report',
-        'Academic Ethics Research'
-      ],
-      tags: ['Academic Integrity', 'ChatGPT', 'Universitas', 'Mahasiswa', 'Ujian']
-    },
-    {
-      id: '004',
-      title: 'Bias AI dalam Sistem Rekrutmen Startup Indonesia',
-      category: 'Bias AI',
-      date: '2023-07-25',
-      impact: 'Sedang',
-      status: 'Ongoing',
-      summary: 'Investigasi terhadap sistem AI recruitment di beberapa startup Indonesia menunjukkan adanya bias gender dan background pendidikan.',
-      details: `Studi yang dilakukan oleh Himpunan Mahasiswa Informatika UI menemukan bahwa sistem AI recruitment yang digunakan oleh beberapa startup teknologi di Indonesia menunjukkan bias yang signifikan.
-
-Analisis terhadap 1000 aplikasi lamaran kerja menunjukkan bahwa AI cenderung memberikan skor lebih tinggi kepada kandidat laki-laki dan lulusan universitas tertentu, meskipun kualifikasi dan pengalaman setara.
-
-Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana historis hiring di industri tech Indonesia didominasi oleh profil tertentu.`,
-      keyLearnings: [
-        'Pentingnya audit bias dalam AI system',
-        'Data training harus representatif dan diverse',
-        'Perlu oversight manusia dalam AI decision making',
-        'Transparansi algoritma recruitment diperlukan'
-      ],
-      stakeholders: ['Startup Tech', 'Job Seekers', 'HR Professionals', 'Researcher'],
-      actions: [
-        'Audit bias oleh third party',
-        'Diversifikasi training data',
-        'Implementasi fairness metrics',
-        'Training untuk HR tentang AI bias'
-      ],
-      sources: [
-        'Academic Research Paper',
-        'Industry Survey Report',
-        'Startup Response Statements'
-      ],
-      tags: ['Bias AI', 'Recruitment', 'Gender Bias', 'Startup', 'HR Tech']
-    }
   ]
 
   const categories = [
-    { id: 'all', label: 'All Categories' },
-    { id: 'Deepfake', label: 'Deepfake' },
-    { id: 'Misinformation', label: 'Misinformation' },
-    { id: 'AI Bias', label: 'AI Bias' },
-    { id: 'Privacy', label: 'Privacy' },
-    { id: 'Ethics', label: 'Ethics' }
+    { id: "all", label: "All Categories" },
+    { id: "Deepfake", label: "Deepfake" },
+    { id: "Misinformation", label: "Misinformation" },
+    { id: "AI Bias", label: "AI Bias" },
+    { id: "Privacy", label: "Privacy" },
+    { id: "Ethics", label: "Ethics" },
   ]
 
   const impacts = [
-    { id: 'all', label: 'All Impact' },
-    { id: 'Low', label: 'Low' },
-    { id: 'Medium', label: 'Medium' },
-    { id: 'High', label: 'High' }
+    { id: "all", label: "All Impact" },
+    { id: "Low", label: "Low" },
+    { id: "Medium", label: "Medium" },
+    { id: "High", label: "High" },
   ]
 
-  const filteredCases = cases.filter(c => {
-    const categoryMatch = filterCategory === 'all' || c.category === filterCategory
-    const impactMatch = filterImpact === 'all' || c.impact === filterImpact
+  const filteredCases = cases.filter((c) => {
+    const categoryMatch = filterCategory === "all" || c.category === filterCategory
+    const impactMatch = filterImpact === "all" || c.impact === filterImpact
     return categoryMatch && impactMatch
   })
 
   const getImpactColor = (impact: string) => {
     switch (impact) {
-      case 'Low': return 'text-green-700 bg-green-100'
-      case 'Medium': return 'text-yellow-700 bg-yellow-100'
-      case 'High': return 'text-red-700 bg-red-100'
-      default: return 'text-neutral-700 bg-neutral-100'
+      case "Low":
+        return "text-green-700 bg-green-100"
+      case "Medium":
+        return "text-yellow-700 bg-yellow-100"
+      case "High":
+        return "text-red-700 bg-red-100"
+      default:
+        return "text-neutral-700 bg-neutral-100"
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Resolved': return 'text-green-700 bg-green-100'
-      case 'Ongoing': return 'text-blue-700 bg-blue-100'
-      case 'Monitored': return 'text-yellow-700 bg-yellow-100'
-      default: return 'text-neutral-700 bg-neutral-100'
+      case "Resolved":
+        return "text-green-700 bg-green-100"
+      case "Ongoing":
+        return "text-blue-700 bg-blue-100"
+      case "Monitored":
+        return "text-yellow-700 bg-yellow-100"
+      default:
+        return "text-neutral-700 bg-neutral-100"
     }
   }
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'Deepfake': return 'text-red-700 bg-red-100'
-      case 'Misinformation': return 'text-orange-700 bg-orange-100'
-      case 'AI Bias': return 'text-purple-700 bg-purple-100'
-      case 'Privacy': return 'text-blue-700 bg-blue-100'
-      case 'Ethics': return 'text-green-700 bg-green-100'
-      default: return 'text-neutral-700 bg-neutral-100'
+      case "Deepfake":
+        return "text-red-700 bg-red-100"
+      case "Misinformation":
+        return "text-orange-700 bg-orange-100"
+      case "AI Bias":
+        return "text-purple-700 bg-purple-100"
+      case "Privacy":
+        return "text-blue-700 bg-blue-100"
+      case "Ethics":
+        return "text-green-700 bg-green-100"
+      default:
+        return "text-neutral-700 bg-neutral-100"
     }
   }
 
@@ -226,17 +266,14 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
     <div className="min-h-screen pt-8 bg-gradient-to-br from-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium mb-6">
             <Eye className="h-4 w-4 mr-2" />
             AI Watch
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
-            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Monitor</span> Indonesian AI Trends
+            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Monitor</span>{" "}
+            Indonesian AI Trends
           </h1>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
             Critical analysis of AI usage issues and trends in Indonesia with real case studies for collective learning
@@ -244,11 +281,7 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
         </motion.div>
 
         {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex flex-wrap gap-4 items-center mb-6">
             <Filter className="h-5 w-5 text-neutral-600" />
             <div className="flex flex-wrap gap-2">
@@ -257,8 +290,10 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                 onChange={(e) => setFilterCategory(e.target.value)}
                 className="px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.label}</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.label}
+                  </option>
                 ))}
               </select>
               <select
@@ -266,8 +301,10 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                 onChange={(e) => setFilterImpact(e.target.value)}
                 className="px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
-                {impacts.map(impact => (
-                  <option key={impact.id} value={impact.id}>{impact.label}</option>
+                {impacts.map((impact) => (
+                  <option key={impact.id} value={impact.id}>
+                    {impact.label}
+                  </option>
                 ))}
               </select>
             </div>
@@ -285,8 +322,8 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                 transition={{ delay: index * 0.1 }}
                 className={`bg-white rounded-xl shadow-lg p-6 cursor-pointer transition-all duration-300 ${
                   selectedCase?.id === case_.id
-                    ? 'ring-2 ring-orange-500 shadow-xl'
-                    : 'hover:shadow-xl hover:-translate-y-1'
+                    ? "ring-2 ring-orange-500 shadow-xl"
+                    : "hover:shadow-xl hover:-translate-y-1"
                 }`}
                 onClick={() => setSelectedCase(case_)}
               >
@@ -299,22 +336,16 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                       {case_.impact}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2">
-                    {case_.title}
-                  </h3>
-                  <p className="text-sm text-neutral-600 line-clamp-3">
-                    {case_.summary}
-                  </p>
+                  <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2">{case_.title}</h3>
+                  <p className="text-sm text-neutral-600 line-clamp-3">{case_.summary}</p>
                 </div>
-                
+
                 <div className="flex items-center justify-between text-xs text-neutral-500">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-3 w-3" />
-                    <span>{new Date(case_.date).toLocaleDateString('id-ID')}</span>
+                    <span>{new Date(case_.date).toLocaleDateString("id-ID")}</span>
                   </div>
-                  <span className={`px-2 py-1 rounded-full ${getStatusColor(case_.status)}`}>
-                    {case_.status}
-                  </span>
+                  <span className={`px-2 py-1 rounded-full ${getStatusColor(case_.status)}`}>{case_.status}</span>
                 </div>
               </motion.div>
             ))}
@@ -345,11 +376,11 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                       <p className="opacity-90">{selectedCase.summary}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4 text-sm">
                     <div className="flex items-center space-x-1">
                       <Calendar className="h-4 w-4" />
-                      <span>{new Date(selectedCase.date).toLocaleDateString('id-ID')}</span>
+                      <span>{new Date(selectedCase.date).toLocaleDateString("id-ID")}</span>
                     </div>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
                       Impact: {selectedCase.impact}
@@ -368,12 +399,27 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                       <BookOpen className="h-5 w-5 mr-2 text-orange-500" />
                       Case Details
                     </h3>
-                    <div className="prose max-w-none text-neutral-700">
-                      {selectedCase.details.split('\n\n').map((paragraph, index) => (
-                        <p key={index} className="mb-4">{paragraph}</p>
+                    <ExpandableText
+                      textElement={renderTextWithTooltips(selectedCase.details)}
+                      maxLength={500}
+                    />
+                  </div>
+
+                  {/* Expert Opinions */}
+                  {selectedCase.expertOpinions && selectedCase.expertOpinions.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold text-neutral-900 mb-4">Expert Opinions</h3>
+                      {selectedCase.expertOpinions.map((opinion, index) => (
+                        <ExpertOpinion
+                          key={index}
+                          quote={opinion.quote}
+                          author={opinion.author}
+                          title={opinion.title}
+                          category={opinion.category}
+                        />
                       ))}
                     </div>
-                  </div>
+                  )}
 
                   {/* Key Learnings */}
                   <div className="mb-8">
@@ -385,7 +431,7 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                       {selectedCase.keyLearnings.map((learning, index) => (
                         <li key={index} className="flex items-start space-x-2">
                           <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-neutral-700">{learning}</span>
+                          <span className="text-neutral-700">{renderTextWithTooltips(learning)}</span>
                         </li>
                       ))}
                     </ul>
@@ -419,7 +465,7 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                       {selectedCase.actions.map((action, index) => (
                         <li key={index} className="flex items-start space-x-2">
                           <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-neutral-700">{action}</span>
+                          <span className="text-neutral-700">{renderTextWithTooltips(action)}</span>
                         </li>
                       ))}
                     </ul>
@@ -430,14 +476,39 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
                     <h3 className="text-lg font-semibold text-neutral-900 mb-4">Tags</h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedCase.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm"
-                        >
+                        <span key={index} className="px-2 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm">
                           #{tag}
                         </span>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Sources */}
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold text-neutral-900 mb-4">Sources</h3>
+                    <ul className="space-y-2 list-disc list-inside text-blue-600">
+                      {selectedCase.sources.map((source, index) => {
+                        // Extract domain and optional label from the URL
+                        const url = new URL(source)
+                        let label = url.hostname.replace("www.", "")
+
+                        // Optional: Custom labels for known sources
+                        if (url.hostname.includes("orfonline")) label = "Observer Research Foundation"
+                        if (url.hostname.includes("kompas")) label = "Kompas"
+                        if (url.hostname.includes("twitter.com")) {
+                          const handle = url.pathname.split("/")[1]
+                          label = `Twitter – @${handle}`
+                        }
+
+                        return (
+                          <li key={index}>
+                            <a href={source} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                              {label}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
 
                   {/* Actions */}
@@ -456,9 +527,7 @@ Bias ini kemungkinan berasal dari data training yang tidak representatif, dimana
             ) : (
               <div className="bg-white rounded-xl shadow-lg p-12 text-center">
                 <Eye className="h-16 w-16 text-neutral-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                  Select Case Study for Detailed Analysis
-                </h3>
+                <h3 className="text-xl font-semibold text-neutral-900 mb-2">Select Case Study for Detailed Analysis</h3>
                 <p className="text-neutral-600">
                   Click on one of the cases on the left to see in-depth analysis and learnings
                 </p>
