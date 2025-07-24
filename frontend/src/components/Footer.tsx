@@ -32,11 +32,23 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="font-semibold text-lg mb-4">Main Features</h3>
-            <ul className="space-y-2">
-              <li><a href="/ai101" className="text-neutral-400 hover:text-primary-400 transition-colors">AI 101</a></li>
-              <li><a href="/prompt-evaluator" className="text-neutral-400 hover:text-primary-400 transition-colors">Prompt Evaluator</a></li>
-              <li><a href="/content-detector" className="text-neutral-400 hover:text-primary-400 transition-colors">Content Detector</a></li>
-              <li><a href="/ai-simulator" className="text-neutral-400 hover:text-primary-400 transition-colors">AI Simulator</a></li>
+            <ul className="space-y-3">
+              <li>
+                <a href="/ai101" className="text-neutral-400 hover:text-primary-400 transition-colors flex items-center space-x-2">
+                  <span>AI 101</span>
+                </a>
+                <ul className="ml-4 mt-2 space-y-1">
+                  <li><a href="/ai101/literacy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Literacy</a></li>
+                  <li><a href="/ai101/comparison" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">Platform Comparison</a></li>
+                  <li><a href="/ai101/policy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Policy</a></li>
+                  <li><a href="/ai101/watch" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Watch</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/prompt-evaluator" className="text-neutral-400 hover:text-primary-400 transition-colors flex items-center space-x-2">
+                  <span>Prompt Evaluator</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -45,14 +57,14 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
             <div className="space-y-3">
               <a 
-                href="mailto:contact@eira.id" 
+                href="mailto:fastresp2304@gmail.com" target="_blank" rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-neutral-400 hover:text-primary-400 transition-colors"
               >
                 <Mail className="h-4 w-4" />
-                <span>contact@eira.id</span>
+                <span>fastresp2304@gmail.com</span>
               </a>
               <a 
-                href="https://github.com/fua-team/eira" 
+                href="https://github.com/novelxv/EIRA" target="_blank" rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-neutral-400 hover:text-primary-400 transition-colors"
               >
                 <Github className="h-4 w-4" />

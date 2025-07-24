@@ -30,25 +30,10 @@ const Home = () => {
       description: "Analyze the effectiveness and ethics of your AI prompts",
       color: "from-purple-500 to-pink-500",
       href: "/prompt-evaluator"
-    },
-    {
-      icon: <Shield className="h-8 w-8" />,
-      title: "Content Detector",
-      description: "Detect AI-generated content and analyze risks",
-      color: "from-green-500 to-teal-500",
-      href: "/content-detector"
-    },
-    {
-      icon: <PlayCircle className="h-8 w-8" />,
-      title: "AI Simulator",
-      description: "Simulate AI usage and reflect on its impact",
-      color: "from-orange-500 to-red-500",
-      href: "/ai-simulator"
     }
   ]
 
   const stats = [
-    { number: "4", label: "Main Features", icon: <Zap className="h-5 w-5" /> },
     { number: "∞", label: "Learning", icon: <Brain className="h-5 w-5" /> },
     { number: "100%", label: "Free", icon: <CheckCircle className="h-5 w-5" /> },
     { number: "24/7", label: "Available", icon: <Star className="h-5 w-5" /> }
@@ -163,23 +148,25 @@ const Home = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mb-4">
-                  <div className="text-primary-600">{stat.icon}</div>
-                </div>
-                <div className="text-3xl font-bold text-neutral-900 mb-2">{stat.number}</div>
-                <div className="text-neutral-600">{stat.label}</div>
-              </motion.div>
-            ))}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-3 gap-24 max-w-4xl">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center"
+                >
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mb-4">
+                    <div className="text-primary-600">{stat.icon}</div>
+                  </div>
+                  <div className="text-3xl font-bold text-neutral-900 mb-2">{stat.number}</div>
+                  <div className="text-neutral-600">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -198,43 +185,45 @@ const Home = () => {
               Explore <span className="gradient-text">EIRA</span> Features
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Four main features that help you understand and use AI wisely
+              Two main features that help you understand and use AI wisely
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-                className="group"
-              >
-                <Link to={feature.href} className="block">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      {feature.icon}
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 gap-12 max-w-4xl">
+              {features.slice(0, 2).map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  className="group"
+                >
+                  <Link to={feature.href} className="block">
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
+                      <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                        {feature.icon}
+                      </div>
+                      
+                      <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors">
+                        {feature.title}
+                      </h3>
+                      
+                      <p className="text-neutral-600 leading-relaxed mb-4">
+                        {feature.description}
+                      </p>
+                      
+                      <div className="flex items-center text-primary-600 font-medium group-hover:text-primary-700">
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                    
-                    <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors">
-                      {feature.title}
-                    </h3>
-                    
-                    <p className="text-neutral-600 leading-relaxed mb-4">
-                      {feature.description}
-                    </p>
-                    
-                    <div className="flex items-center text-primary-600 font-medium group-hover:text-primary-700">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -256,15 +245,15 @@ const Home = () => {
               </h2>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="bg-gradient-to-br from-primary-500/20 to-primary-600/30 border border-primary-400/30 rounded-2xl p-8 backdrop-blur-sm"
               >
-                <div className="text-3xl lg:text-4xl font-bold text-primary-400 mb-4 italic">
+                <div className="text-2xl lg:text-3xl font-bold text-primary-300 mb-4 italic">
                   "A reflective AI space to help society grow with, not against, AI."
                 </div>
                 <p className="text-neutral-300">
@@ -277,9 +266,9 @@ const Home = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="bg-gradient-to-br from-secondary-500/20 to-secondary-600/30 border border-secondary-400/30 rounded-2xl p-8 backdrop-blur-sm"
               >
-                <div className="text-3xl lg:text-4xl font-bold text-secondary-400 mb-4 italic">
+                <div className="text-2xl lg:text-3xl font-bold text-secondary-300 mb-4 italic">
                   "Know AI. Question AI. Use AI wisely."
                 </div>
                 <p className="text-neutral-300">
