@@ -53,213 +53,560 @@
       "quiz": [
         {
           "id": 1,
-          "question": "Saat Anda buka Netflix dan film yang muncul selalu sesuai selera Anda, teknologi di baliknya adalah:",
-          "scenario": "Bayangkan Anda baru saja selesai menonton film aksi di Netflix. Besoknya, halaman utama Netflix penuh dengan rekomendasi film aksi dan thriller yang menarik.",
+          "question": "When your Gojek/Grab app automatically changes your route to avoid a traffic jam, which AI 'superpower' is it using?",
+          "scenario": "You are on your way home. Suddenly, your ride-hailing app sends a notification and changes the route because of an accident ahead. You arrive home faster.",
           "options": [
-            "Karyawan Netflix yang memilih film untuk saya",
-            "AI yang belajar dari riwayat tontonan saya",
-            "Sistem random yang kebetulan cocok",
-            "Teman saya yang berbagi akun"
+            "The AI's ability to feel the driver's emotions",
+            "The AI's ability to drive the motorcycle by itself",
+            "The AI's ability to act on its own & adapt to new situations",
+            "The AI's ability to predict the future with 100% certainty"
           ],
-          "correct": 1,
-          "explanation": "Netflix menggunakan AI machine learning yang menganalisis pola tontonan Anda, rating yang Anda berikan, dan data pengguna serupa untuk memberikan rekomendasi yang personal."
+          "correct": 2,
+          "explanation": "This is an example of Autonomy (acting on its own to change the route) and Adaptivity (adapting to new information like a traffic jam). The AI is not programmed for every possible traffic jam; it learns and adapts."
         },
         {
           "id": 2,
-          "question": "Manakah yang termasuk contoh Narrow AI dalam kehidupan sehari-hari?",
-          "scenario": "Anda sedang menggunakan smartphone dan berinteraksi dengan berbagai aplikasi yang menggunakan teknologi AI.",
+          "question": "You use Google Lens to translate a Japanese food menu into your language just by pointing your camera at it. Which AI technologies are working together here?",
+          "scenario": "You are on vacation in Japan and enter a restaurant. You don't understand the menu at all, so you take out your phone and use a camera translator app.",
           "options": [
-            "Siri yang bisa menjawab semua pertanyaan dan melakukan semua tugas manusia",
-            "Google Translate yang khusus menerjemahkan bahasa",
-            "Robot yang bisa memasak, membersihkan, dan mengajar",
-            "Komputer quantum yang memecahkan semua masalah"
+            "Only Natural Language Processing (NLP)",
+            "Computer Vision (to 'see' the text) and NLP (to translate it)",
+            "Only Robotics and Motion Sensors",
+            "Machine Learning and Route Planning"
           ],
           "correct": 1,
-          "explanation": "Google Translate adalah contoh perfect Narrow AI - sangat ahli dalam satu tugas spesifik (menerjemahkan), tapi tidak bisa melakukan tugas lain di luar itu."
+          "explanation": "First, the AI must 'see' and recognize the Japanese characters with its camera (Computer Vision). After that, it must 'understand' and translate the meaning of the text (Natural Language Processing)."
         },
         {
           "id": 3,
-          "question": "Mengapa penting memahami AI di era digital ini?",
-          "scenario": "Sebagai mahasiswa/profesional muda, Anda sering mendengar istilah AI di berbagai tempat - dari media sosial hingga dunia kerja.",
+          "question": "A farmer wants to create an AI that can tell the difference between ripe and unripe mangoes. Based on the concept of Machine Learning, what is the best way to train this AI?",
+          "scenario": "On a farm, there are thousands of mangoes. The farmer wants to automate the sorting process, which is usually done by hand, using AI.",
           "options": [
-            "Supaya bisa membuat robot seperti di film",
-            "Agar tidak ketinggalan teknologi dan bisa memanfaatkannya dengan bijak",
-            "Untuk menjadi programmer AI",
-            "Karena semua orang membicarakannya"
+            "Give the AI a book about how to grow mangoes.",
+            "Describe the features of a ripe mango to the AI using your voice.",
+            "Program a strict rule: 'If the color is yellow, then it is ripe'.",
+            "Show it thousands of photos of ripe and unripe mangoes as examples."
+          ],
+          "correct": 3,
+          "explanation": "Machine Learning works by learning from examples (data). By seeing thousands of examples, the AI will find the patterns on its own (like the combination of color, spots, and shape), which is much more accurate than one single rule."
+        },
+        {
+          "id": 4,
+          "question": "Why is AI called an 'interdisciplinary' field (a combination of many fields of study)?",
+          "scenario": "A tech company wants to build a new AI virtual assistant that can chat very naturally and with empathy, like a human.",
+          "options": [
+            "Because it can only be built by people from many different countries.",
+            "Because it needs many fields like Psychology (how humans think) and Linguistics (the science of language).",
+            "Because it needs a huge amount of electricity from many sources.",
+            "Because it can only be used on many different devices (phones, laptops, cars)."
           ],
           "correct": 1,
-          "explanation": "Memahami AI membantu kita membuat keputusan yang lebih baik tentang teknologi yang kita gunakan sehari-hari, melindungi privasi, dan memanfaatkan AI untuk meningkatkan produktivitas."
+          "explanation": "To make an AI 'human-like', computer science is not enough. It also requires understanding how the brain and emotions work (Psychology) and how language is structured (Linguistics), proving AI is a combination of many expert fields."
         }
       ]
     },
     {
       "id": 2,
-      "title": "Machine Learning & Deep Learning",
+      "title": "Busting AI Myths",
       "iconName": "Network",
-      "description": "Memahami cara mesin belajar dari data dan membuat prediksi",
+      "description": "Separate AI facts from fiction and learn its core building blocks: data, algorithms, and learning.",
       "videoUrl": "https://example.com/ml-basics.mp4",
       "conceptCards": [
         {
           "id": 1,
-          "keySentence": "Machine Learning adalah AI yang belajar dari contoh-contoh.",
-          "analogy": "Seperti mengajari anak kecil bedanya kucing dan anjing dengan menunjukkan ribuan foto.",
-          "iconName": "Network",
-          "colorScheme": "from-orange-500 to-red-500"
+          "keySentence": "MYTH: AI will take over the world. FACT: AI is a smart tool made by humans to do specific jobs. It cannot think for itself or have its own goals.",
+          "analogy": "Think of AI like a very powerful calculator. It can solve hard math problems fast, but it will never decide to do your homework for you. You must tell it what to do.",
+          "iconName": "ShieldExclamation",
+          "colorScheme": "from-red-500 to-orange-500"
         },
         {
           "id": 2,
-          "keySentence": "Supervised Learning belajar dari data berlabel, Unsupervised Learning mencari pola sendiri.",
-          "analogy": "Supervised seperti belajar dengan kunci jawaban, Unsupervised seperti mencari pola dalam puzzle tanpa contoh.",
-          "iconName": "Target",
-          "colorScheme": "from-blue-500 to-purple-500"
+          "keySentence": "MYTH: AI has feelings and is conscious. FACT: AI can learn to use emotional words like 'happy' or 'sad', but it doesn't actually feel them. It is just copying how humans talk.",
+          "analogy": "It's like a parrot that learns to say 'Hello'. The parrot repeats the sound, but it doesn't understand what 'Hello' means. AI does the same with words and emotions.",
+          "iconName": "ChatBubbleLeftRight",
+          "colorScheme": "from-red-500 to-orange-500"
         },
         {
           "id": 3,
-          "keySentence": "Deep Learning menggunakan neural network berlapis untuk memahami hal kompleks.",
-          "analogy": "Seperti sistem pencernaan yang memproses makanan berlapis: mulut → lambung → usus, setiap lapisan punya tugas khusus.",
-          "iconName": "Layers",
-          "colorScheme": "from-green-500 to-blue-500"
+          "keySentence": "MYTH: AI will make everyone lose their jobs. FACT: AI will change some jobs, not remove all of them. It will handle boring tasks, creating new and more interesting jobs for people.",
+          "analogy": "Think about ATMs. They automated the task of giving out cash. But banks then hired more people for new jobs, like financial advisors and customer service specialists.",
+          "iconName": "Briefcase",
+          "colorScheme": "from-red-500 to-orange-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "CONCEPT: Data is the 'food' or 'fuel' for AI. Without a lot of good quality data, an AI cannot learn or become smart.",
+          "analogy": "To teach a child what a 'cat' is, you show them many pictures of cats. For AI, these pictures are 'data'. The more data it gets, the smarter it becomes.",
+          "iconName": "CircleStack",
+          "colorScheme": "from-blue-500 to-sky-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "CONCEPT: An Algorithm is a set of rules or instructions. It tells the AI exactly what to do with the data to get a result.",
+          "analogy": "If data is the ingredients for a cake (flour, sugar, eggs), then the algorithm is the 'recipe'. The recipe gives step-by-step instructions on how to mix the ingredients.",
+          "iconName": "ClipboardDocumentList",
+          "colorScheme": "from-blue-500 to-sky-500"
+        },
+        {
+          "id": 6,
+          "keySentence": "CONCEPT: Training is the process where an AI practices using the algorithm on data many times, until it becomes very accurate.",
+          "analogy": "This is the 'baking' process. You follow the recipe, bake the cake, and then taste it. If it's not perfect, you adjust the recipe for next time. AI 'training' is this process of practice and adjustment.",
+          "iconName": "Cog",
+          "colorScheme": "from-blue-500 to-sky-500"
         }
       ],
       "quiz": [
         {
           "id": 1,
-          "question": "Apa yang membedakan Deep Learning dari Machine Learning tradisional?",
+          "question": "If you ask a cooking AI to create a recipe for 'Soto Ayam', what do the 'ingredients' (chicken, spices, water) represent in the AI kitchen analogy?",
+          "scenario": "A chef wants to teach a cooking robot how to make the perfect Indonesian chicken soup ('Soto Ayam'). He gathers all the necessary ingredients and the recipe steps.",
           "options": [
-            "Deep Learning lebih cepat",
-            "Deep Learning menggunakan neural network dengan banyak layer",
-            "Deep Learning tidak memerlukan data",
-            "Deep Learning hanya untuk gambar"
+            "The Algorithm (the recipe)",
+            "The Data (the 'food' for the AI to learn from)",
+            "The Training (the cooking process)",
+            "The AI Model (the finished soup)"
           ],
           "correct": 1,
-          "explanation": "Deep Learning menggunakan neural network dengan banyak layer (lapisan) untuk memproses informasi kompleks, sedangkan machine learning tradisional menggunakan algoritma yang lebih sederhana."
+          "explanation": "In AI, 'Data' is the raw material, just like ingredients in cooking. The AI needs this data to learn. The 'Algorithm' is the recipe, and 'Training' is the process of cooking and practicing."
         },
         {
           "id": 2,
-          "question": "Anda ingin membuat sistem yang bisa mengelompokkan pelanggan berdasarkan pola belanja mereka tanpa diberi tahu kategori sebelumnya. Jenis machine learning apa yang tepat?",
-          "scenario": "Sebuah toko online memiliki jutaan data transaksi pelanggan dan ingin memahami segmentasi pelanggan secara otomatis.",
+          "question": "A company starts using an AI to write simple daily reports. What is the most likely impact on the employees?",
+          "scenario": "In the year 2025, an office uses AI to automate the creation of daily sales reports, a task that used to take employees one hour every day.",
           "options": [
-            "Supervised Learning",
-            "Unsupervised Learning",
-            "Reinforcement Learning",
-            "Transfer Learning"
+            "All the employees will immediately lose their jobs.",
+            "The employees' jobs will change, allowing them to focus on more creative tasks that AI cannot do.",
+            "The AI will become the new manager of the employees.",
+            "The employees will have to become AI programmers to compete."
           ],
           "correct": 1,
-          "explanation": "Unsupervised Learning tepat untuk kasus ini karena tidak ada label kategori yang sudah ditentukan - algoritma akan mencari pola dan mengelompokkan pelanggan secara otomatis berdasarkan kesamaan perilaku belanja."
+          "explanation": "AI is excellent at repetitive tasks. This frees up human workers to focus on tasks that require creativity, strategy, and problem-solving, making their jobs different and often more valuable."
+        },
+        {
+          "id": 3,
+          "question": "You tell an AI chatbot, \"I had a great day!\" and it replies, \"That's wonderful to hear!\". Why does the AI say this?",
+          "scenario": "You are interacting with a very friendly and advanced AI assistant on your phone to practice your English.",
+          "options": [
+            "Because it genuinely feels happy for you.",
+            "Because it has analyzed millions of human conversations and learned this is the most appropriate response.",
+            "Because it has had great days too and knows the feeling.",
+            "Because it is trying to become your best friend."
+          ],
+          "correct": 1,
+          "explanation": "AI chatbots don't have real feelings. They are language models that are excellent at predicting the best sequence of words for a response based on the massive amount of text data they were trained on."
+        },
+        {
+          "id": 4,
+          "question": "A self-driving car is programmed to take you to the office. What will happen if you suddenly feel like going to the beach instead?",
+          "scenario": "You get into your self-driving car and set the destination to your office. Halfway there, you see a sign for a beautiful beach.",
+          "options": [
+            "The car will decide to go to the beach on its own because it sounds more fun.",
+            "The car will get confused and stop in the middle of the road.",
+            "The car will continue driving to the office unless you give it a new destination.",
+            "The car will feel your adventurous mood and suggest going to the beach."
+          ],
+          "correct": 2,
+          "explanation": "AI is a tool that follows the instructions given by its user. It does not have its own goals or desires. It will follow the programmed destination until a human changes it."
         }
       ]
     },
     {
       "id": 3,
-      "title": "Natural Language Processing (NLP)",
+      "title": "How AI Learns",
       "iconName": "MessageSquare",
-      "description": "Bagaimana AI memahami dan memproses bahasa manusia",
+      "description": "Discover the simple mechanics behind how AI learns from patterns and creates new ideas.",
       "videoUrl": "https://example.com/nlp-basics.mp4",
       "conceptCards": [
         {
           "id": 1,
-          "keySentence": "NLP memungkinkan komputer memahami, menganalisis, dan merespons bahasa manusia.",
-          "analogy": "Seperti penerjemah universal yang tidak hanya menerjemahkan kata, tapi juga memahami konteks dan emosi di baliknya.",
-          "iconName": "MessageSquare",
-          "colorScheme": "from-indigo-500 to-purple-500"
+          "keySentence": "Machine Learning is teaching a computer to find patterns from many examples, instead of giving it direct instructions for every step.",
+          "analogy": "It's like teaching a child what a 'cat' is. You don't describe it ('it has fur, four legs, a tail'). You just show them 1,000 photos of cats. Eventually, they learn the pattern themselves.",
+          "iconName": "LightBulbIcon",
+          "colorScheme": "from-purple-500 to-pink-500"
         },
         {
           "id": 2,
-          "keySentence": "Tokenization memecah teks menjadi unit-unit kecil yang bisa diproses komputer.",
-          "analogy": "Seperti memotong kalimat panjang menjadi kata-kata individual, lalu kata menjadi huruf, supaya komputer bisa 'mengunyah' informasi satu per satu.",
-          "iconName": "FileText",
-          "colorScheme": "from-teal-500 to-green-500"
+          "keySentence": "A good example of Machine Learning is an email spam filter. The system learns from millions of past emails to decide if a new email is important or junk.",
+          "analogy": "A spam filter is like a security guard at an office building. After seeing all the employees many times, they can guess if a new person is an employee or a visitor just by looking.",
+          "iconName": "EnvelopeIcon",
+          "colorScheme": "from-purple-500 to-pink-500"
         },
         {
           "id": 3,
-          "keySentence": "Sentiment Analysis mengidentifikasi emosi dan opini dalam teks.",
-          "analogy": "Seperti psikolog yang bisa membaca perasaan seseorang dari cara mereka menulis - apakah sedang senang, sedih, atau marah.",
-          "iconName": "Lightbulb",
-          "colorScheme": "from-yellow-500 to-orange-500"
+          "keySentence": "Deep Learning is a more advanced type of Machine Learning. Its structure is inspired by the layers of connections in the human brain.",
+          "analogy": "When you see a face, your brain works in layers. One layer sees lines, the next sees shapes like eyes and a nose, and a final layer puts it all together. Deep Learning copies this layer-by-layer process.",
+          "iconName": "Square3Stack3DIcon",
+          "colorScheme": "from-purple-500 to-pink-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "Generative AI is a type of AI that can CREATE new things, like text, images, or music. It doesn't just analyze the data it already has.",
+          "analogy": "If regular AI is like an art expert who can identify a real painting, Generative AI is like an artist who can paint a completely new, original artwork.",
+          "iconName": "SparklesIcon",
+          "colorScheme": "from-purple-500 to-pink-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "This AI works by predicting the most likely next word or part of an image, based on the huge amount of data it has learned from the internet.",
+          "analogy": "Imagine you type 'The best part of waking up is...'. Your phone's keyboard suggests the next word. Generative AI does the same thing, but it's powerful enough to suggest entire paragraphs or create whole images.",
+          "iconName": "PencilSquareIcon",
+          "colorScheme": "from-purple-500 to-pink-500"
         }
       ],
       "quiz": [
         {
           "id": 1,
-          "question": "Manakah aplikasi NLP yang paling sering Anda gunakan tanpa sadar?",
-          "scenario": "Anda sedang mengetik pesan di WhatsApp dan tiba-tiba muncul saran kata yang tepat, atau saat menulis email dan grammar checker memberikan koreksi otomatis.",
+          "question": "An AI system that analyzes thousands of customer reviews to find the main complaints is different from an AI that writes a brand new marketing email. What is the key difference?",
+          "scenario": "A company uses two AI tools. The first one reads and understands customer feedback. The second one helps the marketing team write creative new slogans.",
           "options": [
-            "Autocorrect dan predictive text di keyboard",
-            "Kalkulator di smartphone",
-            "Kamera untuk foto selfie",
-            "Musik streaming"
+            "The first AI is older, the second AI is newer.",
+            "The first AI analyzes existing data, while the second one (Generative AI) creates new content.",
+            "The first AI is for text, the second AI is for images.",
+            "There is no real difference, they are both the same type of AI."
           ],
-          "correct": 0,
-          "explanation": "Autocorrect dan predictive text menggunakan NLP untuk memahami konteks kalimat Anda dan memprediksi kata yang mungkin akan Anda ketik selanjutnya."
+          "correct": 1,
+          "explanation": "Generative AI's key feature is its ability to CREATE original content (like slogans or emails). Other types of AI are often designed to analyze or categorize existing information (like customer feedback)."
         },
         {
           "id": 2,
-          "question": "Sebuah perusahaan ingin menganalisis ribuan review produk untuk memahami kepuasan pelanggan. Teknologi NLP apa yang paling tepat?",
+          "question": "If an AI system uses Deep Learning to recognize a dog in a photo, how does it likely process the image?",
+          "scenario": "You upload a photo to an app, and it instantly puts a label 'Dog' on your pet. This app uses Deep Learning.",
           "options": [
-            "Machine Translation",
-            "Sentiment Analysis",
-            "Text Summarization",
-            "Speech Recognition"
+            "It asks you if the animal is a dog.",
+            "It analyzes the image in layers: first seeing lines and colors, then shapes like 'ears' and 'tail', then the complete dog.",
+            "It searches the internet for a matching photo of the same dog.",
+            "It only looks for one feature, for example, a wet nose."
           ],
           "correct": 1,
-          "explanation": "Sentiment Analysis dapat mengidentifikasi apakah review bersifat positif, negatif, atau netral, serta mengekstrak emosi spesifik dari teks review pelanggan."
+          "explanation": "Deep Learning is inspired by the human brain. It processes complex information in multiple layers, building up from simple features (lines) to complex objects (a full dog) to make a final decision."
+        },
+        {
+          "id": 3,
+          "question": "You are using an AI tool like ChatGPT to write a story. You type the first sentence: 'The spaceship landed on a strange, red...'. How does the AI decide the next word?",
+          "scenario": "You are trying to write a science fiction story but need some creative help from a Generative AI tool.",
+          "options": [
+            "It randomly picks a word from a dictionary.",
+            "It continues a famous story from a book.",
+            "It predicts the most likely word (like 'planet' or 'moon') based on all the books and text it has learned from.",
+            "It analyzes your past writing to guess your favorite word."
+          ],
+          "correct": 2,
+          "explanation": "Generative AI works like a very advanced autocomplete. It calculates the probability of the next word based on the context you provide and the vast patterns it learned during its training on internet data."
+        },
+        {
+          "id": 4,
+          "question": "What is the main difference between teaching a computer using traditional programming and using Machine Learning?",
+          "scenario": "Imagine you want a computer to be able to identify photos of 'mobil' (cars) and 'motor' (motorcycles).",
+          "options": [
+            "Machine Learning is much more difficult to use.",
+            "Traditional programming uses data; Machine Learning does not.",
+            "Traditional programming gives the computer strict rules. Machine Learning lets the computer learn the rules from examples (data).",
+            "There is no difference; they are just two names for the same thing."
+          ],
+          "correct": 2,
+          "explanation": "With traditional programming, you would have to write code with many 'if-then' rules. With Machine Learning, you don't write the rules; you just show the computer thousands of example photos, and it learns the patterns by itself."
         }
       ]
     },
     {
       "id": 4,
-      "title": "Computer Vision",
+      "title": "The Art of the Prompt",
       "iconName": "Eye",
-      "description": "Bagaimana AI 'melihat' dan memahami gambar serta video",
+      "description": "Master the skill of writing effective prompts to get the best results from popular AI tools.",
       "videoUrl": "https://example.com/cv-basics.mp4",
       "conceptCards": [
         {
           "id": 1,
-          "keySentence": "Computer Vision memungkinkan komputer 'melihat' dan memahami konten visual seperti manusia.",
-          "analogy": "Seperti memberikan mata dan otak visual pada komputer, sehingga bisa membedakan kucing dari anjing dalam foto.",
-          "iconName": "Eye",
-          "colorScheme": "from-pink-500 to-rose-500"
+          "keySentence": "A 'prompt' is the instruction or question you give to an AI. A better, more detailed prompt will always give you a better result.",
+          "analogy": "Talking to an AI is like talking to a genie. A vague wish like 'I want to be rich' is unclear. A specific wish like 'Give me a chest of 100 gold coins' works much better.",
+          "iconName": "ChatBubbleBottomCenterTextIcon",
+          "colorScheme": "from-green-500 to-teal-500"
         },
         {
           "id": 2,
-          "keySentence": "Image Recognition mengidentifikasi objek, wajah, atau pola dalam gambar.",
-          "analogy": "Seperti detektif yang sangat jeli - bisa mengenali wajah seseorang dari ribuan foto dalam hitungan detik.",
-          "iconName": "Lightbulb",
-          "colorScheme": "from-cyan-500 to-blue-500"
+          "keySentence": "Principle 1: Be Specific. Don't say 'write about food'. Instead, say 'write 3 short paragraphs about the history of Italian pizza for social media'.",
+          "analogy": "It's like ordering coffee. 'I want coffee' is not enough. You need to say 'I want one large, hot, black Americano with no sugar'. The more specific you are, the better.",
+          "iconName": "MagnifyingGlassIcon",
+          "colorScheme": "from-green-500 to-teal-500"
         },
         {
           "id": 3,
-          "keySentence": "Object Detection tidak hanya mengenali objek, tapi juga menunjukkan lokasi tepat objek tersebut.",
-          "analogy": "Seperti guru yang tidak hanya tahu ada siswa yang tidak memperhatikan, tapi juga bisa menunjuk tepat di mana siswa itu duduk.",
-          "iconName": "Target",
-          "colorScheme": "from-violet-500 to-purple-500"
+          "keySentence": "Principle 2: Give Context and a Role. Tell the AI who it should be and what situation it is in. A great way to start is: 'Act as a...'",
+          "analogy": "Imagine asking a friend for advice. It helps to say: 'OK, act as a professional tour guide for a moment. Where should I go in Bali for 3 days on a small budget?'",
+          "iconName": "UserCircleIcon",
+          "colorScheme": "from-green-500 to-teal-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "BAD prompt: 'Write an email.' GOOD prompt: 'Act as an HR Manager. Write a friendly and professional email to invite 'Budi' for a job interview.'",
+          "analogy": "The bad prompt is like telling a taxi driver just a city name. The good prompt is like giving them a full, exact address, including the street and number.",
+          "iconName": "DocumentTextIcon",
+          "colorScheme": "from-green-500 to-teal-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "For Writing and Ideas, you can use tools like ChatGPT or Gemini to help you brainstorm, write emails, and create articles.",
+          "analogy": "These tools are like having a super-smart writing assistant. They can help you fix grammar, find better words, or get you started when you don't know what to write.",
+          "iconName": "PencilIcon",
+          "colorScheme": "from-green-500 to-teal-500"
+        },
+        {
+          "id": 6,
+          "keySentence": "For creating Images, tools like Midjourney or DALL-E 3 can turn your text descriptions into unique pictures and art.",
+          "analogy": "These tools are like having a personal artist who can draw anything you describe. You give them the idea in words, and they paint the picture for you in seconds.",
+          "iconName": "PhotoIcon",
+          "colorScheme": "from-green-500 to-teal-500"
+        },
+        {
+          "id": 7,
+          "keySentence": "Use Case: A small business owner can use AI to create 5 Instagram captions for a new product, saving hours of work.",
+          "analogy": "This is like having a marketing expert in your pocket. You give it your product details, and it gives you ready-to-use marketing ideas instantly.",
+          "iconName": "BuildingStorefrontIcon",
+          "colorScheme": "from-green-500 to-teal-500"
         }
       ],
       "quiz": [
         {
           "id": 1,
-          "question": "Saat Anda upload foto di Instagram dan otomatis ter-tag teman Anda, teknologi apa yang bekerja?",
-          "scenario": "Anda mengupload foto liburan bersama 5 teman. Instagram secara otomatis mendeteksi wajah mereka dan menyarankan untuk tag mereka.",
+          "question": "You want to use AI to help plan a birthday party for your 7-year-old nephew who loves superheroes. Which of the following is the BEST prompt?",
+          "scenario": "Your nephew's birthday is next month, and you want to get some creative ideas for the party theme, games, and food.",
           "options": [
-            "GPS Location Tracking",
-            "Face Recognition dalam Computer Vision",
-            "Audio Analysis",
-            "Manual tagging oleh Instagram"
+            "Tell me about birthday parties.",
+            "Ideas for a kid's birthday party.",
+            "Act as an expert party planner. Give me 5 fun ideas for a superhero-themed birthday party for a 7-year-old boy. Include ideas for games and snacks.",
+            "What are the most popular superheroes right now?"
           ],
-          "correct": 1,
-          "explanation": "Instagram menggunakan Face Recognition, bagian dari Computer Vision, untuk mendeteksi dan mengenali wajah orang dalam foto, lalu mencocokkannya dengan database foto profil pengguna."
+          "correct": 2,
+          "explanation": "The best prompts are specific (superhero theme, 7-year-old boy), provide a role ('act as an expert party planner'), and define the desired output (5 ideas for games and snacks)."
         },
         {
           "id": 2,
-          "question": "Mengapa mobil self-driving membutuhkan Computer Vision yang sangat canggih?",
+          "question": "You need to write a professional email to your boss to ask for a holiday leave. What is the most effective way to start your prompt to get the right tone?",
+          "scenario": "You are planning a vacation and need to formally request time off from work using a polite and professional tone.",
           "options": [
-            "Untuk memainkan musik yang tepat",
-            "Untuk mendeteksi dan menghindari rintangan, rambu, pejalan kaki secara real-time",
-            "Untuk navigasi GPS",
-            "Untuk berkomunikasi dengan mobil lain"
+            "Write an email for me.",
+            "I need to ask for a holiday.",
+            "Act as a professional employee writing to their manager...",
+            "Don't sound rude in the email."
+          ],
+          "correct": 2,
+          "explanation": "Starting your prompt with 'Act as a...' immediately tells the AI what persona and tone it should adopt, leading to a much more accurate and useful response for your specific situation."
+        },
+        {
+          "id": 3,
+          "question": "You have an idea for a logo for your new 'warung kopi' (coffee stall): 'a happy cat wearing a 'blangkon' (Javanese hat) and drinking coffee'. Which AI tool should you use?",
+          "scenario": "You want to create a unique visual image for your business brand based on a creative idea you have in your mind.",
+          "options": [
+            "A text-generating AI like ChatGPT to write about the logo.",
+            "An image-generating AI like Midjourney or DALL-E to create the picture.",
+            "A presentation AI like Gamma to make slides about coffee.",
+            "A translation AI to translate 'warung kopi' into English."
           ],
           "correct": 1,
-          "explanation": "Mobil self-driving harus 'melihat' dan memahami lingkungan sekitar secara real-time - mendeteksi pejalan kaki, mobil lain, rambu lalu lintas, dan rintangan untuk membuat keputusan berkendara yang aman."
+          "explanation": "Image-generating AIs are specialized tools that turn your text descriptions (prompts) into unique visuals. Tools like ChatGPT are for generating text, not pictures."
+        },
+        {
+          "id": 4,
+          "question": "Why is giving a prompt to an AI often compared to giving directions to a taxi (or Gojek) driver?",
+          "scenario": "You've learned that being specific is the most important rule of prompting. This idea can be explained with a simple analogy.",
+          "options": [
+            "Because both are very expensive to use.",
+            "Because if you just say 'take me downtown', you might not end up where you wanted. You must provide a specific and complete address.",
+            "Because both can drive you anywhere in the world.",
+            "Because both can perfectly understand your feelings."
+          ],
+          "correct": 1,
+          "explanation": "This analogy highlights the need for specificity. Just like a taxi driver needs a clear and exact address to take you to the right place, an AI needs a detailed and specific prompt to give you the desired output."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Responsible AI",
+      "iconName": "Eye",
+      "description": "Maps the risks of AI, from bias to deepfakes, and learn how to use it safely and ethically",
+      "videoUrl": "https://example.com/cv-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "AI can be very powerful, but it is not always fair or correct. It is important to think critically and use AI as a responsible tool.",
+          "analogy": "A powerful tool like a knife can be used by a chef to create a great meal, or it can be used to cause harm. The responsibility is on the user, not just the tool itself.",
+          "iconName": "ScaleIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "AI can be biased. If the data used to train an AI is unfair, the AI's decisions will also be unfair. This is called 'Garbage In, Garbage Out'.",
+          "analogy": "Imagine a robot that only learned to cook from Italian cookbooks. If you ask it for a dinner recipe, it will almost always suggest pasta. It is 'biased' towards Italian food because its learning data was not diverse.",
+          "iconName": "FunnelIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "Be careful with your data. When you use a free AI service, you might be 'paying' with your personal information. Do not share sensitive details in your prompts.",
+          "analogy": "Using a public AI is like talking to a stranger in a crowded public square. It's okay for general conversation, but you would not tell them your home address or bank account password.",
+          "iconName": "LockClosedIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "Deepfakes are fake videos or audio created by AI that look and sound very real. They can be used to spread false information (hoaxes) and create scams.",
+          "analogy": "A deepfake is like an advanced version of Photoshop, but for video and audio. It can make someone appear to say or do things they never actually did, making it hard to know what's real.",
+          "iconName": "VideoCameraSlashIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "Responsibility 1: Be a critical thinker. If an AI gives you important information, always double-check it with a trusted human source, like a news website or an expert.",
+          "analogy": "Treat advice from an AI like advice from a very smart friend who sometimes confidently makes things up. You listen to their ideas, but you always verify them before making a big decision.",
+          "iconName": "CheckBadgeIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        },
+        {
+          "id": 6,
+          "keySentence": "Responsibility 2: Do not plagiarize. Use the AI's output as a starting point or an assistant, but always write the final work for school or your job in your own words.",
+          "analogy": "Using AI for your essay is like using a calculator for a math problem. It helps you get the answer faster, but you still need to show your own work and prove you understand the process.",
+          "iconName": "DocumentDuplicateIcon",
+          "colorScheme": "from-amber-500 to-red-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "A company builds an AI to help hire new staff. They train it using data from their last 10 years of hiring. In the past, the company mostly hired men. What is the most likely risk?",
+          "scenario": "An HR department wants to use AI to make their hiring process faster and more efficient by having an AI screen candidate CVs.",
+          "options": [
+            "The AI will be perfectly fair and choose the best person every time.",
+            "The AI might be biased and unfairly prefer male candidates over equally qualified female candidates.",
+            "The AI will only hire candidates who are very good at math.",
+            "The AI will crash because the data from 10 years ago is too old."
+          ],
+          "correct": 1,
+          "explanation": "This is a classic example of AI bias. Because the training data was not diverse (it was mostly men), the AI learned an unfair pattern. This is often called the 'Garbage In, Garbage Out' problem."
+        },
+        {
+          "id": 2,
+          "question": "You are using a public AI chatbot to get ideas for your new business. Which of the following pieces of information is UNSAFE to share in your prompt?",
+          "scenario": "You are excited about a new business idea and want to use a free AI tool on the internet to help you write a business plan.",
+          "options": [
+            "General information, like 'my business is a coffee shop for students'.",
+            "Your personal credit card number to 'verify your account'.",
+            "Your favorite type of coffee to get better, more creative ideas.",
+            "A request for the AI to 'act as a business consultant'."
+          ],
+          "correct": 1,
+          "explanation": "You should never share sensitive personal or financial information with a public AI. Treat it like a public forum, not a private conversation. Your data can be used for training or even be seen by others."
+        },
+        {
+          "id": 3,
+          "question": "You ask an AI for the date of an important historical event, and it gives you an answer. What is the most responsible next step?",
+          "scenario": "You are writing an important essay for school and need to make sure all your facts and dates are 100% correct.",
+          "options": [
+            "Immediately use the date in your essay because AI is always correct.",
+            "Argue with the AI until it gives you a different answer.",
+            "Quickly check a trusted source like a history website or encyclopedia to verify the date.",
+            "Assume the history books are wrong and the AI has found secret knowledge."
+          ],
+          "correct": 2,
+          "explanation": "AI can sometimes make mistakes or 'hallucinate' facts. For important information, it is always crucial to double-check with a reliable, human-verified source before trusting the AI's answer."
+        },
+        {
+          "id": 4,
+          "question": "You see a shocking video on social media of a famous person saying something very offensive. The video looks very real. What is the first thing you should consider?",
+          "scenario": "While scrolling through your social media feed, a controversial video appears and starts to go viral. Many people are angry in the comments.",
+          "options": [
+            "That the person in the video is definitely a bad person.",
+            "That the video could be a 'deepfake' created by AI to spread misinformation (hoax).",
+            "That the video has poor audio quality.",
+            "That your friends will find the video very entertaining to watch."
+          ],
+          "correct": 1,
+          "explanation": "With modern AI, it's possible to create very realistic fake videos (deepfakes). The responsible action is to be skeptical and look for confirmation from trusted news sources before believing or sharing potentially damaging content."
+        }
+      ]
+    },
+      {
+      "id": 6,
+      "title": "Humanity's Copilot",
+      "iconName": "Eye",
+      "description": "Explore how AI will shape our future and learn how to work with it as a creative partner.",
+      "videoUrl": "https://example.com/cv-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "The future of AI is not just about robots. It will be integrated into everyday life, helping doctors, teachers, and scientists solve big problems.",
+          "analogy": "Think of AI in the future like electricity today. It's not a single 'thing' you see; it's the invisible power behind many different tools that make our lives better.",
+          "iconName": "GlobeAltIcon",
+          "colorScheme": "from-indigo-500 to-blue-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "Don't see AI as a competitor that will replace you. See it as a 'Copilot' that will help you. AI handles the boring tasks, so you can focus on creativity and strategy.",
+          "analogy": "A pilot in a modern airplane has a computer 'copilot' to manage speed and direction. This allows the human pilot to focus on the bigger picture: safety, weather, and making smart decisions.",
+          "iconName": "UserGroupIcon",
+          "colorScheme": "from-indigo-500 to-blue-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "In an AI-powered world, human skills like creativity, communication, critical thinking, and empathy become more valuable than ever before.",
+          "analogy": "AI can analyze a million customer reviews and give you a data report. But only a human can truly understand one customer's frustration and provide an empathetic solution that builds trust.",
+          "iconName": "HeartIcon",
+          "colorScheme": "from-indigo-500 to-blue-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "To keep learning about AI, follow tech news, watch videos on YouTube, and most importantly, be curious and try new AI tools as they are released.",
+          "analogy": "Learning about AI is not like reading a single book that ends. It's like subscribing to a great magazine. New issues with new information arrive all the time, and your job is just to stay curious.",
+          "iconName": "NewspaperIcon",
+          "colorScheme": "from-indigo-500 to-blue-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "The future isn't something that just happens to you. With the knowledge you have now, you can use AI to build a better future for yourself and your community.",
+          "analogy": "You've just been given a new, powerful set of tools. You don't have to be a master builder today. Just start by using one tool for one small project. The journey begins with the first step.",
+          "iconName": "RocketLaunchIcon",
+          "colorScheme": "from-indigo-500 to-blue-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "A graphic designer starts using an AI image generator. What is the most effective way for her to use this tool, based on the 'Copilot' mindset?",
+          "scenario": "A professional designer is exploring how to integrate new AI tools into her creative workflow to stay competitive and efficient.",
+          "options": [
+            "Let the AI do all the work and sell whatever it creates.",
+            "Stop designing and learn to code to compete with the AI.",
+            "Use the AI to quickly generate initial ideas, then use her human creativity to refine them into a final, unique design.",
+            "Refuse to use the AI because it is a threat to her job."
+          ],
+          "correct": 2,
+          "explanation": "The 'Copilot' mindset is about partnership. The AI is a great tool for handling the initial, repetitive parts of a task (like generating ideas), which allows the human expert to focus on their unique skills like creativity, taste, and final execution."
+        },
+        {
+          "id": 2,
+          "question": "In a future where AI can write a perfect technical report, what makes a report written by a human potentially more valuable?",
+          "scenario": "An AI and a human are both asked to write a report about why a project failed. Both can list the facts correctly.",
+          "options": [
+            "The human's report will always be much longer.",
+            "The human can add strategic insights, understand the team's morale, and show empathy for the challenges faced.",
+            "The human will use more complicated words than the AI.",
+            "There is no difference; the AI's report is just as valuable."
+          ],
+          "correct": 1,
+          "explanation": "While AI is excellent at processing data and facts, uniquely human skills like strategic thinking, understanding team dynamics, and showing empathy are becoming even more valuable in a world filled with AI."
+        },
+        {
+          "id": 3,
+          "question": "You have just finished this AI literacy course. What is the best long-term strategy to make sure you don't get left behind as AI technology changes?",
+          "scenario": "AI is evolving very fast. The tools and concepts that are popular today, on July 25, 2025, might be different in the future.",
+          "options": [
+            "Memorize every fact from this course and assume nothing will ever change.",
+            "Wait for the next version of this course to be released in a few years.",
+            "Stay curious, occasionally read tech news, and be open to trying new AI tools as they become popular.",
+            "Decide that AI is too complicated to follow and just ignore it."
+          ],
+          "correct": 2,
+          "explanation": "The field of AI changes very quickly. The best way to keep up is not to memorize today's facts, but to develop a habit of curiosity. Staying informed and being willing to experiment is the key to lifelong learning in the age of AI."
         }
       ]
     }

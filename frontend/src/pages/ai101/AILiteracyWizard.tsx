@@ -432,7 +432,7 @@ const AILiteracyWizard = () => {
             <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <Lightbulb className="h-5 w-5 mr-2" />
-                Flashcard Analogi Interaktif
+                Interactive Learning Card
               </h2>
             </div>
             
