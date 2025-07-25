@@ -113,6 +113,39 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
       ],
       tags: ["Deepfake", "Satire", "Freedom of Speech", "UU ITE", "Political Expression", "AI Ethics", "Indonesia"],
     },
+    {
+        id: "002",
+        title: "Widespread Use of AI by Students for Assignments",
+        category: "Education / Ethics",
+        date: "2024-05-31",
+        status: "Ongoing",
+        summary:
+            "A survey by Tirto and Jakpat found that over 86% of Indonesian high school and university students admitted to using AI tools—like ChatGPT—to complete school assignments. This rapid adoption raises ethical issues, academic integrity concerns, and highlights the need for AI literacy among students and educators.",
+        details: `Between May 21–27, 2024, a survey across 1,501 students aged 15–21 from 34 provinces revealed that 86.21% used AI at least once per month for homework or essays. While many used AI for summarizing, idea generation, or draft writing, some also relied entirely on AI—up to 100% of task completion. Students reported low academic consequences: plagiarized AI content was often merely asked to be revised rather than sanctioned. This normalization of AI use in education—without guidance or clear academic policy—creates a blurred line between learning and outsourcing intellectual effort.`,
+        keyLearnings: [
+            "AI adoption in education is widespread, yet academic policies are mostly absent or unclear.",
+            "Excessive reliance on AI may undermine students' critical thinking and learning skills.",
+            "Students often misuse AI without understanding ethical guidelines or attribution norms.",
+            "Educators and institutions lack frameworks to responsibly integrate AI in curricula."
+        ],
+        stakeholders: [
+            "Students across Indonesia (high school and university)",
+            "Teachers and academic institutions",
+            "Jakpat & Tirto (survey organizations)",
+            "Ministry of Education, Culture, Research & Technology (Kemendikbudristek)",
+            "Parents and broader educational community"
+        ],
+        actions: [
+            "Survey published raising awareness on student AI usage trends.",
+            "University and school faculty discussions on establishing AI usage guidelines.",
+            "Ministry of Education begins drafting elective AI curriculum for 2025–26 academic year.",
+        ],
+        sources: [
+            "https://tirto.id/penggunaan-ai-di-dunia-pendidikan-makin-marak-dan-merata-gZax",
+            "https://govinsider.asia/intl-en/article/how-indonesia-is-tackling-the-challenges-of-ai-learning-in-the-classroom"
+        ],
+        tags: ["AI in Education", "Academic Integrity", "Student Ethics", "Digital Literacy", "Indonesia"]
+    },
   ]
 
   const categories = [
