@@ -148,6 +148,10 @@ const PromptEvaluator = () => {
           isChecking: false,
           lastChecked: new Date()
         })
+        // Clear fallback state when API is connected
+        if (data.success === true) {
+          setUsingFallback(false)
+        }
       } else {
         throw new Error('API health check failed')
       }
