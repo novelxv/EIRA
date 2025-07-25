@@ -2,7 +2,6 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Eye, TrendingUp, AlertTriangle, MessageSquare, Share2, BookOpen, Filter, Calendar, User } from "lucide-react"
 import { Tooltip } from "@/components/tooltip"
-import { ExpertOpinion } from "@/components/expert-opinion"
 import { ExpandableText } from "@/components/expandable-text"
 
 interface CaseStudy {
@@ -10,7 +9,6 @@ interface CaseStudy {
   title: string
   category: "Deepfake" | "Misinformation" | "AI Bias" | "Privacy" | "Ethics"
   date: string
-  impact: "Low" | "Medium" | "High"
   status: "Ongoing" | "Resolved" | "Monitored"
   summary: string
   details: string
@@ -19,18 +17,12 @@ interface CaseStudy {
   actions: string[]
   sources: string[]
   tags: string[]
-  expertOpinions?: {
-    quote: string
-    author: string
-    title: string
-    category: "ethics" | "legal" | "sociology" | "technology"
-  }[]
 }
 
 const AIWatch = () => {
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
   const [filterCategory, setFilterCategory] = useState("all")
-  const [filterImpact, setFilterImpact] = useState("all")
+//   const [filterImpact, setFilterImpact] = useState("all")
 
   // Term definitions for tooltips
   const termDefinitions: Record<string, string> = {
@@ -75,7 +67,6 @@ const AIWatch = () => {
       title: "ITB Student Arrested for AI-Generated Meme of Jokowi and Prabowo Kissing",
       category: "Deepfake",
       date: "2025-05-06",
-      impact: "High",
       status: "Resolved",
       summary:
         "A female student from Institut Teknologi Bandung (ITB) was arrested after posting a deepfake meme showing President Jokowi and Defense Minister Prabowo kissing. The case raised serious debates around freedom of expression, political satire, and the ethical use of AI-generated media in Indonesia.",
@@ -121,79 +112,6 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
         "https://twitter.com/AnKiiim_/status/1787810136373168352",
       ],
       tags: ["Deepfake", "Satire", "Freedom of Speech", "UU ITE", "Political Expression", "AI Ethics", "Indonesia"],
-      expertOpinions: [
-        {
-          quote:
-            "This case demonstrates the urgent need for legal frameworks that can distinguish between malicious deepfakes and satirical content. The blanket application of existing laws risks stifling legitimate political discourse.",
-          author: "Dr. Sarah Chen",
-          title: "AI Ethics Researcher, University of Indonesia",
-          category: "ethics",
-        },
-        {
-          quote:
-            "The UU ITE law was not designed for the age of AI-generated content. We need more nuanced legislation that considers intent, context, and potential harm rather than just the technology used.",
-          author: "Prof. Ahmad Santoso",
-          title: "Constitutional Law Expert, Universitas Gadjah Mada",
-          category: "legal",
-        },
-        {
-          quote:
-            "This incident reflects deeper societal tensions about authority, respect, and the changing nature of political expression in digital spaces. The reaction tells us as much about Indonesian society as it does about AI technology.",
-          author: "Dr. Maya Indira",
-          title: "Digital Sociology Researcher, ITB",
-          category: "sociology",
-        },
-      ],
-    },
-    {
-      id: "002",
-      title: "AI Bias in Indonesian Job Recruitment Platforms",
-      category: "AI Bias",
-      date: "2025-03-15",
-      impact: "Medium",
-      status: "Ongoing",
-      summary:
-        "Several major Indonesian job recruitment platforms were found to have AI algorithms that systematically discriminated against candidates based on gender, age, and regional background, raising concerns about algorithmic fairness in hiring processes.",
-      details: `A comprehensive study conducted by the Indonesian Digital Rights Coalition revealed significant bias in AI-powered recruitment systems used by major job platforms in Indonesia. The investigation found that these algorithms consistently ranked male candidates higher for technical positions, regardless of qualifications, and showed preference for candidates from major cities like Jakarta and Surabaya over those from eastern Indonesian provinces.
-
-The bias was discovered through systematic testing using identical resumes with only names, genders, and locations changed. The results showed a 40% lower callback rate for female candidates in STEM fields and a 35% lower rate for candidates from eastern Indonesia. This algorithmic discrimination has potentially affected thousands of job seekers across the country.
-
-The platforms involved initially denied the allegations but later acknowledged the issues after presented with concrete evidence. The case has prompted discussions about the need for algorithmic auditing and fairness testing in AI systems used for critical decisions like employment.`,
-      keyLearnings: [
-        "AI systems can perpetuate and amplify existing societal biases if not properly designed and tested.",
-        "Regular algorithmic auditing is essential for fair AI deployment in critical areas like employment.",
-        "Transparency in AI decision-making processes is crucial for accountability.",
-        "Diverse development teams and inclusive datasets are necessary to prevent bias.",
-      ],
-      stakeholders: [
-        "Indonesian Digital Rights Coalition",
-        "Job recruitment platforms",
-        "Job seekers across Indonesia",
-        "Ministry of Manpower",
-        "Technology companies",
-        "HR professionals",
-      ],
-      actions: [
-        "Public disclosure of bias findings by advocacy groups.",
-        "Platforms committed to algorithmic auditing and bias correction.",
-        "Government initiated discussions on AI fairness regulations.",
-        "Industry working group formed to develop best practices.",
-      ],
-      sources: [
-        "https://example.com/indonesian-digital-rights-coalition-report",
-        "https://example.com/ai-bias-recruitment-study",
-        "https://example.com/ministry-manpower-response",
-      ],
-      tags: ["AI Bias", "Employment", "Discrimination", "Algorithmic Fairness", "Digital Rights"],
-      expertOpinions: [
-        {
-          quote:
-            "This case highlights the critical importance of inclusive AI development. When algorithms are trained on biased historical data without proper correction, they become tools that perpetuate inequality rather than promote fairness.",
-          author: "Dr. Rini Wulandari",
-          title: "AI Fairness Researcher, Universitas Indonesia",
-          category: "technology",
-        },
-      ],
     },
   ]
 
@@ -215,8 +133,8 @@ The platforms involved initially denied the allegations but later acknowledged t
 
   const filteredCases = cases.filter((c) => {
     const categoryMatch = filterCategory === "all" || c.category === filterCategory
-    const impactMatch = filterImpact === "all" || c.impact === filterImpact
-    return categoryMatch && impactMatch
+    // const impactMatch = filterImpact === "all" || c.impact === filterImpact
+    return categoryMatch
   })
 
   const getImpactColor = (impact: string) => {
@@ -296,7 +214,7 @@ The platforms involved initially denied the allegations but later acknowledged t
                   </option>
                 ))}
               </select>
-              <select
+              {/* <select
                 value={filterImpact}
                 onChange={(e) => setFilterImpact(e.target.value)}
                 className="px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -306,7 +224,7 @@ The platforms involved initially denied the allegations but later acknowledged t
                     {impact.label}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
           </div>
         </motion.div>
@@ -332,9 +250,9 @@ The platforms involved initially denied the allegations but later acknowledged t
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(case_.category)}`}>
                       {case_.category}
                     </span>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getImpactColor(case_.impact)}`}>
+                    {/* <span className={`px-2 py-1 rounded-full text-xs font-medium ${getImpactColor(case_.impact)}`}>
                       {case_.impact}
-                    </span>
+                    </span> */}
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2">{case_.title}</h3>
                   <p className="text-sm text-neutral-600 line-clamp-3">{case_.summary}</p>
@@ -382,9 +300,9 @@ The platforms involved initially denied the allegations but later acknowledged t
                       <Calendar className="h-4 w-4" />
                       <span>{new Date(selectedCase.date).toLocaleDateString("id-ID")}</span>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
+                    {/* <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
                       Impact: {selectedCase.impact}
-                    </span>
+                    </span> */}
                     <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
                       {selectedCase.status}
                     </span>
@@ -404,22 +322,6 @@ The platforms involved initially denied the allegations but later acknowledged t
                       maxLength={500}
                     />
                   </div>
-
-                  {/* Expert Opinions */}
-                  {selectedCase.expertOpinions && selectedCase.expertOpinions.length > 0 && (
-                    <div className="mb-8">
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-4">Expert Opinions</h3>
-                      {selectedCase.expertOpinions.map((opinion, index) => (
-                        <ExpertOpinion
-                          key={index}
-                          quote={opinion.quote}
-                          author={opinion.author}
-                          title={opinion.title}
-                          category={opinion.category}
-                        />
-                      ))}
-                    </div>
-                  )}
 
                   {/* Key Learnings */}
                   <div className="mb-8">

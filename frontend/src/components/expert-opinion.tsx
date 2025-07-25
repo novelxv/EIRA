@@ -59,11 +59,11 @@ export const ExpertOpinion: React.FC<ExpertOpinionProps> = ({ quote, author, tit
             <div>
               <p className="font-semibold text-neutral-900 text-sm">{author}</p>
               <p className="text-xs text-neutral-600">{title}</p>
-              <span
+              {/* <span
                 className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-1 bg-gradient-to-r ${getCategoryColor(category)} text-white`}
               >
                 {getCategoryLabel(category)}
-              </span>
+              </span> */}
             </div>
           </div>
         </div>
