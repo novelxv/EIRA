@@ -63,7 +63,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         color: "from-purple-500 to-pink-500",
         highlights: ["Interactive Table", "Benchmarks", "Pros & Cons", "Recommendations"],
         isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 30,
-        lockReason: "Selesaikan dulu 30% AI Literacy untuk membuka modul ini",
+        lockReason: "Complete 30% of AI Literacy first to unlock this module",
         difficulty: 'intermediate',
         recommendedFor: ['curious', 'professional', 'creator']
       },
@@ -75,7 +75,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         color: "from-green-500 to-teal-500",
         highlights: ["Interactive Simulation", "Real Dilemmas", "Policy-Based", "Leadership Skills"],
         isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 50,
-        lockReason: "Pahami dulu dasar AI sebelum mengeksplorasi etika kepemimpinan",
+        lockReason: "Understand AI basics first before exploring leadership ethics",
         difficulty: 'advanced',
         recommendedFor: ['professional', 'creator', 'curious']
       },
@@ -87,7 +87,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         color: "from-orange-500 to-red-500",
         highlights: ["Trend Analysis", "Case Studies", "Critical Thinking", "Real Examples"],
         isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 70,
-        lockReason: "Modul advanced - buka setelah menguasai konsep dasar",
+        lockReason: "Advanced module - unlock after mastering basic concepts",
         difficulty: 'advanced',
         recommendedFor: ['professional', 'curious']
       }
@@ -133,23 +133,23 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
 
   const getPersonaTitle = (persona: UserPersona) => {
     switch (persona) {
-      case 'beginner': return 'Pemula Pemberani'
-      case 'curious': return 'Peneliti Muda'
-      case 'professional': return 'Guardian Etika'
-      case 'creator': return 'Inovator Kreatif'
+      case 'beginner': return 'Brave Beginner'
+      case 'curious': return 'Young Researcher'
+      case 'professional': return 'Ethics Guardian'
+      case 'creator': return 'Creative Innovator'
     }
   }
 
   const getWelcomeMessage = (persona: UserPersona) => {
     switch (persona) {
       case 'beginner': 
-        return 'Selamat datang! Mari mulai perjalanan AI Anda step by step. Kami sudah menyiapkan jalur pembelajaran yang aman dan menyenangkan.'
+        return 'Welcome! Let\'s start your AI journey step by step. We\'ve prepared a safe and enjoyable learning path.'
       case 'curious': 
-        return 'Ready to dive deep? Kami tahu Anda suka mengeksplorasi. Semua tools dan experiment space sudah disiapkan!'
+        return 'Ready to dive deep? We know you love to explore. All tools and experiment spaces are ready!'
       case 'professional': 
-        return 'Welcome, leader! Focus Anda pada ethics dan policy sangat dibutuhkan. Mari explore strategic implications dari AI.'
+        return 'Welcome, leader! Your focus on ethics and policy is much needed. Let\'s explore strategic implications of AI.'
       case 'creator': 
-        return 'Time to create magic! Balance antara innovation dan responsibility akan menjadi superpower Anda.'
+        return 'Time to create magic! The balance between innovation and responsibility will be your superpower.'
     }
   }
 
@@ -172,10 +172,10 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
               
               <div>
                 <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900">
-                  Selamat datang kembali, {userProfile.name}! 👋
+                  Welcome back, {userProfile.name}! 👋
                 </h1>
                 <p className="text-lg text-neutral-600">
-                  {getPersonaTitle(userProfile.persona)} • Dashboard Dipersonalisasi
+                  {getPersonaTitle(userProfile.persona)} • Personalized Dashboard
                 </p>
               </div>
             </div>
@@ -218,7 +218,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                 <Lightbulb className="h-6 w-6 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-1">Pesan Khusus untuk Anda</h3>
+                <h3 className="font-semibold text-neutral-900 mb-1">Special Message for You</h3>
                 <p className="text-neutral-600 leading-relaxed">
                   {getWelcomeMessage(userProfile.persona)}
                 </p>
@@ -233,10 +233,10 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-neutral-900 mb-4">
-              Modul yang Dipersonalisasi untuk Anda
+              Modules Personalized for You
             </h2>
             <p className="text-neutral-600 max-w-2xl mx-auto">
-              Setiap modul telah disesuaikan dengan learning style dan goals Anda sebagai {getPersonaTitle(userProfile.persona)}
+              Each module has been tailored to your learning style and goals as a {getPersonaTitle(userProfile.persona)}
             </p>
           </div>
 
@@ -261,7 +261,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                   {/* Recommended Badge */}
                   {isRecommended && !feature.isLocked && (
                     <div className="absolute -top-3 left-6 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium rounded-full">
-                      ⭐ Recommended for You
+                      <span className="text-white">⭐ Recommended for You</span>
                     </div>
                   )}
 
@@ -270,7 +270,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                     <div className="absolute inset-0 bg-slate-50/90 rounded-2xl flex items-center justify-center z-10">
                       <div className="text-center">
                         <Lock className="h-12 w-12 text-slate-400 mx-auto mb-3" />
-                        <p className="text-slate-600 font-medium mb-1">Modul Terkunci</p>
+                        <p className="text-slate-600 font-medium mb-1">Module Locked</p>
                         <p className="text-sm text-slate-500 max-w-xs">
                           {feature.lockReason}
                         </p>
@@ -311,8 +311,8 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                               ? 'bg-yellow-100 text-yellow-700'
                               : 'bg-red-100 text-red-700'
                         }`}>
-                          {feature.difficulty === 'beginner' ? 'Pemula' : 
-                           feature.difficulty === 'intermediate' ? 'Menengah' : 'Lanjutan'}
+                          {feature.difficulty === 'beginner' ? 'Beginner' : 
+                           feature.difficulty === 'intermediate' ? 'Intermediate' : 'Advanced'}
                         </span>
                       </div>
                     </div>
@@ -341,7 +341,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                         to={feature.href}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neutral-900 to-neutral-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all group-hover:gap-3"
                       >
-                        {feature.progress && feature.progress > 0 ? 'Lanjutkan' : 'Mulai Belajar'}
+                        {feature.progress && feature.progress > 0 ? 'Continue' : 'Start Learning'}
                         <ArrowRight className="h-5 w-5" />
                       </Link>
                     ) : (
@@ -350,7 +350,7 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                         className="inline-flex items-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 rounded-xl font-semibold cursor-not-allowed"
                       >
                         <Lock className="h-5 w-5" />
-                        Terkunci
+                        Locked
                       </button>
                     )}
                   </div>

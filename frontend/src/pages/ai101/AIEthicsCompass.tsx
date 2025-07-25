@@ -221,11 +221,11 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             </div>
             
             <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
-              Kompas <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Etika AI</span>
+              AI Ethics <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Compass</span>
             </h1>
             
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
-              Tidak memberikan jawaban "boleh" atau "tidak boleh". Tetapi mengajukan pertanyaan-pertanyaan tepat untuk membantu Anda menemukan wisdom dalam setiap dilema etika AI.
+              Does not give "allowed" or "not allowed" answers. But asks the right questions to help you find wisdom in every AI ethics dilemma.
             </p>
           </motion.div>
 
@@ -234,9 +234,9 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
               <h2 className="text-2xl font-bold mb-2 flex items-center">
                 <Brain className="h-6 w-6 mr-3" />
-                Kompas Etika AI
+                AI Ethics Compass
               </h2>
-              <p className="opacity-90">Wisdom through self-discovery, bukan through instruction</p>
+              <p className="opacity-90">Wisdom through self-discovery, not through instruction</p>
             </div>
             
             <div className="p-8">
@@ -245,24 +245,24 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <MessageSquare className="h-8 w-8 text-purple-600" />
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2">1. Ceritakan Dilema</h3>
-                  <p className="text-neutral-600 text-sm">Deskripsikan situasi etika AI yang sedang Anda hadapi</p>
+                  <h3 className="font-semibold text-neutral-900 mb-2">1. Share Your Dilemma</h3>
+                  <p className="text-neutral-600 text-sm">Describe the AI ethics situation you're facing</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Sparkles className="h-8 w-8 text-indigo-600" />
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2">2. AI Menganalisis</h3>
-                  <p className="text-neutral-600 text-sm">Sistem menghasilkan pertanyaan Sokratik yang relevan</p>
+                  <h3 className="font-semibold text-neutral-900 mb-2">2. AI Analyzes</h3>
+                  <p className="text-neutral-600 text-sm">System generates relevant Socratic questions</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Lightbulb className="h-8 w-8 text-blue-600" />
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2">3. Refleksi Mendalam</h3>
-                  <p className="text-neutral-600 text-sm">Temukan clarity melalui guided self-reflection</p>
+                  <h3 className="font-semibold text-neutral-900 mb-2">3. Deep Reflection</h3>
+                  <p className="text-neutral-600 text-sm">Find clarity through guided self-reflection</p>
                 </div>
               </div>
 
@@ -270,24 +270,24 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-6 mb-6">
                 <h4 className="font-semibold text-neutral-900 mb-4 flex items-center">
                   <Heart className="h-5 w-5 text-purple-600 mr-2" />
-                  Prinsip Kompas Etika
+                  Ethics Compass Principles
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div className="flex items-start space-x-2">
                     <Shield className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-neutral-700">Non-judgmental: Tidak menghakimi, hanya memfasilitasi</span>
+                    <span className="text-neutral-700">Non-judgmental: Doesn't judge, only facilitates</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <Users className="h-4 w-4 text-indigo-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-neutral-700">Contextual: Setiap dilema unik dan personal</span>
+                    <span className="text-neutral-700">Contextual: Every dilemma is unique and personal</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <Scale className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-neutral-700">Empowering: Memberdayakan critical thinking</span>
+                    <span className="text-neutral-700">Empowering: Empowers critical thinking</span>
                   </div>
                   <div className="flex items-start space-x-2">
                     <Eye className="h-4 w-4 text-indigo-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-neutral-700">Holistic: Melihat dari berbagai perspektif</span>
+                    <span className="text-neutral-700">Holistic: Views from various perspectives</span>
                   </div>
                 </div>
               </div>
@@ -298,7 +298,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 mx-auto"
                 >
                   <Compass className="h-5 w-5" />
-                  <span>Mulai Navigasi Etika</span>
+                  <span>Start Ethics Navigation</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
               </div>
@@ -307,19 +307,19 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
 
           {/* Example Dilemmas */}
           <div className="bg-white rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-semibold text-neutral-900 mb-4">Contoh Dilema yang Bisa Dieksplorasi:</h3>
+            <h3 className="text-lg font-semibold text-neutral-900 mb-4">Example Dilemmas You Can Explore:</h3>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="p-3 bg-purple-50 rounded-lg">
-                <p className="text-purple-800">"Saya ingin menggunakan AI untuk membuat video dengan gaya yang mirip creator terkenal. Apakah ini etis?"</p>
+                <p className="text-purple-800">"I want to use AI to create videos with a style similar to a famous creator. Is this ethical?"</p>
               </div>
               <div className="p-3 bg-indigo-50 rounded-lg">
-                <p className="text-indigo-800">"Perusahaan saya ingin menggunakan data customer untuk AI training. Bagaimana cara yang etis?"</p>
+                <p className="text-indigo-800">"My company wants to use customer data for AI training. What's the ethical way?"</p>
               </div>
               <div className="p-3 bg-blue-50 rounded-lg">
-                <p className="text-blue-800">"Saya diminta membuat deepfake untuk kampanye edukasi. Apakah ada masalah etika?"</p>
+                <p className="text-blue-800">"I was asked to create a deepfake for an educational campaign. Are there ethical issues?"</p>
               </div>
               <div className="p-3 bg-purple-50 rounded-lg">
-                <p className="text-purple-800">"AI chatbot kami kadang memberikan advice yang salah. Seberapa bertanggung jawab kami?"</p>
+                <p className="text-purple-800">"Our AI chatbot sometimes gives wrong advice. How responsible are we?"</p>
               </div>
             </div>
           </div>
@@ -340,29 +340,29 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="flex items-center space-x-2 text-neutral-600 hover:text-purple-600 transition-colors duration-200 mb-6"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>Kembali</span>
+              <span>Back</span>
             </button>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageSquare className="h-8 w-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-neutral-900 mb-2">Ceritakan Dilema Anda</h1>
-              <p className="text-neutral-600">Deskripsikan situasi etika AI yang sedang Anda hadapi dengan bebas dan detail</p>
+              <h1 className="text-3xl font-bold text-neutral-900 mb-2">Share Your Dilemma</h1>
+              <p className="text-neutral-600">Describe the AI ethics situation you're facing freely and in detail</p>
             </div>
           </div>
 
           {/* Input Form */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
-              <h2 className="text-xl font-bold">Ruang Refleksi</h2>
-              <p className="opacity-90 text-sm">Tidak ada judgement di sini. Hanya space untuk eksplorasi honest.</p>
+              <h2 className="text-xl font-bold">Reflection Space</h2>
+              <p className="opacity-90 text-sm">No judgment here. Just space for honest exploration.</p>
             </div>
             
             <div className="p-8">
               <div className="mb-6">
                 <label className="block text-sm font-medium text-neutral-700 mb-3">
-                  Jelaskan dilema etis atau keraguan yang sedang Anda hadapi terkait penggunaan AI:
+                  Describe the ethical dilemma or concern you're facing regarding AI use:
                 </label>
                 <textarea
                   value={userInput}
@@ -371,19 +371,19 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   className="w-full h-48 p-4 border border-neutral-200 rounded-lg resize-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <div className="flex justify-between items-center mt-2">
-                  <p className="text-xs text-neutral-500">Semakin detail, semakin personal guidance yang Anda dapatkan</p>
-                  <p className="text-xs text-neutral-500">{userInput.length} karakter</p>
+                  <p className="text-xs text-neutral-500">The more detailed, the more personalized guidance you'll receive</p>
+                  <p className="text-xs text-neutral-500">{userInput.length} characters</p>
                 </div>
               </div>
 
               {/* Guidelines */}
               <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
-                <h4 className="font-semibold text-purple-900 mb-2">Tips untuk Refleksi yang Efektif:</h4>
+                <h4 className="font-semibold text-purple-900 mb-2">Tips for Effective Reflection:</h4>
                 <ul className="text-purple-800 text-sm space-y-1 list-disc list-inside">
-                  <li>Jelaskan konteks situasi Anda secara spesifik</li>
-                  <li>Sebutkan pihak-pihak yang mungkin terpengaruh</li>
-                  <li>Ekspresikan keraguan atau conflict internal yang Anda rasakan</li>
-                  <li>Tidak perlu menyensor - ini adalah safe space untuk honest reflection</li>
+                  <li>Explain your situation's context specifically</li>
+                  <li>Mention parties that might be affected</li>
+                  <li>Express the doubts or internal conflicts you feel</li>
+                  <li>No need to censor - this is a safe space for honest reflection</li>
                 </ul>
               </div>
 
@@ -393,7 +393,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                 className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium py-4 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
               >
                 <Send className="h-5 w-5" />
-                <span>Mulai Eksplorasi Etika</span>
+                <span>Start Ethics Exploration</span>
               </button>
             </div>
           </div>
@@ -420,9 +420,9 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             </motion.div>
           </div>
           
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">Menganalisis Dilema Anda...</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 mb-4">Analyzing Your Dilemma...</h2>
           <p className="text-neutral-600 max-w-md mx-auto">
-            AI sedang memproses konteks dan menghasilkan pertanyaan-pertanyaan Sokratik yang relevan untuk membantu refleksi Anda.
+            AI is processing the context and generating relevant Socratic questions to help your reflection.
           </p>
           
           <div className="flex justify-center space-x-1 mt-8">
@@ -461,15 +461,15 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Compass className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-neutral-900 mb-2">Kompas Etika Anda</h1>
-            <p className="text-neutral-600">Pertanyaan-pertanyaan untuk memandu refleksi mendalam</p>
+            <h1 className="text-3xl font-bold text-neutral-900 mb-2">Your Ethics Compass</h1>
+            <p className="text-neutral-600">Questions to guide deep reflection</p>
           </motion.div>
 
           {/* Original Dilemma */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="font-semibold text-neutral-900 mb-3 flex items-center">
               <MessageSquare className="h-5 w-5 text-purple-600 mr-2" />
-              Dilema yang Anda Bagikan:
+              The Dilemma You Shared:
             </h3>
             <div className="bg-neutral-50 rounded-lg p-4">
               <p className="text-neutral-700 italic">"{userInput}"</p>
@@ -481,9 +481,9 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <Brain className="h-6 w-6 mr-3" />
-                Pertanyaan untuk Refleksi
+                Questions for Reflection
               </h2>
-              <p className="opacity-90 text-sm">Bukan jawaban, tapi pathway menuju wisdom</p>
+              <p className="opacity-90 text-sm">Not answers, but pathways to wisdom</p>
             </div>
             
             <div className="p-8">
@@ -499,13 +499,13 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
           <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl border border-purple-200 p-6 mb-8">
             <h3 className="font-semibold text-purple-900 mb-3 flex items-center">
               <Lightbulb className="h-5 w-5 mr-2" />
-              Langkah Selanjutnya:
+              Next Steps:
             </h3>
             <div className="text-purple-800 space-y-2 text-sm">
-              <p>• Luangkan waktu untuk merenungkan setiap pertanyaan dengan honest</p>
-              <p>• Diskusikan dengan mentor, teman, atau colleague yang Anda percaya</p>
-              <p>• Pertimbangkan untuk menulis jawaban Anda sebagai form of self-dialogue</p>
-              <p>• Ingat: tidak ada jawaban yang sempurna, hanya keputusan yang thoughtful</p>
+              <p>• Take time to honestly reflect on each question</p>
+              <p>• Discuss with mentors, friends, or colleagues you trust</p>
+              <p>• Consider writing your answers as a form of self-dialogue</p>
+              <p>• Remember: there are no perfect answers, only thoughtful decisions</p>
             </div>
           </div>
 
@@ -516,7 +516,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
             >
               <MessageSquare className="h-5 w-5" />
-              <span>Eksplorasi Dilema Lain</span>
+              <span>Explore Another Dilemma</span>
             </button>
             
             <button
@@ -524,7 +524,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="bg-white border border-purple-200 text-purple-700 font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:bg-purple-50 flex items-center justify-center space-x-2"
             >
               <FileText className="h-5 w-5" />
-              <span>Simpan Refleksi</span>
+              <span>Save Reflection</span>
             </button>
           </div>
 
@@ -535,7 +535,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="inline-flex items-center space-x-2 text-neutral-600 hover:text-purple-600 transition-colors duration-200"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>Kembali ke AI 101</span>
+              <span>Back to AI 101</span>
             </Link>
           </div>
         </div>
@@ -553,23 +553,23 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-8"
           >
-            <h1 className="text-3xl font-bold text-neutral-900 mb-2">Journal Etika Anda</h1>
-            <p className="text-neutral-600">Kumpulan refleksi untuk pertumbuhan ethical thinking</p>
+            <h1 className="text-3xl font-bold text-neutral-900 mb-2">Your Ethics Journal</h1>
+            <p className="text-neutral-600">Collection of reflections for ethical thinking growth</p>
           </motion.div>
 
           {/* Current Session */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-neutral-900">Sesi Refleksi Terbaru</h3>
+              <h3 className="font-semibold text-neutral-900">Latest Reflection Session</h3>
               <CheckCircle className="h-5 w-5 text-green-500" />
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">Dilema:</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-2">Dilemma:</label>
                 <p className="text-neutral-600 text-sm bg-neutral-50 rounded p-3">{userInput}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">Pertanyaan Refleksi:</label>
+                <label className="block text-sm font-medium text-neutral-700 mb-2">Reflection Questions:</label>
                 <div className="text-neutral-600 text-sm bg-neutral-50 rounded p-3 max-h-48 overflow-y-auto">
                   <div className="whitespace-pre-line">{aiResponse}</div>
                 </div>
@@ -579,7 +579,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
 
           {/* Reflection Tools */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h3 className="font-semibold text-neutral-900 mb-4">Tools untuk Refleksi Lanjutan</h3>
+            <h3 className="font-semibold text-neutral-900 mb-4">Tools for Further Reflection</h3>
             <div className="grid md:grid-cols-3 gap-4">
               <Link 
                 to="/prompt-evaluator"
@@ -589,7 +589,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   <FileText className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="font-semibold text-blue-900 mb-1">Prompt Evaluator</div>
-                <div className="text-blue-700 text-sm">Evaluasi ethical prompting</div>
+                <div className="text-blue-700 text-sm">Evaluate ethical prompting</div>
               </Link>
               
               <Link 
@@ -600,7 +600,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   <Users className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="font-semibold text-green-900 mb-1">AI Simulator</div>
-                <div className="text-green-700 text-sm">Simulasi ethical scenarios</div>
+                <div className="text-green-700 text-sm">Simulate ethical scenarios</div>
               </Link>
               
               <a 
@@ -613,7 +613,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
                   <ExternalLink className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="font-semibold text-purple-900 mb-1">AI Ethics Resources</div>
-                <div className="text-purple-700 text-sm">Panduan global AI ethics</div>
+                <div className="text-purple-700 text-sm">Global AI ethics guidelines</div>
               </a>
             </div>
           </div>
@@ -625,7 +625,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
             >
               <RotateCcw className="h-5 w-5" />
-              <span>Mulai Eksplorasi Baru</span>
+              <span>Start New Exploration</span>
             </button>
             
             <Link
@@ -633,7 +633,7 @@ Ethical decision making bukan tentang finding perfect answer, tapi about making 
               className="bg-white border border-neutral-200 text-neutral-700 font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:shadow-md flex items-center justify-center space-x-2"
             >
               <ArrowLeft className="h-5 w-5" />
-              <span>Kembali ke AI 101</span>
+              <span>Back to AI 101</span>
             </Link>
           </div>
         </div>

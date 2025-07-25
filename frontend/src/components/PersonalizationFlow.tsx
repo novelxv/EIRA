@@ -41,26 +41,26 @@ interface Question {
 const questions: Question[] = [
   {
     id: 'q1',
-    scenario: '🤖 Anda melihat teman menggunakan ChatGPT untuk mengerjakan tugas kuliah',
-    question: 'Reaksi pertama Anda adalah...',
+    scenario: 'You see a friend using ChatGPT to complete college assignments',
+    question: 'Your first reaction is...',
     options: [
       {
-        text: 'Wah keren! Tapi apa ini aman digunakan?',
+        text: 'Wow cool! But is this safe to use?',
         value: 'curious_safe',
         persona: ['beginner']
       },
       {
-        text: 'Menarik! Bagaimana cara kerjanya ya?',
+        text: 'Interesting! How does it work?',
         value: 'want_to_learn',
         persona: ['curious']
       },
       {
-        text: 'Hmm, ini melanggar aturan akademik tidak ya?',
+        text: 'Hmm, does this violate academic rules?',
         value: 'ethical_concern',
         persona: ['professional']
       },
       {
-        text: 'Asyik! Saya juga mau coba untuk proyek kreatif',
+        text: 'Cool! I want to try it for creative projects too',
         value: 'creative_use',
         persona: ['creator']
       }
@@ -68,26 +68,26 @@ const questions: Question[] = [
   },
   {
     id: 'q2',
-    scenario: '🎨 Anda melihat artwork AI yang sangat mirip dengan gaya artist terkenal',
-    question: 'Pendapat Anda tentang situasi ini...',
+    scenario: 'You see AI artwork that closely resembles a famous artist\'s style',
+    question: 'Your opinion about this situation...',
     options: [
       {
-        text: 'Wah bagus! Tapi apa artist aslinya tahu?',
+        text: 'Wow nice! But does the original artist know about this?',
         value: 'impressed_concerned',
         persona: ['beginner']
       },
       {
-        text: 'Penasaran bagaimana AI bisa meniru gaya seperti itu',
+        text: 'Curious how AI can mimic styles like that',
         value: 'technical_curiosity',
         persona: ['curious']
       },
       {
-        text: 'Ini masalah hak cipta dan etika yang serius',
+        text: 'This is a serious copyright and ethics issue',
         value: 'legal_ethical',
         persona: ['professional']
       },
       {
-        text: 'Inspiratif! Tapi harus ada batasan yang jelas',
+        text: 'Inspiring! But there should be clear boundaries',
         value: 'creative_boundaries',
         persona: ['creator']
       }
@@ -95,26 +95,26 @@ const questions: Question[] = [
   },
   {
     id: 'q3',
-    scenario: '📱 Perusahaan mengumumkan AI baru yang "lebih pintar dari manusia"',
-    question: 'Perasaan Anda terhadap berita ini...',
+    scenario: 'A company announces a new AI that is "smarter than humans"',
+    question: 'Your feelings about this news...',
     options: [
       {
-        text: 'Kagum tapi juga sedikit khawatir',
+        text: 'Amazed but also a bit worried',
         value: 'amazed_worried',
         persona: ['beginner']
       },
       {
-        text: 'Excited! Pengen tahu kemampuan dan batasannya',
+        text: 'Excited! Want to know its capabilities and limitations',
         value: 'excited_analytical',
         persona: ['curious']
       },
       {
-        text: 'Skeptis. Perlu data dan evaluasi independen',
+        text: 'Skeptical. Need data and independent evaluation',
         value: 'skeptical_analytical',
         persona: ['professional']
       },
       {
-        text: 'Tertarik dengan potensi kolaborasi kreatif',
+        text: 'Interested in creative collaboration potential',
         value: 'collaborative_creative',
         persona: ['creator']
       }
@@ -124,40 +124,40 @@ const questions: Question[] = [
 
 const personaProfiles = {
   beginner: {
-    title: 'Pemula Pemberani',
-    subtitle: 'Explorer yang Bijak',
-    description: 'Anda memiliki rasa ingin tahu yang besar tentang AI, tapi juga kesadaran yang baik tentang pentingnya belajar dengan aman. Perfect!',
+    title: 'Brave Beginner',
+    subtitle: 'Wise Explorer',
+    description: 'You have great curiosity about AI, but also good awareness about the importance of learning safely. Perfect!',
     icon: <Rocket className="h-8 w-8" />,
     color: 'from-green-400 to-emerald-500',
-    traits: ['Terbuka untuk belajar', 'Berpikir kritis', 'Peduli keamanan', 'Mau bertanya'],
-    recommendation: 'EIRA akan memandumu step-by-step dari konsep dasar hingga aplikasi praktis!'
+    traits: ['Open to learning', 'Critical thinking', 'Safety-conscious', 'Willing to ask questions'],
+    recommendation: 'EIRA will guide you step-by-step from basic concepts to practical applications!'
   },
   curious: {
-    title: 'Peneliti Muda',
+    title: 'Young Researcher',
     subtitle: 'Knowledge Hunter',
-    description: 'Anda adalah tipe orang yang selalu ingin tahu "bagaimana" dan "mengapa". Curiosity Anda adalah asset besar!',
+    description: 'You are the type of person who always wants to know "how" and "why". Your curiosity is a great asset!',
     icon: <Brain className="h-8 w-8" />,
     color: 'from-blue-400 to-indigo-500',
-    traits: ['Analitis', 'Suka eksperimen', 'Detail-oriented', 'Problem solver'],
-    recommendation: 'Perfect untuk modul-modul yang lebih teknis dan hands-on learning!'
+    traits: ['Analytical', 'Likes to experiment', 'Detail-oriented', 'Problem solver'],
+    recommendation: 'Perfect for more technical modules and hands-on learning!'
   },
   professional: {
-    title: 'Guardian Etika',
+    title: 'Ethics Guardian',
     subtitle: 'Responsible Leader',
-    description: 'Anda memiliki perspektif matang tentang dampak teknologi. Leadership mindset yang sangat dibutuhkan!',
+    description: 'You have mature perspective on technology impact. Leadership mindset that is much needed!',
     icon: <Shield className="h-8 w-8" />,
     color: 'from-purple-400 to-violet-500',
-    traits: ['Berpikir sistemik', 'Etis', 'Long-term thinking', 'Risk aware'],
-    recommendation: 'Fokus pada policy, ethics, dan strategic implications dari AI!'
+    traits: ['Systems thinking', 'Ethical', 'Long-term thinking', 'Risk aware'],
+    recommendation: 'Focus on policy, ethics, and strategic implications of AI!'
   },
   creator: {
-    title: 'Inovator Kreatif',
+    title: 'Creative Innovator',
     subtitle: 'Creative Collaborator',
-    description: 'Anda melihat AI sebagai alat kolaborasi kreatif. Balance antara inovasi dan responsibility!',
+    description: 'You see AI as a creative collaboration tool. Balance between innovation and responsibility!',
     icon: <Star className="h-8 w-8" />,
     color: 'from-pink-400 to-rose-500',
-    traits: ['Imajinatif', 'Kolaboratif', 'Boundary-aware', 'Innovation-focused'],
-    recommendation: 'Explore AI tools, creative workflows, dan ethical creation practices!'
+    traits: ['Imaginative', 'Collaborative', 'Boundary-aware', 'Innovation-focused'],
+    recommendation: 'Explore AI tools, creative workflows, and ethical creation practices!'
   }
 }
 
@@ -265,12 +265,12 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
               </motion.div>
 
               <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                Selamat Datang di <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">EIRA</span>
+                Welcome to <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">EIRA</span>
               </h1>
 
               <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-                Mari personalisasi pengalaman belajar AI Anda!<br />
-                <span className="text-slate-400 text-lg">Hanya butuh 2 menit untuk setup yang sempurna ✨</span>
+                Let's personalize your AI learning experience!<br />
+                <span className="text-slate-400 text-lg">Just 2 minutes for perfect setup ✨</span>
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -281,7 +281,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all"
                 >
                   <Rocket className="h-5 w-5" />
-                  Mulai Petualangan Belajar
+                  Start Learning Adventure
                   <ArrowRight className="h-5 w-5" />
                 </motion.button>
 
@@ -291,7 +291,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   onClick={onSkip}
                   className="px-6 py-4 border border-slate-600 text-slate-300 rounded-xl font-medium hover:bg-slate-800 transition-all"
                 >
-                  Skip untuk sekarang
+                  Skip for now
                 </motion.button>
               </div>
             </motion.div>
@@ -311,11 +311,11 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
               </div>
 
               <h2 className="text-3xl font-bold text-white mb-4">
-                Boleh kenalan dulu? 👋
+                Can we get acquainted first? 👋
               </h2>
 
               <p className="text-slate-300 mb-8">
-                Kami akan menyesuaikan pengalaman sesuai preferensi Anda
+                We'll customize the experience according to your preferences
               </p>
 
               <div className="mb-8">
@@ -323,11 +323,13 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Nama atau panggilan Anda..."
+                  placeholder="Your name or nickname..."
                   className="w-full max-w-sm mx-auto px-6 py-4 bg-slate-800 border border-slate-600 text-white rounded-xl text-center text-lg focus:outline-none focus:border-purple-400 transition-all"
                   autoFocus
                 />
               </div>
+
+              <p className="text-xs text-neutral-500">The more detailed, the more personal guidance you'll get</p>
 
               <div className="flex gap-4 justify-center">
                 <motion.button
@@ -337,7 +339,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   disabled={!userName.trim()}
                   className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
-                  Lanjut
+                  Continue
                   <ArrowRight className="h-5 w-5" />
                 </motion.button>
 
@@ -347,7 +349,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   onClick={() => setCurrentStep('welcome')}
                   className="px-6 py-3 border border-slate-600 text-slate-300 rounded-xl font-medium hover:bg-slate-800 transition-all"
                 >
-                  Kembali
+                  Back
                 </motion.button>
               </div>
             </motion.div>
@@ -365,7 +367,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
               {/* Progress Bar */}
               <div className="mb-8">
                 <div className="flex justify-between text-sm text-slate-400 mb-2">
-                  <span>Pertanyaan {currentQuestion + 1} dari {questions.length}</span>
+                  <span>Question {currentQuestion + 1} of {questions.length}</span>
                   <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
                 </div>
                 <div className="w-full bg-slate-700 rounded-full h-2">
@@ -386,11 +388,11 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-center mb-8">
-                    <div className="text-4xl mb-4">{questions[currentQuestion].scenario}</div>
+                    <div className="text-4xl mb-4 text-white">{questions[currentQuestion].scenario}</div>
                     <h3 className="text-2xl font-semibold text-white mb-2">
                       {questions[currentQuestion].question}
                     </h3>
-                    <p className="text-slate-400">Pilih jawaban yang paling sesuai dengan Anda</p>
+                    <p className="text-slate-400">Choose the answer that best fits you</p>
                   </div>
 
                   <div className="space-y-4">
@@ -443,10 +445,10 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                 transition={{ delay: 0.4 }}
               >
                 <h2 className="text-4xl font-bold text-white mb-2">
-                  Hai {userName}! 👋
+                  Hi {userName}! 👋
                 </h2>
                 <h3 className="text-2xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-                  Anda adalah seorang "{personaData.title}"
+                  You are a "{personaData.title}"
                 </h3>
                 <p className="text-lg text-slate-300 mb-6">
                   {personaData.subtitle}
@@ -458,7 +460,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   </p>
 
                   <div className="mb-4">
-                    <h4 className="text-white font-semibold mb-2">Strengths Anda:</h4>
+                    <h4 className="text-white font-semibold mb-2">Your Strengths:</h4>
                     <div className="flex flex-wrap gap-2">
                       {personaData.traits.map((trait, index) => (
                         <span
@@ -475,7 +477,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                     <div className="flex items-start gap-3">
                       <Lightbulb className="h-5 w-5 text-purple-400 mt-1 flex-shrink-0" />
                       <div>
-                        <h4 className="text-purple-300 font-semibold mb-1">Rekomendasi EIRA:</h4>
+                        <h4 className="text-purple-300 font-semibold mb-1">EIRA Recommendation:</h4>
                         <p className="text-slate-300 text-sm">
                           {personaData.recommendation}
                         </p>
@@ -491,7 +493,7 @@ const PersonalizationFlow = ({ onComplete, onSkip }: PersonalizationFlowProps) =
                   className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 mx-auto hover:shadow-lg transition-all"
                 >
                   <CheckCircle className="h-5 w-5" />
-                  Masuk ke Dashboard Saya
+                  Enter My Dashboard
                   <ArrowRight className="h-5 w-5" />
                 </motion.button>
               </motion.div>

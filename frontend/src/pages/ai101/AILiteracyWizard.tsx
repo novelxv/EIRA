@@ -157,17 +157,17 @@ const AILiteracyWizard = () => {
               AI Literacy Journey
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
-              Mulai Perjalanan <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Literasi AI</span>
+              Start Your <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">AI Literacy</span> Journey
             </h1>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
-              Pilih modul pembelajaran yang ingin Anda pelajari. Setiap modul dirancang untuk memberikan pemahaman mendalam melalui pendekatan step-by-step.
+              Choose a learning module you want to explore. Each module is designed to provide deep understanding through a step-by-step approach.
             </p>
             
             {/* Progress Summary */}
             <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto mb-8">
-              <h3 className="font-semibold text-neutral-900 mb-3">Progress Pembelajaran</h3>
+              <h3 className="font-semibold text-neutral-900 mb-3">Learning Progress</h3>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-neutral-600">Modul Selesai</span>
+                <span className="text-sm text-neutral-600">Completed Modules</span>
                 <span className="text-sm font-medium text-blue-600">{getCompletedModules()}/{modules.length}</span>
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-2">
@@ -210,19 +210,19 @@ const AILiteracyWizard = () => {
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center text-sm text-neutral-600">
                       <Video className="h-4 w-4 mr-2 text-blue-500" />
-                      <span>Video pembelajaran interaktif</span>
+                      <span>Interactive learning video</span>
                     </div>
                     <div className="flex items-center text-sm text-neutral-600">
                       <BookOpen className="h-4 w-4 mr-2 text-green-500" />
-                      <span>{module.conceptCards.length} kartu konsep analogi</span>
+                      <span>{module.conceptCards.length} concept analogy cards</span>
                     </div>
                     <div className="flex items-center text-sm text-neutral-600">
                       <HelpCircle className="h-4 w-4 mr-2 text-purple-500" />
-                      <span>{module.quiz.length} kuis skenario dunia nyata</span>
+                      <span>{module.quiz.length} real-world scenario quiz</span>
                     </div>
                     <div className="flex items-center text-sm text-neutral-600">
                       <CheckCircle className="h-4 w-4 mr-2 text-orange-500" />
-                      <span>~{(module.conceptCards.length * 2) + (module.quiz.length * 1.5)} menit</span>
+                      <span>~{(module.conceptCards.length * 2) + (module.quiz.length * 1.5)} minutes</span>
                     </div>
                   </div>
 
@@ -237,12 +237,12 @@ const AILiteracyWizard = () => {
                     {moduleProgress[module.id] ? (
                       <>
                         <CheckCircle className="h-5 w-5" />
-                        <span>Ulang Modul</span>
+                        <span>Retake Module</span>
                       </>
                     ) : (
                       <>
                         <PlayCircle className="h-5 w-5" />
-                        <span>Mulai Belajar</span>
+                        <span>Start Learning</span>
                         <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
@@ -259,7 +259,7 @@ const AILiteracyWizard = () => {
               className="inline-flex items-center text-neutral-600 hover:text-blue-600 transition-colors duration-200"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Kembali ke AI 101
+              Back to AI 101
             </Link>
           </div>
         </div>
@@ -280,14 +280,14 @@ const AILiteracyWizard = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-3xl font-bold text-neutral-900">
-                📺 Tonton & Pahami
+                📺 Watch & Understand
               </h1>
               <button
                 onClick={() => setCurrentStep('selection')}
                 className="text-neutral-500 hover:text-neutral-700 flex items-center"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Kembali
+                Back
               </button>
             </div>
             
@@ -299,17 +299,17 @@ const AILiteracyWizard = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="flex items-center text-blue-600">
                 <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">1</div>
-                <span className="font-semibold">Tonton</span>
+                <span className="font-semibold">Watch</span>
               </div>
               <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
               <div className="flex items-center text-neutral-400">
                 <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">2</div>
-                <span>Pahami</span>
+                <span>Understand</span>
               </div>
               <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
               <div className="flex items-center text-neutral-400">
                 <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
-                <span>Uji</span>
+                <span>Test</span>
               </div>
             </div>
           </div>
@@ -319,22 +319,22 @@ const AILiteracyWizard = () => {
             <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <Video className="h-5 w-5 mr-2" />
-                Video Pembelajaran
+                Learning Video
               </h2>
             </div>
             <div className="p-8">
               <div className="aspect-video bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center">
                 <div className="text-center">
                   <PlayCircle className="h-16 w-16 text-neutral-400 mx-auto mb-4" />
-                  <p className="text-neutral-600 text-lg font-medium">Video pembelajaran akan tersedia segera</p>
-                  <p className="text-sm text-neutral-500 mt-2">Sementara waktu, mari lanjut ke flashcard interaktif</p>
+                  <p className="text-neutral-600 text-lg font-medium">Learning video will be available soon</p>
+                  <p className="text-sm text-neutral-500 mt-2">Meanwhile, let's continue to interactive flashcards</p>
                 </div>
               </div>
               
               {/* Module Description */}
               <div className="mt-8 text-center">
                 <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                  Apa yang akan Anda pelajari?
+                  What will you learn?
                 </h3>
                 <p className="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
                   {selectedModule.description}
@@ -350,14 +350,14 @@ const AILiteracyWizard = () => {
               className="flex items-center px-6 py-3 text-neutral-600 hover:text-neutral-800 transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Pilih Modul Lain
+              Choose Another Module
             </button>
             
             <button
               onClick={goToFlashcards}
               className="flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              Lanjut ke Flashcard
+              Continue to Flashcards
               <ArrowRight className="h-4 w-4 ml-2" />
             </button>
           </div>
@@ -379,14 +379,14 @@ const AILiteracyWizard = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-3xl font-bold text-neutral-900">
-                🧠 Pahami dengan Analogi
+                🧠 Understand with Analogies
               </h1>
               <button
                 onClick={() => setCurrentStep('video')}
                 className="text-neutral-500 hover:text-neutral-700 flex items-center"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Kembali ke Video
+                Back to Video
               </button>
             </div>
             
@@ -398,24 +398,24 @@ const AILiteracyWizard = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="flex items-center text-green-600">
                 <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
-                <span className="font-medium">Tonton</span>
+                <span className="font-medium">Watch</span>
               </div>
               <div className="flex-1 h-1 bg-green-200 rounded"></div>
               <div className="flex items-center text-purple-600">
                 <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">2</div>
-                <span className="font-semibold">Pahami</span>
+                <span className="font-semibold">Understand</span>
               </div>
               <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
               <div className="flex items-center text-neutral-400">
                 <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
-                <span>Uji</span>
+                <span>Test</span>
               </div>
             </div>
 
             {/* Card Progress */}
             <div className="flex items-center justify-between mb-6">
               <div className="text-sm text-neutral-600">
-                Kartu {currentCard + 1} dari {selectedModule.conceptCards.length}
+                Card {currentCard + 1} of {selectedModule.conceptCards.length}
               </div>
             </div>
             
@@ -460,7 +460,7 @@ const AILiteracyWizard = () => {
                     <div className="bg-blue-50 rounded-lg p-6">
                       <h4 className="font-semibold text-blue-900 mb-3 flex items-center justify-center">
                         <Lightbulb className="h-4 w-4 mr-2" />
-                        Analogi Sederhana
+                        Simple Analogy
                       </h4>
                       <p className="text-gray-600 text-lg leading-relaxed font-normal">
                         {selectedModule.conceptCards[currentCard].analogy}
@@ -476,7 +476,7 @@ const AILiteracyWizard = () => {
                       className="flex items-center space-x-2 px-4 py-2 text-neutral-600 hover:text-blue-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <ArrowLeft className="h-4 w-4" />
-                      <span>Sebelumnya</span>
+                      <span>Previous</span>
                     </button>
 
                     {currentCard < selectedModule.conceptCards.length - 1 ? (
@@ -487,7 +487,7 @@ const AILiteracyWizard = () => {
                         }}
                         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
                       >
-                        <span>Lanjut ke Kartu Berikutnya</span>
+                        <span>Continue to Next Card</span>
                         <ArrowRight className="h-4 w-4" />
                       </button>
                     ) : (
@@ -498,7 +498,7 @@ const AILiteracyWizard = () => {
                         }}
                         className="bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
                       >
-                        <span>Lanjut ke Kuis Pemahaman</span>
+                        <span>Continue to Comprehension Quiz</span>
                         <ChevronRight className="h-4 w-4" />
                       </button>
                     )}
@@ -527,14 +527,14 @@ const AILiteracyWizard = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-3xl font-bold text-neutral-900">
-                ❓ Uji Pemahaman
+                ❓ Test Understanding
               </h1>
               <button
                 onClick={() => setCurrentStep('flashcards')}
                 className="text-neutral-500 hover:text-neutral-700 flex items-center"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Kembali ke Flashcard
+                Back to Flashcards
               </button>
             </div>
             
@@ -546,24 +546,24 @@ const AILiteracyWizard = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="flex items-center text-green-600">
                 <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
-                <span className="font-medium">Tonton</span>
+                <span className="font-medium">Watch</span>
               </div>
               <div className="flex-1 h-1 bg-green-200 rounded"></div>
               <div className="flex items-center text-green-600">
                 <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
-                <span className="font-medium">Pahami</span>
+                <span className="font-medium">Understand</span>
               </div>
               <div className="flex-1 h-1 bg-green-200 rounded"></div>
               <div className="flex items-center text-blue-600">
                 <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
-                <span className="font-semibold">Uji</span>
+                <span className="font-semibold">Test</span>
               </div>
             </div>
 
             {/* Quiz Progress */}
             <div className="flex items-center justify-between mb-6">
               <div className="text-sm text-neutral-600">
-                Pertanyaan {currentQuiz + 1} dari {selectedModule.quiz.length}
+                Question {currentQuiz + 1} of {selectedModule.quiz.length}
               </div>
             </div>
             
@@ -580,7 +580,7 @@ const AILiteracyWizard = () => {
             <div className="bg-gradient-to-r from-green-500 to-teal-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <HelpCircle className="h-5 w-5 mr-2" />
-                Kuis Pemahaman: Skenario Dunia Nyata
+                Comprehension Quiz: Real-World Scenarios
               </h2>
             </div>
             
@@ -589,7 +589,7 @@ const AILiteracyWizard = () => {
               {currentQuestion.scenario && (
                 <div className="relative bg-blue-50 border-2 border-transparent bg-gradient-to-r from-blue-200 via-green-200 to-blue-200 p-[1px] rounded-lg mb-6">
                   <div className="bg-blue-50 rounded-lg p-6">
-                    <h3 className="font-semibold text-blue-900 mb-3">📱 Skenario:</h3>
+                    <h3 className="font-semibold text-blue-900 mb-3">📱 Scenario:</h3>
                     <p className="text-blue-800 leading-relaxed">{currentQuestion.scenario}</p>
                   </div>
                 </div>
@@ -651,7 +651,7 @@ const AILiteracyWizard = () => {
                 >
                   <h4 className="font-semibold text-neutral-900 mb-3 flex items-center">
                     <Lightbulb className="h-4 w-4 mr-2 text-yellow-500" />
-                    Penjelasan:
+                    Explanation:
                   </h4>
                   <p className="text-neutral-700 leading-relaxed">{currentQuestion.explanation}</p>
                 </motion.div>
@@ -661,7 +661,7 @@ const AILiteracyWizard = () => {
               {showExplanation && (
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-neutral-600">
-                    Skor: {quizScore}/{currentQuiz + 1}
+                    Score: {quizScore}/{currentQuiz + 1}
                   </div>
                   
                   {currentQuiz < selectedModule.quiz.length - 1 ? (
@@ -673,7 +673,7 @@ const AILiteracyWizard = () => {
                       }}
                       className="bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
                     >
-                      <span>Pertanyaan Berikutnya</span>
+                      <span>Next Question</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   ) : (
@@ -682,7 +682,7 @@ const AILiteracyWizard = () => {
                       className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
                     >
                       <Trophy className="h-4 w-4" />
-                      <span>Selesaikan Modul</span>
+                      <span>Complete Module</span>
                     </button>
                   )}
                 </div>
@@ -717,21 +717,21 @@ const AILiteracyWizard = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-neutral-900 mb-6">
-              🎉 Selamat! Modul Selesai
+              🎉 Congratulations! Module Completed
             </h1>
             
             <p className="text-xl text-neutral-600 mb-8">
-              Anda telah berhasil menyelesaikan modul "{selectedModule.title}" dengan baik!
+              You have successfully completed the "{selectedModule.title}" module!
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Score Card */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-4">Hasil Pembelajaran</h2>
+              <h2 className="text-xl font-bold text-neutral-900 mb-4">Learning Results</h2>
               <div className="text-center">
                 <div className="text-4xl font-bold text-green-600 mb-2">{finalScore}/{totalQuestions}</div>
-                <div className="text-neutral-600 mb-4">Skor Kuis Pemahaman</div>
+                <div className="text-neutral-600 mb-4">Comprehension Quiz Score</div>
                 <div className="w-full bg-neutral-200 rounded-full h-3 mb-2">
                   <div
                     className="bg-gradient-to-r from-green-500 to-teal-500 h-3 rounded-full transition-all duration-300"
@@ -739,34 +739,34 @@ const AILiteracyWizard = () => {
                   ></div>
                 </div>
                 <div className="text-sm text-neutral-600 mb-4">
-                  {scorePercentage >= 80 ? '🌟 Excellent! Pemahaman yang sangat baik' :
-                   scorePercentage >= 60 ? '👍 Good Job! Pemahaman yang cukup baik' :
-                   '💪 Keep Learning! Mari perbaiki pemahaman'}
+                  {scorePercentage >= 80 ? '🌟 Excellent! Very good understanding' :
+                   scorePercentage >= 60 ? '👍 Good Job! Quite good understanding' :
+                   '💪 Keep Learning! Let\'s improve understanding'}
                 </div>
                 
                 {/* Detail breakdown */}
                 <div className="text-xs text-neutral-500 space-y-1">
-                  <div>Jawaban Benar: {finalScore} dari {totalQuestions} pertanyaan</div>
-                  <div>Tingkat Akurasi: {Math.round(scorePercentage)}%</div>
+                  <div>Correct Answers: {finalScore} of {totalQuestions} questions</div>
+                  <div>Accuracy Rate: {Math.round(scorePercentage)}%</div>
                 </div>
               </div>
             </div>
 
             {/* Achievement Card */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-4">Yang Telah Anda Pelajari</h2>
+              <h2 className="text-xl font-bold text-neutral-900 mb-4">What You Have Learned</h2>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <p className="text-neutral-600 text-sm">Memahami konsep dasar melalui kartu analogi interaktif</p>
+                  <p className="text-neutral-600 text-sm">Understanding basic concepts through interactive analogy cards</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <p className="text-neutral-600 text-sm">Menerapkan pemahaman dalam skenario dunia nyata</p>
+                  <p className="text-neutral-600 text-sm">Applying understanding in real-world scenarios</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <p className="text-neutral-600 text-sm">Mendapatkan pengalaman pembelajaran yang terstruktur</p>
+                  <p className="text-neutral-600 text-sm">Gaining structured learning experience</p>
                 </div>
               </div>
             </div>
@@ -774,7 +774,7 @@ const AILiteracyWizard = () => {
 
           {/* Next Steps */}
           <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-6 text-center">Langkah Selanjutnya</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6 text-center">Next Steps</h2>
             
             <div className="grid md:grid-cols-3 gap-6">
               <Link 
@@ -785,7 +785,7 @@ const AILiteracyWizard = () => {
                   <Brain className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="font-semibold text-blue-900 mb-1">Platform Comparison</div>
-                <div className="text-blue-700 text-sm">Bandingkan berbagai platform AI</div>
+                <div className="text-blue-700 text-sm">Compare various AI platforms</div>
               </Link>
               
               <Link 
@@ -796,7 +796,7 @@ const AILiteracyWizard = () => {
                   <FileText className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="font-semibold text-purple-900 mb-1">Prompt Evaluator</div>
-                <div className="text-purple-700 text-sm">Praktikkan skill prompting</div>
+                <div className="text-purple-700 text-sm">Practice prompting skills</div>
               </Link>
               
               <Link 
@@ -807,7 +807,7 @@ const AILiteracyWizard = () => {
                   <HelpCircle className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="font-semibold text-green-900 mb-1">Content Detector</div>
-                <div className="text-green-700 text-sm">Deteksi konten AI-generated</div>
+                <div className="text-green-700 text-sm">Detect AI-generated content</div>
               </Link>
             </div>
           </div>
@@ -819,7 +819,7 @@ const AILiteracyWizard = () => {
               className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
             >
               <Home className="h-5 w-5" />
-              <span>Pilih Modul Lain</span>
+              <span>Choose Another Module</span>
             </button>
             
             <Link
@@ -827,7 +827,7 @@ const AILiteracyWizard = () => {
               className="bg-white border border-neutral-200 text-neutral-700 font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:shadow-md flex items-center justify-center space-x-2"
             >
               <ArrowLeft className="h-5 w-5" />
-              <span>Kembali ke AI 101</span>
+              <span>Back to AI 101</span>
             </Link>
           </div>
         </div>
