@@ -15,3 +15,4 @@ AI_DETECTION_MODEL : str =  config("AI_DETECTION_MODEL")
 
 # Text generation model configuration
 TEXT_GENERATION_MODEL: str = config("TEXT_GENERATION_MODEL", default="GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct")
+GEMINI_API_KEY : str = config("GEMINI_API_KEY")

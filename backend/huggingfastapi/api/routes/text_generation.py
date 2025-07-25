@@ -3,9 +3,10 @@ from starlette.requests import Request
 from loguru import logger
 
 from huggingfastapi.core import security
-from huggingfastapi.models.payload import TextGenerationPayload
-from huggingfastapi.models.prediction import TextGenerationResult
+from huggingfastapi.models.payload import TextGenerationPayload, PromptEvaluationPayload
+from huggingfastapi.models.prediction import TextGenerationResult, EvaluationResult
 from huggingfastapi.services.text_generation import TextGenerationModel
+from huggingfastapi.services.nlp import GeminiPromptEvaluator
 
 router = APIRouter()
 
@@ -85,3 +86,85 @@ def post_chat(
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Chat failed: {str(e)}")
+
+
+# Global evaluator instance
+evaluator = None
+
+def get_evaluator():
+    """Get or create evaluator instance"""
+    global evaluator
+    if evaluator is None:
+        evaluator = GeminiPromptEvaluator()
+    return evaluator
+
+
+@router.post("/evaluate", response_model=EvaluationResult, name="evaluate-prompt")
+def post_evaluate_prompt(
+    request: Request,
+    authenticated: bool = Depends(security.validate_request),
+    payload: PromptEvaluationPayload = None,
+) -> EvaluationResult:
+    """
+    #### Evaluate AI prompts using Gemini 2.5 Pro with advanced criteria
+    
+    Analyzes prompts based on research-backed evaluation criteria from leading AI organizations.
+    Uses few-shot learning and expert knowledge for consistent, accurate assessments.
+    
+    Evaluation Criteria:
+    - Clarity (25%): Language simplicity, clear instructions, logical structure
+    - Specificity (30%): Detailed context, output format, constraints, role definition
+    - Ethics (20%): Bias-free content, inclusive language, AI safety alignment
+    - Effectiveness (25%): Clear goals, appropriate structure, context provision
+    - Bias Risk (penalty): Detection of stereotypes, assumptions, prejudices
+    
+    Parameters:
+    - prompt: The prompt text to evaluate (max 3000 characters)
+    
+    Returns:
+    - overall_score: Weighted score based on all criteria (0-100)
+    - Individual scores for each criterion
+    - strengths: List of identified strengths
+    - weaknesses: List of areas for improvement
+    - suggestions: Actionable improvement recommendations
+    - improved_prompt: Enhanced version demonstrating best practices
+    - evaluation_details: Technical details about the evaluation
+    - sources_used: Research sources referenced
+    - timestamp: When the evaluation was performed
+    """
+    
+    try:
+        if not payload or not payload.prompt:
+            raise HTTPException(status_code=400, detail="Prompt is required")
+
+        prompt = payload.prompt.strip()
+        if not prompt:
+            raise HTTPException(status_code=400, detail="Prompt cannot be empty")
+
+        if len(prompt) > 3000:
+            raise HTTPException(status_code=400, detail="Prompt too long (max 3000 characters)")
+
+        # Get evaluator instance
+        eval_instance = get_evaluator()
+        
+        # Run evaluation
+        logger.info(f"API Request: {prompt[:50]}...")
+        result: EvaluationResult = eval_instance.evaluate_prompt(prompt)
+        
+        response = result.to_dict()
+
+
+        response['success'] = True
+
+        logger.info(f"API Response: Score {response['overall_score']}")
+        
+        return response
+        
+    except HTTPException:
+        raise
+    except ValueError as e:
+        logger.error(f"Validation error in evaluation endpoint: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error in evaluation endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Evaluation failed: {str(e)}")

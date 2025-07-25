@@ -12,3 +12,7 @@ class TextGenerationPayload(BaseModel):
     conversation_history: Optional[List[Dict[str, str]]] = None
     max_new_tokens: int = 256
     temperature: float = 0.7
+
+
+class PromptEvaluationPayload(BaseModel):
+    prompt: str
