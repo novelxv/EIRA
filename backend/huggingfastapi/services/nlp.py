@@ -11,7 +11,7 @@ from transformers import AutoTokenizer
 from transformers import AutoModelForQuestionAnswering, AutoConfig, AutoModel, PreTrainedModel
 from transformers import pipeline
 
-from huggingfastapi.models.payload import AIDetectionPayload
+from huggingfastapi.models.payload import AIDetectionPayload, TextGenerationPayload
 from huggingfastapi.models.prediction import AIDetectionResult, EvaluationResult
 from huggingfastapi.services.utils import ModelLoader
 from huggingfastapi.core.messages import NO_VALID_PAYLOAD
@@ -493,6 +493,7 @@ EVALUATION:
 class GoToPromptEvaluator:
     """Evaluator for prompts using GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct model"""
     
+    
     def __init__(self, text_gen_model: 'TextGenerationModel'):
         """Initialize the evaluator with text generation model"""
         self.text_gen_model = text_gen_model
@@ -514,209 +515,357 @@ class GoToPromptEvaluator:
             "DAIR.AI Prompting Guide"
         ]
     
-    def create_evaluation_prompt(self, user_prompt: str) -> str:
-        """Create evaluation prompt for the GoTo model"""
-        return f"""Anda adalah seorang ahli evaluasi prompt AI dengan pengetahuan mendalam tentang prompt engineering, keamanan AI, dan komunikasi yang efektif. Tugas Anda adalah mengevaluasi prompt AI berdasarkan kriteria yang didukung penelitian dari organisasi AI terkemuka.
+    def create_clarity_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk mengevaluasi CLARITY (Kejelasan) saja."""
+        return f"""Anda adalah AI yang bertugas mengevaluasi kualitas sebuah prompt. Fokus hanya pada satu metrik.
 
-KRITERIA EVALUASI (skor 0-100 untuk masing-masing):
-
-1. CLARITY (Kejelasan) - 25% bobot:
+METRIK PENILAIAN:
+CLARITY (Kejelasan):
    - Kesederhanaan dan keterbacaan bahasa
    - Instruksi yang jelas dan tidak ambigu
    - Struktur dan alur yang logis
    - Kompleksitas yang sesuai dengan tugas
 
-2. SPECIFICITY (Spesifisitas) - 30% bobot:
+CONTOH PENILAIAN (Hanya berikan angkanya):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: 25
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: 70
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial yang komprehensif untuk merek fesyen berkelanjutan..."
+EVALUASI: 92
+
+INSTRUKSI FINAL:
+Evaluasi PROMPT INPUT di bawah ini berdasarkan metrik CLARITY.
+Berikan HANYA ANGKA skornya (0-100) sebagai respons tunggal tanpa teks atau format tambahan.
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_specificity_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk mengevaluasi SPECIFICITY (Spesifisitas) saja."""
+        return f"""Anda adalah AI yang bertugas mengevaluasi kualitas sebuah prompt. Fokus hanya pada satu metrik.
+
+METRIK PENILAIAN:
+SPECIFICITY (Spesifisitas):
    - Konteks dan latar belakang yang detail
    - Persyaratan format output yang spesifik
    - Batasan dan parameter yang jelas
    - Definisi peran dan perspektif
    - Spesifikasi target audiens
 
-3. ETHICS (Etika) - 20% bobot:
+CONTOH PENILAIAN (Hanya berikan angkanya):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: 15
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: 60
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial yang komprehensif untuk merek fesyen berkelanjutan..."
+EVALUASI: 95
+
+INSTRUKSI FINAL:
+Evaluasi PROMPT INPUT di bawah ini berdasarkan metrik SPECIFICITY.
+Berikan HANYA ANGKA skornya (0-100) sebagai respons tunggal tanpa teks atau format tambahan.
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_ethics_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk mengevaluasi ETHICS (Etika) saja."""
+        return f"""Anda adalah AI yang bertugas mengevaluasi kualitas sebuah prompt. Fokus hanya pada satu metrik.
+
+METRIK PENILAIAN:
+ETHICS (Etika):
    - Tidak ada konten yang berbahaya atau bias
    - Bahasa yang inklusif dan menghormati
    - Keselarasan dengan prinsip keamanan AI
    - Sensitivitas budaya dan kesadaran
 
-4. EFFECTIVENESS (Efektivitas) - 25% bobot:
+CONTOH PENILAIAN (Hanya berikan angkanya):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: 85
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: 15
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial yang komprehensif untuk merek fesyen berkelanjutan..."
+EVALUASI: 90
+
+INSTRUKSI FINAL:
+Evaluasi PROMPT INPUT di bawah ini berdasarkan metrik ETHICS.
+Berikan HANYA ANGKA skornya (0-100) sebagai respons tunggal tanpa teks atau format tambahan.
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_effectiveness_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk mengevaluasi EFFECTIVENESS (Efektivitas) saja."""
+        return f"""Anda adalah AI yang bertugas mengevaluasi kualitas sebuah prompt. Fokus hanya pada satu metrik.
+
+METRIK PENILAIAN:
+EFFECTIVENESS (Efektivitas):
    - Definisi tujuan dan sasaran yang jelas
    - Struktur tugas yang tepat
    - Kemungkinan mencapai hasil yang diinginkan
    - Penyediaan konteks dan contoh yang membantu
 
-5. BIAS RISK (Risiko Bias) - skor penalti 0-100, semakin rendah semakin baik:
+CONTOH PENILAIAN (Hanya berikan angkanya):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: 20
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: 30
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial yang komprehensif untuk merek fesyen berkelanjutan..."
+EVALUASI: 88
+
+INSTRUKSI FINAL:
+Evaluasi PROMPT INPUT di bawah ini berdasarkan metrik EFFECTIVENESS.
+Berikan HANYA ANGKA skornya (0-100) sebagai respons tunggal tanpa teks atau format tambahan.
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_bias_risk_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk mengevaluasi BIAS RISK (Risiko Bias) saja."""
+        return f"""Anda adalah AI yang bertugas mengevaluasi kualitas sebuah prompt. Fokus hanya pada satu metrik.
+
+METRIK PENILAIAN:
+BIAS RISK (Risiko Bias) - skor penalti 0-100, semakin rendah semakin baik:
    - Kehadiran stereotip atau asumsi
    - Indikator bias demografis
    - Prasangka budaya atau sosial
    - Pernyataan absolut yang dapat mengecualikan kelompok
 
-PENDEKATAN EVALUASI:
-- Dasarkan skor pada penelitian yang mapan dari OpenAI, Google AI, Anthropic, Microsoft, dan DAIR.AI
-- Pertimbangkan praktik terbaik prompt engineering
-- Fokus pada kegunaan praktis dan keamanan
-- Berikan saran perbaikan yang dapat ditindaklanjuti
-- Buat versi yang ditingkatkan yang menunjukkan perbaikan
+CONTOH PENILAIAN (Hanya berikan angkanya):
 
-Berikan respons dalam format JSON dengan struktur berikut:
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: 20
 
-```json
-{{
-  "clarity": [skor 0-100],
-  "specificity": [skor 0-100], 
-  "ethics": [skor 0-100],
-  "effectiveness": [skor 0-100],
-  "bias_risk": [skor 0-100],
-}}
-```
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: 95
 
-PROMPT YANG AKAN DIEVALUASI: "{user_prompt}"
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial yang komprehensif untuk merek fesyen berkelanjutan..."
+EVALUASI: 15
 
-Evaluasi prompt tersebut dan berikan respons dalam format JSON yang diminta:"""
+INSTRUKSI FINAL:
+Evaluasi PROMPT INPUT di bawah ini berdasarkan metrik BIAS RISK.
+Berikan HANYA ANGKA skornya (0-100) sebagai respons tunggal tanpa teks atau format tambahan.
 
-# Tambahan tekstual
-#   "strengths": ["kekuatan 1", "kekuatan 2", "kekuatan 3"],
-#   "weaknesses": ["kelemahan 1", "kelemahan 2", "kelemahan 3"],
-#   "suggestions": [
-#     "saran perbaikan 1",
-#     "saran perbaikan 2", 
-#     "saran perbaikan 3"
-#   ],
-#   "improved_prompt": "Versi prompt yang diperbaiki dengan penjelasan mengapa lebih baik"
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_strengths_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk menganalisis Strengths (Kelebihan)."""
+        return f"""Anda adalah seorang ahli evaluasi prompt AI. Tugas Anda adalah mengidentifikasi kelebihan (strengths) dari sebuah prompt.
+
+CONTOH ANALISIS (Hanya berikan daftar JSON):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: ["Bahasa sederhana", "Tidak ada bias yang jelas"]
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: ["Permintaan penjelasan yang jelas"]
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial..."
+EVALUASI: ["Definisi peran yang jelas", "Audiens target spesifik", "Persyaratan detail", "Beberapa platform ditentukan", "Jadwal disertakan", "Fokus etis pada keberlanjutan"]
+
+INSTRUKSI FINAL:
+Analisis PROMPT INPUT di bawah ini. Berikan HANYA daftar kelebihannya dalam format JSON list of strings. Jika tidak ada, kembalikan daftar kosong [].
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_weaknesses_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk menganalisis Weaknesses (Kelemahan)."""
+        return f"""Anda adalah seorang ahli evaluasi prompt AI. Tugas Anda adalah mengidentifikasi kelemahan (weaknesses) dari sebuah prompt.
+
+CONTOH ANALISIS (Hanya berikan daftar JSON):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: ["Sangat kabur", "Tidak ada tujuan yang jelas", "Tidak ada konteks yang diberikan", "Tidak ada spesifikasi output"]
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: ["Mengandung stereotip gender yang berbahaya", "Mengasumsikan premis yang salah", "Mendorong diskriminasi", "Mengabaikan bukti penelitian"]
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial..."
+EVALUASI: ["Bisa menambahkan batasan anggaran", "Akan lebih baik jika menyebutkan analisis pesaing"]
+
+INSTRUKSI FINAL:
+Analisis PROMPT INPUT di bawah ini. Berikan HANYA daftar kelemahannya dalam format JSON list of strings. Jika tidak ada, kembalikan daftar kosong [].
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_suggestions_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk memberikan Suggestions (Saran Perbaikan)."""
+        return f"""Anda adalah seorang ahli evaluasi prompt AI. Tugas Anda adalah memberikan saran perbaikan (suggestions) yang konkret dan dapat ditindaklanjuti.
+
+CONTOH ANALISIS (Hanya berikan daftar JSON):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: ["Definisikan topik spesifik dalam AI (misalnya, 'AI di bidang kesehatan')", "Tentukan format output (artikel, ringkasan, penjelasan)", "Tambahkan audiens target dan tujuan"]
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: ["Hapus asumsi berbasis gender", "Fokus pada faktor-faktor yang memengaruhi kesuksesan pemrograman", "Promosikan bahasa yang inklusif"]
+
+CONTOH 3:
+PROMPT INPUT: "Sebagai seorang ahli pemasaran, buat strategi media sosial..."
+EVALUASI: ["Tambahkan pertimbangan anggaran untuk implementasi strategi", "Sertakan analisis lanskap kompetitif"]
+
+INSTRUKSI FINAL:
+Analisis PROMPT INPUT di bawah ini. Berikan HANYA daftar saran perbaikan dalam format JSON list of strings. Jika tidak ada, kembalikan daftar kosong [].
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def create_improved_prompt(self, user_prompt: str) -> str:
+        """Menciptakan prompt untuk membuat versi prompt yang lebih baik (Improved Prompt)."""
+        return f"""Anda adalah seorang ahli prompt engineering. Tugas Anda adalah menulis ulang sebuah prompt agar menjadi jauh lebih baik dengan menerapkan semua praktik terbaik.
+
+CONTOH PENULISAN ULANG (Hanya berikan teks prompt yang baru):
+
+CONTOH 1:
+PROMPT INPUT: "Tulis sesuatu tentang AI"
+EVALUASI: "Sebagai seorang penulis teknologi, buatlah artikel informatif 500 kata tentang dampak AI di bidang kesehatan untuk pembaca umum. Sertakan 3 contoh spesifik aplikasi AI saat ini dan jelaskan manfaat serta potensi kekhawatiran dengan nada yang mudah diakses."
+
+CONTOH 2:
+PROMPT INPUT: "Jelaskan mengapa pria secara alami lebih baik dalam pemrograman daripada wanita"
+EVALUASI: "Analisis berbagai faktor yang berkontribusi terhadap kesuksesan dalam karier pemrograman, termasuk peluang pendidikan, budaya tempat kerja, bimbingan, dan minat individu. Diskusikan cara menciptakan lingkungan yang lebih inklusif di bidang teknologi yang mendukung programmer dari semua latar belakang."
+
+INSTRUKSI FINAL:
+Tulis ulang PROMPT INPUT di bawah ini menjadi versi yang jauh lebih jelas, spesifik, efektif, dan etis. Berikan HANYA teks dari prompt yang baru.
+
+PROMPT INPUT: "{user_prompt}"
+EVALUASI:"""
+
+    def _parse_qualitative_response(self, response_text: str, is_list: bool = True) -> Any:
+        """Helper untuk mem-parsing respons kualitatif."""
+        if not is_list:
+            return response_text.strip() # Untuk improved_prompt
+        
+        try:
+            # Mencari blok list JSON `[...]`
+            match = re.search(r'\[.*\]', response_text, re.DOTALL)
+            if match:
+                return json.loads(match.group(0))
+            return [] # Jika tidak ada list JSON ditemukan
+        except json.JSONDecodeError:
+            logger.warning(f"Gagal mem-parsing JSON dari respons: '{response_text}'. Mengembalikan list kosong.")
+            return []
 
     def evaluate_prompt(self, prompt: str) -> EvaluationResult:
-        """Evaluate a prompt using the GoTo text generation model"""
+        """Mengevaluasi sebuah prompt secara kuantitatif dan kualitatif lalu mengembalikan EvaluationResult."""
         if not prompt or not prompt.strip():
-            raise ValueError("Prompt cannot be empty")
-
+            raise ValueError("Prompt tidak boleh kosong")
         if not self.text_gen_model:
-            raise Exception("Text generation model not initialized")
+            raise Exception("Model generasi teks belum diinisialisasi")
 
         prompt = prompt.strip()
-        logger.info(f"Evaluating prompt with GoTo model: {prompt[:50]}...")
+        logger.info(f"Mengevaluasi prompt: {prompt[:80]}...")
 
-        try:
-            # Create evaluation prompt in Indonesian for GoTo model
-            evaluation_prompt = self.create_evaluation_prompt(prompt)
-            
-            # Use text generation model to evaluate
-            # Import here to avoid circular imports
-            from huggingfastapi.models.payload import TextGenerationPayload
-            
-            payload = TextGenerationPayload(
-                text=evaluation_prompt,
-                max_new_tokens=256,
-                temperature=0.9,  # Low temperature for consistent evaluation
-                system_message="Anda adalah evaluator prompt AI yang ahli dan objektif. Berikan evaluasi yang akurat dan konstruktif."
-            )
-            
-            # Generate evaluation using GoTo model
-            response = self.text_gen_model.generate(payload)
-            logger.info(f"Received evaluation response from GoTo model: {response.generated_text[:200]}...")
-            
-            # Parse the JSON response
-            evaluation_data = self._parse_evaluation_response(response.generated_text)
-            
-            # Calculate overall score using research-backed weights
-            overall_score = self._calculate_overall_score(evaluation_data)
-            
-            # Create evaluation result
-            result = EvaluationResult(
-                overall_score=round(overall_score, 1),
-                clarity=evaluation_data.get('clarity', 0),
-                specificity=evaluation_data.get('specificity', 0),
-                ethics=evaluation_data.get('ethics', 0),
-                effectiveness=evaluation_data.get('effectiveness', 0),
-                bias_risk=evaluation_data.get('bias_risk', 0),
-                suggestions=evaluation_data.get('suggestions', []),
-                strengths=evaluation_data.get('strengths', []),
-                weaknesses=evaluation_data.get('weaknesses', []),
-                improved_prompt=evaluation_data.get('improved_prompt', ''),
-                evaluation_details={
-                    'word_count': len(prompt.split()),
-                    'character_count': len(prompt),
-                    'model_used': 'GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct',
-                    'evaluation_method': 'local_llm_evaluation'
-                },
-                sources_used=self.sources,
-                timestamp=datetime.now().isoformat()
-            )
-            
-            logger.info(f"GoTo evaluation completed. Overall score: {result.overall_score}")
-            return result
-            
-        except Exception as e:
-            logger.error(f"GoTo evaluation failed: {e}")
-            raise Exception(f"GoTo evaluation failed: {str(e)}")
-
-    def _parse_evaluation_response(self, response_text: str) -> Dict[str, Any]:
-        """Parse the evaluation response from GoTo model"""
-        try:
-            # Find JSON content in the response
-            json_start = response_text.find('{')
-            json_end = response_text.rfind('}') + 1
-            
-            if json_start != -1 and json_end > json_start:
-                json_str = response_text[json_start:json_end]
-                data = json.loads(json_str)
-                logger.info("✅ Successfully parsed JSON from GoTo model response.")
-                return data
-            else:
-                logger.warning("⚠️ No JSON found in response, using fallback extraction...")
-                return self._extract_fallback_data(response_text)
-                
-        except json.JSONDecodeError:
-            logger.warning("⚠️ Failed to parse JSON, using fallback extraction.")
-            return self._extract_fallback_data(response_text)
-
-    def _extract_fallback_data(self, response_text: str) -> Dict[str, Any]:
-        """Extract data using fallback method when JSON parsing fails"""
-        import re
-        
-        # Default values
-        default_data = {
-            'clarity': 50,
-            'specificity': 50,
-            'ethics': 50,
-            'effectiveness': 50,
-            'bias_risk': 50,
-            'strengths': ["Evaluation incomplete - response parsing failed"],
-            'weaknesses': ["Unable to complete full evaluation"],
-            'suggestions': ["Please try submitting the prompt again"],
-            'improved_prompt': "Unable to generate improved version due to parsing error"
+        # --- TAHAP 1: EVALUASI KUANTITATIF ---
+        scores: Dict[str, int] = {}
+        metric_functions = {
+            "clarity": self.create_clarity_prompt, "specificity": self.create_specificity_prompt,
+            "ethics": self.create_ethics_prompt, "effectiveness": self.create_effectiveness_prompt,
+            "bias_risk": self.create_bias_risk_prompt,
         }
-        
-        # Try to extract numeric scores
-        score_patterns = {
-            'clarity': r'clarity["\s:]*(\d+)',
-            'specificity': r'specificity["\s:]*(\d+)',
-            'ethics': r'ethics["\s:]*(\d+)',
-            'effectiveness': r'effectiveness["\s:]*(\d+)',
-            'bias_risk': r'bias_risk["\s:]*(\d+)'
-        }
-        
-        for key, pattern in score_patterns.items():
-            match = re.search(pattern, response_text, re.IGNORECASE)
-            if match:
-                try:
-                    default_data[key] = int(match.group(1))
-                except ValueError:
-                    pass
-        
-        return default_data
+        for metric_name, create_prompt_func in metric_functions.items():
+            try:
+                # ... (logika loop kuantitatif Anda)
+                evaluation_prompt = create_prompt_func(prompt)
+                payload = TextGenerationPayload(text=evaluation_prompt, max_new_tokens=8, temperature=0.1, system_message="Anda adalah evaluator prompt AI yang ahli dan objektif.")
+                response = self.text_gen_model.generate(payload)
+                match = re.search(r'\d+', response.generated_text.strip())
+                scores[metric_name] = int(match.group(0)) if match else 0
+            except Exception as e:
+                logger.error(f"Evaluasi kuantitatif untuk '{metric_name}' gagal: {e}")
+                scores[metric_name] = 0
 
-    def _calculate_overall_score(self, evaluation_data: Dict) -> float:
-        """Calculate overall score using research-backed weights"""
-        weighted_score = (
-            evaluation_data['clarity'] * self.criteria_weights['clarity'] +
-            evaluation_data['specificity'] * self.criteria_weights['specificity'] +
-            evaluation_data['ethics'] * self.criteria_weights['ethics'] +
-            evaluation_data['effectiveness'] * self.criteria_weights['effectiveness']
+        logger.info(f"Evaluasi kuantitatif selesai. Skor: {scores}")
+
+        # --- TAHAP 2: EVALUASI KUALITATIF ---
+        qualitative_results: Dict[str, Any] = {}
+        qualitative_functions = {
+            "strengths": (self.create_strengths_prompt, True, 64),
+            "weaknesses": (self.create_weaknesses_prompt, True, 64),
+            "suggestions": (self.create_suggestions_prompt, True, 96),
+            "improved_prompt": (self.create_improved_prompt, False, 256),
+        }
+        for metric_name, (create_prompt_func, is_list, max_tokens) in qualitative_functions.items():
+            try:
+                # ... (logika loop kualitatif Anda)
+                evaluation_prompt = create_prompt_func(prompt)
+                payload = TextGenerationPayload(text=evaluation_prompt, max_new_tokens=max_tokens, temperature=0.3, system_message="Anda adalah seorang ahli prompt engineering yang analitis dan kreatif.")
+                response = self.text_gen_model.generate(payload)
+                qualitative_results[metric_name] = self._parse_qualitative_response(response.generated_text, is_list=is_list)
+            except Exception as e:
+                logger.error(f"Evaluasi kualitatif untuk '{metric_name}' gagal: {e}")
+                qualitative_results[metric_name] = [] if is_list else ""
+        
+        logger.info("Evaluasi kualitatif selesai.")
+
+        # --- TAHAP 3: HITUNG SKOR DAN BUAT OBJEK RETURN ---
+
+        # 1. Hitung skor keseluruhan berdasarkan bobot
+        overall_score = 0.0
+        for criterion, weight in self.criteria_weights.items():
+            overall_score += scores.get(criterion, 0) * weight
+        
+        # 2. Siapkan detail evaluasi
+        evaluation_details = {
+            'word_count': len(prompt.split()),
+            'character_count': len(prompt),
+            'model_used': 'GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct',
+            'evaluation_method': 'local_llm_evaluation'
+        }
+
+        # 3. Buat dan kembalikan objek EvaluationResult
+        result = EvaluationResult(
+            overall_score=round(overall_score, 1),
+            clarity=float(scores.get('clarity', 0)),
+            specificity=float(scores.get('specificity', 0)),
+            ethics=float(scores.get('ethics', 0)),
+            effectiveness=float(scores.get('effectiveness', 0)),
+            bias_risk=float(scores.get('bias_risk', 0)),
+            suggestions=qualitative_results.get('suggestions', []),
+            strengths=qualitative_results.get('strengths', []),
+            weaknesses=qualitative_results.get('weaknesses', []),
+            improved_prompt=qualitative_results.get('improved_prompt', ''),
+            evaluation_details=evaluation_details,
+            sources_used=[],  # Sesuai permintaan, dikosongkan
+            timestamp=datetime.now().isoformat()
         )
         
-        # Apply bias risk penalty (subtract a percentage of bias risk)
-        bias_penalty = evaluation_data['bias_risk'] * 0.15
-        overall_score = weighted_score - bias_penalty
-        
-        return max(0, min(100, overall_score))
-        
+        logger.info(f"Evaluasi lengkap selesai. Skor Keseluruhan: {result.overall_score}")
+        return result
