@@ -137,12 +137,6 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               </>
             ) : (
               <>
-                <Link
-                  to="/prompt-evaluator"
-                  className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  Try Evaluator
-                </Link>
                 <div className="relative group">
                   <button className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors duration-300">
                     <User className="h-4 w-4" />
@@ -251,13 +245,6 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
                     </>
                   ) : (
                     <>
-                      <Link
-                        to="/prompt-evaluator"
-                        className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Try Evaluator
-                      </Link>
                       <div className="space-y-1">
                         <button className="flex items-center space-x-2 w-full px-4 py-2 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200">
                           <User className="h-5 w-5" />
