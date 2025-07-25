@@ -175,10 +175,10 @@ const AIEthicsSimulator = () => {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-6xl md:text-7xl font-bold text-white mb-8 tracking-tight"
+          className="text-6xl md:text-7xl font-bold text-gray-800 mb-8 tracking-tight"
         >
           AI Ethics & Policy
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500">
             Simulator
           </span>
         </motion.h1>
@@ -188,7 +188,7 @@ const AIEthicsSimulator = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-2xl text-gray-300 mb-12 leading-relaxed"
+          className="text-2xl text-gray-600 mb-12 leading-relaxed"
         >
           Test your leadership skills in Indonesia's AI landscape.<br />
           Make critical decisions that shape the future.
@@ -201,26 +201,26 @@ const AIEthicsSimulator = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="grid md:grid-cols-3 gap-8 mb-12"
         >
-          <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50">
-            <div className="text-red-400 mb-3">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-green-200/50 shadow-lg">
+            <div className="text-emerald-600 mb-3">
               <Gavel className="h-8 w-8 mx-auto" />
             </div>
-            <h3 className="text-white font-semibold mb-2">Real Dilemmas</h3>
-            <p className="text-gray-400 text-sm">Face actual challenges in Indonesia's AI ecosystem</p>
+            <h3 className="text-gray-800 font-semibold mb-2">Real Dilemmas</h3>
+            <p className="text-gray-600 text-sm">Face actual challenges in Indonesia's AI ecosystem</p>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50">
-            <div className="text-orange-400 mb-3">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-green-200/50 shadow-lg">
+            <div className="text-green-600 mb-3">
               <Target className="h-8 w-8 mx-auto" />
             </div>
-            <h3 className="text-white font-semibold mb-2">Strategic Impact</h3>
-            <p className="text-gray-400 text-sm">Your decisions affect both business and national interests</p>
+            <h3 className="text-gray-800 font-semibold mb-2">Strategic Impact</h3>
+            <p className="text-gray-600 text-sm">Your decisions affect both business and national interests</p>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50">
-            <div className="text-yellow-400 mb-3">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-green-200/50 shadow-lg">
+            <div className="text-teal-600 mb-3">
               <Brain className="h-8 w-8 mx-auto" />
             </div>
-            <h3 className="text-white font-semibold mb-2">Leadership Assessment</h3>
-            <p className="text-gray-400 text-sm">Get detailed analysis of your leadership style</p>
+            <h3 className="text-gray-800 font-semibold mb-2">Leadership Assessment</h3>
+            <p className="text-gray-600 text-sm">Get detailed analysis of your leadership style</p>
           </div>
         </motion.div>
 
@@ -232,7 +232,7 @@ const AIEthicsSimulator = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentStep('intro')}
-          className="bg-gradient-to-r from-red-600 via-red-700 to-orange-600 text-white px-12 py-4 rounded-xl font-bold text-xl hover:from-red-700 hover:via-red-800 hover:to-orange-700 transition-all duration-300 transform shadow-2xl border border-red-500/30"
+          className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white px-12 py-4 rounded-xl font-bold text-xl hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 transition-all duration-300 transform shadow-2xl border border-green-400/30"
         >
           Start Simulation
           <ArrowRight className="h-6 w-6 ml-3 inline" />
@@ -257,9 +257,9 @@ const AIEthicsSimulator = () => {
       animate={{ opacity: 1, y: 0 }}
       className="text-center"
     >
-      <div className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white p-8 rounded-xl mb-8 shadow-2xl border border-red-500/30">
+      <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white p-8 rounded-xl mb-8 shadow-2xl border border-green-400/30">
         <div className="flex justify-center mb-4">
-          <div className="bg-red-500/20 backdrop-blur-sm p-4 rounded-full border border-red-400/30">
+          <div className="bg-green-500/20 backdrop-blur-sm p-4 rounded-full border border-green-400/30">
             <Users className="h-12 w-12" />
           </div>
         </div>
@@ -272,38 +272,38 @@ const AIEthicsSimulator = () => {
         </p>
       </div>
 
-      <div className="bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-xl p-8 mb-8 border border-gray-700/50">
-        <h3 className="text-xl font-semibold text-white mb-4">INCOMING CHALLENGES (3 Strategic Dilemmas):</h3>
+      <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-8 mb-8 border border-gray-200/50">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">INCOMING CHALLENGES (3 Strategic Dilemmas):</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <div className="flex items-start space-x-3">
-            <Shield className="h-6 w-6 text-red-400 mt-1" />
+            <Shield className="h-6 w-6 text-emerald-600 mt-1" />
             <div>
-              <h4 className="font-medium text-white">Data Ethics</h4>
-              <p className="text-gray-300 text-sm">Innovation vs user privacy in the era of Indonesia's Data Protection Law</p>
+              <h4 className="font-medium text-gray-800">Data Ethics</h4>
+              <p className="text-gray-600 text-sm">Innovation vs user privacy in the era of Indonesia's Data Protection Law</p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
-            <Brain className="h-6 w-6 text-orange-400 mt-1" />
+            <Brain className="h-6 w-6 text-green-600 mt-1" />
             <div>
-              <h4 className="font-medium text-white">Talent Strategy</h4>
-              <p className="text-gray-300 text-sm">Quick solutions vs long-term investment for the nation</p>
+              <h4 className="font-medium text-gray-800">Talent Strategy</h4>
+              <p className="text-gray-600 text-sm">Quick solutions vs long-term investment for the nation</p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
-            <BookOpen className="h-6 w-6 text-yellow-400 mt-1" />
+            <BookOpen className="h-6 w-6 text-teal-600 mt-1" />
             <div>
-              <h4 className="font-medium text-white">Transparency</h4>
-              <p className="text-gray-300 text-sm">Competitive advantage vs knowledge sharing</p>
+              <h4 className="font-medium text-gray-800">Transparency</h4>
+              <p className="text-gray-600 text-sm">Competitive advantage vs knowledge sharing</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="text-center">
-        <p className="text-gray-300 mb-6">Are you ready to face the challenges of AI leadership?</p>
+        <p className="text-gray-600 mb-6">Are you ready to face the challenges of AI leadership?</p>
         <button
           onClick={() => setCurrentStep('dilemma1')}
-          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-200 transform hover:scale-105 flex items-center mx-auto shadow-xl border border-red-500/30"
+          className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-green-600 transition-all duration-200 transform hover:scale-105 flex items-center mx-auto shadow-xl border border-green-400/30"
         >
           Enter the Simulation
           <ArrowRight className="h-5 w-5 ml-2" />
@@ -325,32 +325,32 @@ const AIEthicsSimulator = () => {
         {/* Progress indicator */}
         <div className="flex items-center justify-center mb-8">
           <div className="flex items-center space-x-4">
-            <div className={`w-4 h-4 rounded-full ${stepNumber >= 1 ? 'bg-red-500 shadow-lg shadow-red-500/50' : 'bg-gray-600'} transition-all duration-300`}></div>
-            <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-              <div className={`h-full bg-gradient-to-r from-red-500 to-orange-500 transition-all duration-500 ${stepNumber >= 2 ? 'w-full' : 'w-0'}`}></div>
+            <div className={`w-4 h-4 rounded-full ${stepNumber >= 1 ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-gray-400'} transition-all duration-300`}></div>
+            <div className="w-16 h-2 bg-gray-300 rounded-full overflow-hidden">
+              <div className={`h-full bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-500 ${stepNumber >= 2 ? 'w-full' : 'w-0'}`}></div>
             </div>
-            <div className={`w-4 h-4 rounded-full ${stepNumber >= 2 ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-gray-600'} transition-all duration-300`}></div>
-            <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-              <div className={`h-full bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-500 ${stepNumber >= 3 ? 'w-full' : 'w-0'}`}></div>
+            <div className={`w-4 h-4 rounded-full ${stepNumber >= 2 ? 'bg-green-500 shadow-lg shadow-green-500/50' : 'bg-gray-400'} transition-all duration-300`}></div>
+            <div className="w-16 h-2 bg-gray-300 rounded-full overflow-hidden">
+              <div className={`h-full bg-gradient-to-r from-green-500 to-teal-500 transition-all duration-500 ${stepNumber >= 3 ? 'w-full' : 'w-0'}`}></div>
             </div>
-            <div className={`w-4 h-4 rounded-full ${stepNumber >= 3 ? 'bg-yellow-500 shadow-lg shadow-yellow-500/50' : 'bg-gray-600'} transition-all duration-300`}></div>
+            <div className={`w-4 h-4 rounded-full ${stepNumber >= 3 ? 'bg-teal-500 shadow-lg shadow-teal-500/50' : 'bg-gray-400'} transition-all duration-300`}></div>
           </div>
         </div>
 
-        <div className="bg-gray-800/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-gray-700/50">
-          <div className="bg-gradient-to-r from-red-600 via-red-700 to-orange-600 text-white p-6 border-b border-red-500/30">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-gray-200/50">
+          <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white p-6 border-b border-green-400/30">
             <h2 className="text-2xl font-bold mb-2">{dilemma.title}</h2>
             <p className="opacity-90">Phase {stepNumber} of 3 • Critical Decision Required</p>
           </div>
 
           <div className="p-8">
-            <div className="bg-red-900/20 border-l-4 border-red-500 p-6 mb-8 backdrop-blur-sm">
-              <p className="text-lg leading-relaxed text-gray-100 whitespace-pre-line">
+            <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 backdrop-blur-sm">
+              <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
                 {dilemma.scenario}
               </p>
             </div>
 
-            <h3 className="text-xl font-semibold text-white mb-6">Your Decision:</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">Your Decision:</h3>
             
             <div className="space-y-4">
               {dilemma.choices.map((choice) => (
@@ -359,15 +359,15 @@ const AIEthicsSimulator = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => makeChoice(dilemmaKey, choice.id)}
-                  className="w-full text-left p-6 border-2 border-gray-600/50 bg-gray-700/30 backdrop-blur-sm rounded-lg hover:border-red-500/70 hover:bg-red-900/20 transition-all duration-200"
+                  className="w-full text-left p-6 border-2 border-gray-200/50 bg-gray-50/30 backdrop-blur-sm rounded-lg hover:border-green-400/70 hover:bg-green-50/50 transition-all duration-200"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="bg-red-500/20 text-red-300 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 border border-red-500/30">
+                    <div className="bg-green-100 text-green-700 w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 border border-green-300">
                       {choice.id}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white mb-2">{choice.text}</h4>
-                      <p className="text-gray-300">{choice.description}</p>
+                      <h4 className="font-semibold text-gray-800 mb-2">{choice.text}</h4>
+                      <p className="text-gray-600">{choice.description}</p>
                     </div>
                   </div>
                 </motion.button>
@@ -388,7 +388,7 @@ const AIEthicsSimulator = () => {
         animate={{ opacity: 1, y: 0 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="bg-gray-800/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-gray-700/50">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-gray-200/50">
           <div className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white p-6 text-center border-b border-emerald-500/30">
             <h2 className="text-3xl font-bold mb-2">LEADERSHIP ASSESSMENT COMPLETE</h2>
             <p className="text-xl opacity-90">Your Performance as Chief Innovation Officer</p>
@@ -409,20 +409,20 @@ const AIEthicsSimulator = () => {
               </p>
             </div>
 
-            <div className="bg-gray-700/50 border-l-4 border-emerald-500 p-6 mb-8 backdrop-blur-sm">
-              <h4 className="font-semibold text-white mb-2">Alignment with Indonesia's National AI Strategy:</h4>
-              <p className="text-lg font-medium text-emerald-300">{results.alignment}</p>
+            <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 backdrop-blur-sm">
+              <h4 className="font-semibold text-gray-800 mb-2">Alignment with Indonesia's National AI Strategy:</h4>
+              <p className="text-lg font-medium text-green-700">{results.alignment}</p>
             </div>
 
-            <div className="bg-gray-700/30 p-6 rounded-lg mb-8 backdrop-blur-sm border border-gray-600/50">
-              <h4 className="font-semibold text-white mb-3 flex items-center">
-                <BookOpen className="h-5 w-5 mr-2 text-blue-400" />
+            <div className="bg-gray-50 p-6 rounded-lg mb-8 backdrop-blur-sm border border-gray-200">
+              <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+                <BookOpen className="h-5 w-5 mr-2 text-teal-600" />
                 Decision Summary
               </h4>
-              <div className="space-y-2 text-gray-300">
-                <p><strong className="text-white">Data Ethics:</strong> {choices.dilemma1 === 'A' ? 'Used data without explicit consent' : 'Found privacy-respecting alternatives'}</p>
-                <p><strong className="text-white">Talent Strategy:</strong> {choices.dilemma2 === 'A' ? 'Recruited foreign expert for immediate results' : 'Invested in developing local Indonesian talent'}</p>
-                <p><strong className="text-white">Transparency:</strong> {
+              <div className="space-y-2 text-gray-600">
+                <p><strong className="text-gray-800">Data Ethics:</strong> {choices.dilemma1 === 'A' ? 'Used data without explicit consent' : 'Found privacy-respecting alternatives'}</p>
+                <p><strong className="text-gray-800">Talent Strategy:</strong> {choices.dilemma2 === 'A' ? 'Recruited foreign expert for immediate results' : 'Invested in developing local Indonesian talent'}</p>
+                <p><strong className="text-gray-800">Transparency:</strong> {
                   choices.dilemma3 === 'A' ? 'Kept methodology secret for competitive advantage' :
                   choices.dilemma3 === 'B' ? 'Shared partially - balanced business and social impact' :
                   'Full open-source for Indonesian education advancement'
@@ -433,14 +433,14 @@ const AIEthicsSimulator = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={resetSimulation}
-                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-200 flex items-center justify-center shadow-xl border border-red-500/30"
+                className="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-green-600 transition-all duration-200 flex items-center justify-center shadow-xl border border-green-400/30"
               >
                 <RotateCcw className="h-5 w-5 mr-2" />
                 Run Simulation Again
               </button>
               <Link
                 to="/ai101"
-                className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors flex items-center justify-center shadow-xl border border-gray-500/30"
+                className="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors flex items-center justify-center shadow-xl border border-gray-400/30"
               >
                 <Home className="h-5 w-5 mr-2" />
                 Return to Main Menu
@@ -453,15 +453,15 @@ const AIEthicsSimulator = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-black py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50 to-teal-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Header - hanya tampil jika bukan landing page */}
         {currentStep !== 'landing' && (
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
               AI Ethics & Policy Simulator
             </h1>
-            <p className="text-xl text-gray-300">
+            <p className="text-xl text-gray-600">
               Leadership Simulation in Indonesia's AI Era
             </p>
           </div>
@@ -482,7 +482,7 @@ const AIEthicsSimulator = () => {
           <div className="mt-8 text-center">
             <button
               onClick={() => setCurrentStep('landing')}
-              className="text-gray-400 hover:text-white transition-colors flex items-center mx-auto"
+              className="text-gray-500 hover:text-gray-700 transition-colors flex items-center mx-auto"
             >
               <ArrowLeft className="h-4 w-4 mr-1" />
               Back to Start
@@ -498,7 +498,7 @@ const AIEthicsSimulator = () => {
                 else if (currentStep === 'dilemma2') setCurrentStep('dilemma1')
                 else if (currentStep === 'dilemma1') setCurrentStep('intro')
               }}
-              className="text-gray-400 hover:text-white transition-colors flex items-center mx-auto"
+              className="text-gray-500 hover:text-gray-700 transition-colors flex items-center mx-auto"
             >
               <ArrowLeft className="h-4 w-4 mr-1" />
               Go Back
