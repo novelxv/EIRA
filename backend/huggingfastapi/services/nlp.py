@@ -1,4 +1,4 @@
-from typing import Dict, List, Any
+from typing import Dict, List, Any, TYPE_CHECKING, Optional
 from loguru import logger
 import torch
 import torch.nn as nn
@@ -12,17 +12,23 @@ from transformers import AutoModelForQuestionAnswering, AutoConfig, AutoModel, P
 from transformers import pipeline
 
 from huggingfastapi.models.payload import AIDetectionPayload
-from huggingfastapi.models.prediction import AIDetectionResult
+from huggingfastapi.models.prediction import AIDetectionResult, EvaluationResult
 from huggingfastapi.services.utils import ModelLoader
 from huggingfastapi.core.messages import NO_VALID_PAYLOAD
 from huggingfastapi.core.config import (
     DEFAULT_MODEL_PATH,
     AI_DETECTION_MODEL,
-    GEMINI_API_KEY
 )
-from typing import Dict, List, Optional
+
+# Additional imports for evaluators
 import google.generativeai as genai
-from huggingfastapi.models.prediction import EvaluationResult
+
+# Get GEMINI_API_KEY from environment
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+
+if TYPE_CHECKING:
+    from huggingfastapi.services.text_generation import TextGenerationModel
+#Text
 
 
 class DesklibAIDetectionModel(PreTrainedModel):
@@ -483,3 +489,234 @@ EVALUATION:
         
         return max(0, min(100, overall_score))
 
+
+class GoToPromptEvaluator:
+    """Evaluator for prompts using GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct model"""
+    
+    def __init__(self, text_gen_model: 'TextGenerationModel'):
+        """Initialize the evaluator with text generation model"""
+        self.text_gen_model = text_gen_model
+        
+        # Research-backed evaluation criteria weights (same as Gemini)
+        self.criteria_weights = {
+            'clarity': 0.25,
+            'specificity': 0.30,
+            'ethics': 0.20,
+            'effectiveness': 0.25
+        }
+        
+        # Sources for citations
+        self.sources = [
+            "OpenAI Best Practices for Prompt Engineering",
+            "Google AI Prompt Design Principles", 
+            "Anthropic Constitutional AI Research",
+            "Microsoft Responsible AI Guidelines",
+            "DAIR.AI Prompting Guide"
+        ]
+    
+    def create_evaluation_prompt(self, user_prompt: str) -> str:
+        """Create evaluation prompt for the GoTo model"""
+        return f"""Anda adalah seorang ahli evaluasi prompt AI dengan pengetahuan mendalam tentang prompt engineering, keamanan AI, dan komunikasi yang efektif. Tugas Anda adalah mengevaluasi prompt AI berdasarkan kriteria yang didukung penelitian dari organisasi AI terkemuka.
+
+KRITERIA EVALUASI (skor 0-100 untuk masing-masing):
+
+1. CLARITY (Kejelasan) - 25% bobot:
+   - Kesederhanaan dan keterbacaan bahasa
+   - Instruksi yang jelas dan tidak ambigu
+   - Struktur dan alur yang logis
+   - Kompleksitas yang sesuai dengan tugas
+
+2. SPECIFICITY (Spesifisitas) - 30% bobot:
+   - Konteks dan latar belakang yang detail
+   - Persyaratan format output yang spesifik
+   - Batasan dan parameter yang jelas
+   - Definisi peran dan perspektif
+   - Spesifikasi target audiens
+
+3. ETHICS (Etika) - 20% bobot:
+   - Tidak ada konten yang berbahaya atau bias
+   - Bahasa yang inklusif dan menghormati
+   - Keselarasan dengan prinsip keamanan AI
+   - Sensitivitas budaya dan kesadaran
+
+4. EFFECTIVENESS (Efektivitas) - 25% bobot:
+   - Definisi tujuan dan sasaran yang jelas
+   - Struktur tugas yang tepat
+   - Kemungkinan mencapai hasil yang diinginkan
+   - Penyediaan konteks dan contoh yang membantu
+
+5. BIAS RISK (Risiko Bias) - skor penalti 0-100, semakin rendah semakin baik:
+   - Kehadiran stereotip atau asumsi
+   - Indikator bias demografis
+   - Prasangka budaya atau sosial
+   - Pernyataan absolut yang dapat mengecualikan kelompok
+
+PENDEKATAN EVALUASI:
+- Dasarkan skor pada penelitian yang mapan dari OpenAI, Google AI, Anthropic, Microsoft, dan DAIR.AI
+- Pertimbangkan praktik terbaik prompt engineering
+- Fokus pada kegunaan praktis dan keamanan
+- Berikan saran perbaikan yang dapat ditindaklanjuti
+- Buat versi yang ditingkatkan yang menunjukkan perbaikan
+
+Berikan respons dalam format JSON dengan struktur berikut:
+
+```json
+{{
+  "clarity": [skor 0-100],
+  "specificity": [skor 0-100], 
+  "ethics": [skor 0-100],
+  "effectiveness": [skor 0-100],
+  "bias_risk": [skor 0-100],
+}}
+```
+
+PROMPT YANG AKAN DIEVALUASI: "{user_prompt}"
+
+Evaluasi prompt tersebut dan berikan respons dalam format JSON yang diminta:"""
+
+# Tambahan tekstual
+#   "strengths": ["kekuatan 1", "kekuatan 2", "kekuatan 3"],
+#   "weaknesses": ["kelemahan 1", "kelemahan 2", "kelemahan 3"],
+#   "suggestions": [
+#     "saran perbaikan 1",
+#     "saran perbaikan 2", 
+#     "saran perbaikan 3"
+#   ],
+#   "improved_prompt": "Versi prompt yang diperbaiki dengan penjelasan mengapa lebih baik"
+
+    def evaluate_prompt(self, prompt: str) -> EvaluationResult:
+        """Evaluate a prompt using the GoTo text generation model"""
+        if not prompt or not prompt.strip():
+            raise ValueError("Prompt cannot be empty")
+
+        if not self.text_gen_model:
+            raise Exception("Text generation model not initialized")
+
+        prompt = prompt.strip()
+        logger.info(f"Evaluating prompt with GoTo model: {prompt[:50]}...")
+
+        try:
+            # Create evaluation prompt in Indonesian for GoTo model
+            evaluation_prompt = self.create_evaluation_prompt(prompt)
+            
+            # Use text generation model to evaluate
+            # Import here to avoid circular imports
+            from huggingfastapi.models.payload import TextGenerationPayload
+            
+            payload = TextGenerationPayload(
+                text=evaluation_prompt,
+                max_new_tokens=256,
+                temperature=0.9,  # Low temperature for consistent evaluation
+                system_message="Anda adalah evaluator prompt AI yang ahli dan objektif. Berikan evaluasi yang akurat dan konstruktif."
+            )
+            
+            # Generate evaluation using GoTo model
+            response = self.text_gen_model.generate(payload)
+            logger.info(f"Received evaluation response from GoTo model: {response.generated_text[:200]}...")
+            
+            # Parse the JSON response
+            evaluation_data = self._parse_evaluation_response(response.generated_text)
+            
+            # Calculate overall score using research-backed weights
+            overall_score = self._calculate_overall_score(evaluation_data)
+            
+            # Create evaluation result
+            result = EvaluationResult(
+                overall_score=round(overall_score, 1),
+                clarity=evaluation_data.get('clarity', 0),
+                specificity=evaluation_data.get('specificity', 0),
+                ethics=evaluation_data.get('ethics', 0),
+                effectiveness=evaluation_data.get('effectiveness', 0),
+                bias_risk=evaluation_data.get('bias_risk', 0),
+                suggestions=evaluation_data.get('suggestions', []),
+                strengths=evaluation_data.get('strengths', []),
+                weaknesses=evaluation_data.get('weaknesses', []),
+                improved_prompt=evaluation_data.get('improved_prompt', ''),
+                evaluation_details={
+                    'word_count': len(prompt.split()),
+                    'character_count': len(prompt),
+                    'model_used': 'GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct',
+                    'evaluation_method': 'local_llm_evaluation'
+                },
+                sources_used=self.sources,
+                timestamp=datetime.now().isoformat()
+            )
+            
+            logger.info(f"GoTo evaluation completed. Overall score: {result.overall_score}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"GoTo evaluation failed: {e}")
+            raise Exception(f"GoTo evaluation failed: {str(e)}")
+
+    def _parse_evaluation_response(self, response_text: str) -> Dict[str, Any]:
+        """Parse the evaluation response from GoTo model"""
+        try:
+            # Find JSON content in the response
+            json_start = response_text.find('{')
+            json_end = response_text.rfind('}') + 1
+            
+            if json_start != -1 and json_end > json_start:
+                json_str = response_text[json_start:json_end]
+                data = json.loads(json_str)
+                logger.info("✅ Successfully parsed JSON from GoTo model response.")
+                return data
+            else:
+                logger.warning("⚠️ No JSON found in response, using fallback extraction...")
+                return self._extract_fallback_data(response_text)
+                
+        except json.JSONDecodeError:
+            logger.warning("⚠️ Failed to parse JSON, using fallback extraction.")
+            return self._extract_fallback_data(response_text)
+
+    def _extract_fallback_data(self, response_text: str) -> Dict[str, Any]:
+        """Extract data using fallback method when JSON parsing fails"""
+        import re
+        
+        # Default values
+        default_data = {
+            'clarity': 50,
+            'specificity': 50,
+            'ethics': 50,
+            'effectiveness': 50,
+            'bias_risk': 50,
+            'strengths': ["Evaluation incomplete - response parsing failed"],
+            'weaknesses': ["Unable to complete full evaluation"],
+            'suggestions': ["Please try submitting the prompt again"],
+            'improved_prompt': "Unable to generate improved version due to parsing error"
+        }
+        
+        # Try to extract numeric scores
+        score_patterns = {
+            'clarity': r'clarity["\s:]*(\d+)',
+            'specificity': r'specificity["\s:]*(\d+)',
+            'ethics': r'ethics["\s:]*(\d+)',
+            'effectiveness': r'effectiveness["\s:]*(\d+)',
+            'bias_risk': r'bias_risk["\s:]*(\d+)'
+        }
+        
+        for key, pattern in score_patterns.items():
+            match = re.search(pattern, response_text, re.IGNORECASE)
+            if match:
+                try:
+                    default_data[key] = int(match.group(1))
+                except ValueError:
+                    pass
+        
+        return default_data
+
+    def _calculate_overall_score(self, evaluation_data: Dict) -> float:
+        """Calculate overall score using research-backed weights"""
+        weighted_score = (
+            evaluation_data['clarity'] * self.criteria_weights['clarity'] +
+            evaluation_data['specificity'] * self.criteria_weights['specificity'] +
+            evaluation_data['ethics'] * self.criteria_weights['ethics'] +
+            evaluation_data['effectiveness'] * self.criteria_weights['effectiveness']
+        )
+        
+        # Apply bias risk penalty (subtract a percentage of bias risk)
+        bias_penalty = evaluation_data['bias_risk'] * 0.15
+        overall_score = weighted_score - bias_penalty
+        
+        return max(0, min(100, overall_score))
+        

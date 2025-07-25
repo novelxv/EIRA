@@ -38,8 +38,8 @@ def post_generate_text(
     """
     
     try:
-        text_gen_model: TextGenerationModel = request.app.state.text_gen_model
-        result: TextGenerationResult = text_gen_model.generate(payload)
+        text_goto_model: TextGenerationModel = request.app.state.text_goto_model
+        result: TextGenerationResult = text_goto_model.generate(payload)
         return result
         
     except Exception as e:
@@ -78,8 +78,8 @@ def post_chat(
         if not payload.system_message:
             payload.system_message = "Anda adalah asisten AI yang membantu dan ramah. Jawablah pertanyaan dengan jelas dan informatif."
         
-        text_gen_model: TextGenerationModel = request.app.state.text_gen_model
-        result: TextGenerationResult = text_gen_model.generate(payload)
+        text_goto_model: TextGenerationModel = request.app.state.text_goto_model
+        result: TextGenerationResult = text_goto_model.generate(payload)
         return result
         
     except Exception as e:
