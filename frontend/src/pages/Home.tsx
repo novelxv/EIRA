@@ -65,7 +65,7 @@ const Home = () => {
               
               <h1 className="text-5xl lg:text-7xl font-bold text-neutral-900 mb-6 leading-tight">
                 Growing 
-                <span className="gradient-text block">With AI</span>
+                <span className="gradient-text block mt-3 mb-3">With AI</span>
                 Not Against AI
               </h1>
               

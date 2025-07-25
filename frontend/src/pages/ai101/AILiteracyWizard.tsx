@@ -1,57 +1,31 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  Brain, 
-  BookOpen, 
-  PlayCircle, 
-  CheckCircle, 
   ArrowRight, 
   ArrowLeft,
   Lightbulb,
   HelpCircle,
   Video,
-  FileText,
-  Home,
-  Trophy,
+  PlayCircle,
+  BookOpen,
+  CheckCircle,
   ChevronRight,
-  Smartphone,
-  Music,
-  Camera,
-  TrendingUp,
-  Globe
+  Trophy,
+  Brain,
+  FileText,
+  Home
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useAILiteracyModules } from '../../hooks/useAILiteracyModules'
+import type { LearningModule } from '../../hooks/useAILiteracyModules'
 
-interface QuizQuestion {
-  id: number
-  question: string
-  options: string[]
-  correct: number
-  explanation: string
-  scenario?: string
-}
-
-interface ConceptCard {
-  id: number
-  keySentence: string
-  analogy: string
-  icon: React.ReactNode
-  color: string
-}
-
-interface LearningModule {
-  id: number
-  title: string
-  icon: React.ReactNode
-  description: string
-  videoUrl: string
-  conceptCards: ConceptCard[]
-  quiz: QuizQuestion[]
-}
-
-type WizardStep = 'selection' | 'learning' | 'quiz' | 'completion'
+type WizardStep = 'selection' | 'video' | 'flashcards' | 'quiz' | 'completion'
 
 const AILiteracyWizard = () => {
+  // Load modules from JSON
+  const { modules, loading, error } = useAILiteracyModules()
+  
+  // ALL HOOKS MUST BE DEFINED FIRST - Rules of Hooks
   // Wizard state
   const [currentStep, setCurrentStep] = useState<WizardStep>('selection')
   const [selectedModule, setSelectedModule] = useState<LearningModule | null>(null)
@@ -68,324 +42,63 @@ const AILiteracyWizard = () => {
   const [quizScore, setQuizScore] = useState(0)
   const [userAnswers, setUserAnswers] = useState<number[]>([])
 
-  const modules: LearningModule[] = [
-    {
-      id: 1,
-      title: "Apa itu Artificial Intelligence?",
-      icon: <Brain className="h-6 w-6" />,
-      description: "Memahami konsep dasar AI dan penerapannya dalam kehidupan sehari-hari",
-      videoUrl: "https://example.com/ai-basics.mp4",
-      conceptCards: [
-        {
-          id: 1,
-          keySentence: "Artificial Intelligence adalah teknologi yang membuat mesin bisa berpikir seperti manusia.",
-          analogy: "Seperti memberi 'otak' pada robot sehingga dia bisa memutuskan sendiri tanpa diperintah terus-menerus.",
-          icon: <Brain className="h-12 w-12" />,
-          color: "from-blue-500 to-cyan-500"
-        },
-        {
-          id: 2,
-          keySentence: "Narrow AI dirancang untuk tugas spesifik, General AI untuk semua tugas.",
-          analogy: "Narrow AI seperti pisau khusus untuk memotong sayur, General AI seperti pisau Swiss Army yang bisa untuk apa saja.",
-          icon: <Smartphone className="h-12 w-12" />,
-          color: "from-purple-500 to-pink-500"
-        },
-        {
-          id: 3,
-          keySentence: "AI sudah ada di sekitar kita dalam bentuk rekomendasi dan asisten virtual.",
-          analogy: "Seperti pelayan restoran yang sudah hafal selera kita dan langsung menyarankan menu favorit.",
-          icon: <Music className="h-12 w-12" />,
-          color: "from-green-500 to-teal-500"
-        }
-      ],
-      quiz: [
-        {
-          id: 1,
-          question: "Saat Anda buka Netflix dan film yang muncul selalu sesuai selera Anda, teknologi di baliknya adalah:",
-          scenario: "Bayangkan Anda baru saja selesai menonton film aksi di Netflix. Besoknya, halaman utama Netflix penuh dengan rekomendasi film aksi dan thriller yang menarik.",
-          options: [
-            "Karyawan Netflix yang memilih film untuk saya",
-            "AI yang belajar dari riwayat tontonan saya",
-            "Sistem random yang kebetulan cocok",
-            "Teman saya yang berbagi akun"
-          ],
-          correct: 1,
-          explanation: "Netflix menggunakan AI machine learning yang menganalisis pola tontonan Anda, rating yang Anda berikan, dan data pengguna serupa untuk memberikan rekomendasi yang personal."
-        },
-        {
-          id: 2,
-          question: "Manakah yang termasuk contoh Narrow AI dalam kehidupan sehari-hari?",
-          scenario: "Anda sedang menggunakan smartphone dan berinteraksi dengan berbagai aplikasi yang menggunakan teknologi AI.",
-          options: [
-            "Siri yang bisa menjawab semua pertanyaan dan melakukan semua tugas manusia",
-            "Google Translate yang hanya bisa menerjemahkan bahasa",
-            "Robot yang bisa berpikir seperti manusia dalam segala hal",
-            "AI yang bisa menggantikan semua pekerjaan manusia"
-          ],
-          correct: 1,
-          explanation: "Google Translate adalah contoh Narrow AI karena dirancang khusus untuk satu tugas: menerjemahkan bahasa. Berbeda dengan General AI yang bisa melakukan berbagai tugas seperti manusia."
-        },
-        {
-          id: 3,
-          question: "Ketika Anda bertanya pada Siri 'Bagaimana cuaca hari ini?', apa yang sebenarnya terjadi di balik layar?",
-          scenario: "Anda sedang bersiap keluar rumah dan bertanya pada Siri tentang cuaca. Dalam hitungan detik, Siri memberikan informasi cuaca yang akurat.",
-          options: [
-            "Siri melihat keluar jendela untuk mengecek cuaca",
-            "Siri menggunakan AI untuk memahami pertanyaan Anda, lalu mengambil data cuaca dari internet",
-            "Siri menelepon kantor meteorologi",
-            "Siri menebak berdasarkan hari kemarin"
-          ],
-          correct: 1,
-          explanation: "Siri menggunakan Natural Language Processing (NLP) untuk memahami pertanyaan Anda, kemudian mengakses database cuaca online untuk memberikan informasi yang akurat dan real-time."
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: "Machine Learning & Deep Learning",
-      icon: <Lightbulb className="h-6 w-6" />,
-      description: "Memahami cara mesin belajar dari data dan membuat prediksi",
-      videoUrl: "https://example.com/ml-basics.mp4",
-      conceptCards: [
-        {
-          id: 1,
-          keySentence: "Machine Learning adalah AI yang belajar dari contoh-contoh.",
-          analogy: "Seperti mengajari anak kecil bedanya kucing dan anjing dengan menunjukkan ribuan foto.",
-          icon: <Camera className="h-12 w-12" />,
-          color: "from-orange-500 to-red-500"
-        },
-        {
-          id: 2,
-          keySentence: "Supervised Learning belajar dari data berlabel, Unsupervised Learning mencari pola sendiri.",
-          analogy: "Supervised seperti belajar dengan kunci jawaban, Unsupervised seperti mencari pola dalam puzzle tanpa contoh.",
-          icon: <TrendingUp className="h-12 w-12" />,
-          color: "from-blue-500 to-purple-500"
-        },
-        {
-          id: 3,
-          keySentence: "Deep Learning menggunakan neural network berlapis untuk memahami hal kompleks.",
-          analogy: "Seperti sistem pencernaan yang memproses makanan berlapis: mulut → lambung → usus, setiap lapisan punya tugas khusus.",
-          icon: <Globe className="h-12 w-12" />,
-          color: "from-green-500 to-blue-500"
-        }
-      ],
-      quiz: [
-        {
-          id: 1,
-          question: "Apa yang membedakan Deep Learning dari Machine Learning tradisional?",
-          options: [
-            "Deep Learning menggunakan lebih banyak data",
-            "Deep Learning menggunakan neural network berlapis",
-            "Deep Learning lebih cepat",
-            "Deep Learning lebih murah"
-          ],
-          correct: 1,
-          explanation: "Deep Learning menggunakan neural network dengan banyak layer (lapisan) untuk memproses informasi kompleks, sedangkan machine learning tradisional menggunakan algoritma yang lebih sederhana."
-        },
-        {
-          id: 2,
-          question: "Anda ingin membuat sistem yang bisa mengelompokkan pelanggan berdasarkan pola belanja mereka tanpa diberi tahu kategori sebelumnya. Jenis machine learning apa yang tepat?",
-          scenario: "Sebagai pemilik toko online, Anda memiliki data transaksi ribuan pelanggan dan ingin memahami segmen pelanggan untuk strategi marketing yang lebih efektif.",
-          options: [
-            "Supervised Learning",
-            "Unsupervised Learning", 
-            "Reinforcement Learning",
-            "Transfer Learning"
-          ],
-          correct: 1,
-          explanation: "Unsupervised Learning cocok untuk mencari pola tersembunyi dalam data tanpa label yang sudah ada. Algoritma clustering akan mengelompokkan pelanggan berdasarkan kesamaan pola belanja mereka."
-        },
-        {
-          id: 3,
-          question: "Mengapa AI game seperti AlphaGo bisa mengalahkan juara dunia Go?",
-          scenario: "AlphaGo berhasil mengalahkan Lee Sedol, juara dunia Go, dalam pertandingan yang mengejutkan dunia. Game Go memiliki lebih banyak kemungkinan langkah daripada catur.",
-          options: [
-            "AlphaGo menggunakan Supervised Learning dengan data pertandingan manusia",
-            "AlphaGo menggunakan Reinforcement Learning dengan bermain jutaan game melawan dirinya sendiri",
-            "AlphaGo sudah diprogram dengan semua strategi yang mungkin",
-            "AlphaGo menggunakan internet untuk mencari strategi terbaik"
-          ],
-          correct: 1,
-          explanation: "AlphaGo menggunakan Reinforcement Learning, bermain jutaan game melawan dirinya sendiri untuk belajar strategi optimal melalui trial and error. Ini memungkinkannya menemukan strategi yang bahkan tidak terpikirkan oleh manusia."
-        }
-      ]
-    },
-    {
-      id: 3,
-      title: "Large Language Models (LLM)",
-      icon: <FileText className="h-6 w-6" />,
-      description: "Memahami AI bahasa seperti ChatGPT dan cara kerjanya",
-      videoUrl: "https://example.com/llm-basics.mp4",
-      conceptCards: [
-        {
-          id: 1,
-          keySentence: "LLM adalah AI yang dilatih dengan miliaran teks untuk memahami dan menghasilkan bahasa manusia.",
-          analogy: "Seperti siswa yang membaca seluruh perpustakaan dan bisa menjawab pertanyaan apapun berdasarkan yang pernah dibaca.",
-          icon: <BookOpen className="h-12 w-12" />,
-          color: "from-indigo-500 to-purple-500"
-        },
-        {
-          id: 2,
-          keySentence: "LLM bekerja dengan memprediksi kata selanjutnya berdasarkan konteks yang diberikan.",
-          analogy: "Seperti melengkapi kalimat dalam permainan tebak kata, tapi dengan kemampuan yang sangat canggih.",
-          icon: <Brain className="h-12 w-12" />,
-          color: "from-pink-500 to-rose-500"
-        },
-        {
-          id: 3,
-          keySentence: "Hallucination terjadi ketika LLM membuat informasi yang terdengar benar tapi sebenarnya salah.",
-          analogy: "Seperti storyteller yang sangat persuasif tapi kadang mencampur fakta dengan fiksi tanpa sadar.",
-          icon: <HelpCircle className="h-12 w-12" />,
-          color: "from-yellow-500 to-orange-500"
-        }
-      ],
-      quiz: [
-        {
-          id: 1,
-          question: "Apa yang dimaksud dengan 'hallucination' dalam konteks LLM?",
-          options: [
-            "LLM yang bermimpi",
-            "LLM menghasilkan informasi yang terdengar benar tapi sebenarnya salah",
-            "LLM yang bisa melihat gambar",
-            "LLM yang bekerja di malam hari"
-          ],
-          correct: 1,
-          explanation: "Hallucination adalah ketika LLM menghasilkan informasi yang terdengar meyakinkan dan logis, tapi sebenarnya salah atau tidak akurat. Ini terjadi karena LLM memprediksi berdasarkan pola, bukan pemahaman yang sebenarnya."
-        },
-        {
-          id: 2,
-          question: "Anda bertanya pada ChatGPT: 'Siapa presiden Indonesia tahun 2024?' dan mendapat jawaban yang salah. Mengapa ini bisa terjadi?",
-          scenario: "Anda sedang mengerjakan tugas sejarah dan mengandalkan ChatGPT untuk informasi faktual tentang kepemimpinan Indonesia.",
-          options: [
-            "ChatGPT sengaja berbohong",
-            "ChatGPT tidak memiliki akses ke informasi terbaru atau terjadi hallucination",
-            "ChatGPT hanya tahu tentang negara lain",
-            "ChatGPT sedang rusak"
-          ],
-          correct: 1,
-          explanation: "LLM seperti ChatGPT memiliki 'knowledge cutoff' - batas waktu data training mereka. Mereka juga bisa mengalami hallucination, menghasilkan informasi yang terdengar benar tapi salah. Selalu verifikasi informasi faktual dari sumber terpercaya."
-        },
-        {
-          id: 3,
-          question: "Ketika Anda meminta ChatGPT menulis kode Python, bagaimana sebenarnya prosesnya?",
-          scenario: "Anda meminta ChatGPT: 'Buatkan kode Python untuk menghitung rata-rata dari list angka' dan mendapat kode yang benar dan berfungsi.",
-          options: [
-            "ChatGPT menjalankan kode di server untuk memastikan benar",
-            "ChatGPT memprediksi token/kata berikutnya berdasarkan pola kode dalam data training",
-            "ChatGPT terhubung ke GitHub untuk mencari kode yang sama",
-            "ChatGPT memiliki compiler Python built-in"
-          ],
-          correct: 1,
-          explanation: "LLM bekerja dengan memprediksi token (kata/karakter) berikutnya berdasarkan pola yang dipelajari dari data training. Ketika menghasilkan kode, LLM memprediksi syntax dan struktur yang paling mungkin berdasarkan konteks permintaan Anda."
-        },
-        {
-          id: 4,
-          question: "Mengapa penting untuk memberikan konteks yang jelas saat berinteraksi dengan LLM?",
-          scenario: "Anda bertanya 'Bagaimana cara menggoreng?' tanpa konteks. LLM bisa menjawab tentang menggoreng ikan, ayam, atau bahkan tentang teknik memasak secara umum.",
-          options: [
-            "Supaya LLM tidak bingung dan memberikan jawaban yang relevan",
-            "Supaya LLM bekerja lebih cepat",
-            "Supaya menghemat token/biaya",
-            "Supaya LLM tidak crash"
-          ],
-          correct: 0,
-          explanation: "LLM bergantung pada konteks untuk memberikan respons yang tepat. Tanpa konteks yang jelas, LLM mungkin memberikan jawaban yang terlalu umum atau tidak sesuai dengan kebutuhan spesifik Anda. Konteks yang baik = hasil yang lebih relevan."
-        }
-      ]
-    },
-    {
-      id: 4,
-      title: "Prompt Engineering",
-      icon: <FileText className="h-6 w-6" />,
-      description: "Belajar cara berkomunikasi efektif dengan AI untuk mendapatkan hasil terbaik",
-      videoUrl: "https://example.com/prompt-engineering.mp4",
-      conceptCards: [
-        {
-          id: 1,
-          keySentence: "Prompt yang baik adalah kunci untuk mendapatkan output AI yang berkualitas.",
-          analogy: "Seperti memberikan instruksi pada asisten - semakin jelas dan spesifik instruksi Anda, semakin baik hasil yang diperoleh.",
-          icon: <FileText className="h-12 w-12" />,
-          color: "from-emerald-500 to-green-500"
-        },
-        {
-          id: 2,
-          keySentence: "Konteks dan contoh dalam prompt membantu AI memahami ekspektasi Anda dengan lebih baik.",
-          analogy: "Seperti menjelaskan tugas pada karyawan baru - memberikan contoh hasil yang diinginkan membuat mereka lebih paham.",
-          icon: <Lightbulb className="h-12 w-12" />,
-          color: "from-amber-500 to-yellow-500"
-        },
-        {
-          id: 3,
-          keySentence: "Iterasi dan perbaikan prompt adalah bagian normal dari proses prompting yang efektif.",
-          analogy: "Seperti memasak - mencoba, mencicipi, dan menyesuaikan bumbu sampai mendapat rasa yang pas.",
-          icon: <Brain className="h-12 w-12" />,
-          color: "from-violet-500 to-purple-500"
-        }
-      ],
-      quiz: [
-        {
-          id: 1,
-          question: "Mana prompt yang lebih efektif untuk membuat email profesional?",
-          scenario: "Anda perlu menulis email untuk meminta meeting dengan klien penting dan ingin menggunakan AI untuk membantu.",
-          options: [
-            "Buatkan email",
-            "Buatkan email profesional untuk meminta meeting dengan klien, tone formal, maksimal 150 kata, sertakan agenda yang jelas",
-            "Tolong buatkan email yang bagus",
-            "Email untuk klien"
-          ],
-          correct: 1,
-          explanation: "Prompt yang efektif harus spesifik, mencakup konteks (meeting dengan klien), tone yang diinginkan (formal), batasan (150 kata), dan requirement khusus (agenda yang jelas). Ini membantu AI menghasilkan output yang sesuai ekspektasi."
-        },
-        {
-          id: 2,
-          question: "Apa yang dimaksud dengan 'Chain of Thought' prompting?",
-          scenario: "Anda meminta AI menyelesaikan soal matematika kompleks dan ingin AI menunjukkan cara berpikirnya.",
-          options: [
-            "Meminta AI berpikir secara random",
-            "Meminta AI menjelaskan langkah-langkah pemikirannya secara bertahap",
-            "Meminta AI menggunakan internet",
-            "Meminta AI bekerja lebih cepat"
-          ],
-          correct: 1,
-          explanation: "Chain of Thought prompting meminta AI untuk 'menunjukkan pekerjaan rumahnya' - menjelaskan proses berpikir step-by-step. Ini often menghasilkan jawaban yang lebih akurat dan memungkinkan Anda memahami reasoning AI."
-        },
-        {
-          id: 3,
-          question: "Mengapa penting untuk memberikan contoh (few-shot) dalam prompt?",
-          scenario: "Anda ingin AI menganalisis sentimen dari review produk dengan format output yang konsisten.",
-          options: [
-            "Supaya AI tidak bosan",
-            "Supaya AI memahami format dan style output yang diinginkan",
-            "Supaya AI bekerja lebih cepat",
-            "Supaya menghemat token"
-          ],
-          correct: 1,
-          explanation: "Few-shot prompting (memberikan contoh) membantu AI memahami pola dan format output yang Anda inginkan. Ini seperti memberikan template - AI akan mengikuti struktur dan style yang Anda tunjukkan dalam contoh."
-        }
-      ]
-    }
-  ]
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading AI Literacy modules...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-xl shadow-lg">
+          <div className="text-red-500 mb-4">
+            <HelpCircle className="h-12 w-12 mx-auto" />
+          </div>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">Error Loading Content</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   const startModule = (module: LearningModule) => {
     setSelectedModule(module)
-    setCurrentStep('learning')
+    setCurrentStep('video') // Mulai dengan video
     setCurrentCard(0)
     setCardProgress(new Array(module.conceptCards.length).fill(false))
+  }
+
+  // Navigation functions
+  const goToFlashcards = () => {
+    setCurrentStep('flashcards')
+    setCurrentCard(0)
+  }
+
+  const goToQuiz = () => {
+    setCurrentStep('quiz')
+    setCurrentQuiz(0)
+    setSelectedAnswer(null)
+    setShowExplanation(false)
   }
 
   const completeCard = (cardIndex: number) => {
     const newProgress = [...cardProgress]
     newProgress[cardIndex] = true
     setCardProgress(newProgress)
-  }
-
-  const proceedToQuiz = () => {
-    setCurrentStep('quiz')
-    setCurrentQuiz(0)
-    setSelectedAnswer(null)
-    setShowExplanation(false)
-    setQuizScore(0)
-    setUserAnswers([])
   }
 
   const handleQuizAnswer = (answerIndex: number) => {
@@ -427,8 +140,12 @@ const AILiteracyWizard = () => {
   // Module Selection Step
   if (currentStep === 'selection') {
     return (
-      <div className="min-h-screen pt-8 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen pt-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='1'%3E%3Cpolygon fill='%23000' points='50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -470,7 +187,7 @@ const AILiteracyWizard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+                className="bg-gradient-to-b from-white to-gray-50 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 group border border-white/50"
               >
                 {/* Header */}
                 <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white relative">
@@ -550,26 +267,153 @@ const AILiteracyWizard = () => {
     )
   }
 
-  // Learning Step (Video + Concept Cards)
-  if (currentStep === 'learning' && selectedModule) {
+  // Video Step (Halaman 1: Tonton)
+  if (currentStep === 'video' && selectedModule) {
     return (
-      <div className="min-h-screen pt-8 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen pt-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-[0.01]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Progress Header */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={resetWizard}
-                  className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
-                >
-                  <ArrowLeft className="h-5 w-5 text-neutral-600" />
-                </button>
-                <div>
-                  <h1 className="text-2xl font-bold text-neutral-900">{selectedModule.title}</h1>
-                  <p className="text-neutral-600">Langkah 1: Pelajari Konsep</p>
+              <h1 className="text-3xl font-bold text-neutral-900">
+                📺 Tonton & Pahami
+              </h1>
+              <button
+                onClick={() => setCurrentStep('selection')}
+                className="text-neutral-500 hover:text-neutral-700 flex items-center"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Kembali
+              </button>
+            </div>
+            
+            <div className="text-lg text-neutral-600 mb-4">
+              <strong>{selectedModule.title}</strong>
+            </div>
+
+            {/* Step Indicator */}
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="flex items-center text-blue-600">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">1</div>
+                <span className="font-semibold">Tonton</span>
+              </div>
+              <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
+              <div className="flex items-center text-neutral-400">
+                <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">2</div>
+                <span>Pahami</span>
+              </div>
+              <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
+              <div className="flex items-center text-neutral-400">
+                <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
+                <span>Uji</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Video Section */}
+          <div className="bg-gradient-to-b from-white to-gray-50 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] overflow-hidden mb-8 border border-white/50">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
+              <h2 className="text-xl font-bold flex items-center">
+                <Video className="h-5 w-5 mr-2" />
+                Video Pembelajaran
+              </h2>
+            </div>
+            <div className="p-8">
+              <div className="aspect-video bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center">
+                <div className="text-center">
+                  <PlayCircle className="h-16 w-16 text-neutral-400 mx-auto mb-4" />
+                  <p className="text-neutral-600 text-lg font-medium">Video pembelajaran akan tersedia segera</p>
+                  <p className="text-sm text-neutral-500 mt-2">Sementara waktu, mari lanjut ke flashcard interaktif</p>
                 </div>
               </div>
+              
+              {/* Module Description */}
+              <div className="mt-8 text-center">
+                <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                  Apa yang akan Anda pelajari?
+                </h3>
+                <p className="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+                  {selectedModule.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => setCurrentStep('selection')}
+              className="flex items-center px-6 py-3 text-neutral-600 hover:text-neutral-800 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Pilih Modul Lain
+            </button>
+            
+            <button
+              onClick={goToFlashcards}
+              className="flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Lanjut ke Flashcard
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Flashcards Step (Halaman 2: Pahami)  
+  if (currentStep === 'flashcards' && selectedModule) {
+    return (
+      <div className="min-h-screen pt-8 bg-gradient-to-br from-purple-50 via-white to-pink-50 relative">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-[0.01]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Crect x='38' y='38' width='4' height='4'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Progress Header */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-3xl font-bold text-neutral-900">
+                🧠 Pahami dengan Analogi
+              </h1>
+              <button
+                onClick={() => setCurrentStep('video')}
+                className="text-neutral-500 hover:text-neutral-700 flex items-center"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Kembali ke Video
+              </button>
+            </div>
+            
+            <div className="text-lg text-neutral-600 mb-4">
+              <strong>{selectedModule.title}</strong>
+            </div>
+
+            {/* Step Indicator */}
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="flex items-center text-green-600">
+                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
+                <span className="font-medium">Tonton</span>
+              </div>
+              <div className="flex-1 h-1 bg-green-200 rounded"></div>
+              <div className="flex items-center text-purple-600">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">2</div>
+                <span className="font-semibold">Pahami</span>
+              </div>
+              <div className="flex-1 h-1 bg-neutral-200 rounded"></div>
+              <div className="flex items-center text-neutral-400">
+                <div className="w-8 h-8 bg-neutral-200 text-neutral-400 rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
+                <span>Uji</span>
+              </div>
+            </div>
+
+            {/* Card Progress */}
+            <div className="flex items-center justify-between mb-6">
               <div className="text-sm text-neutral-600">
                 Kartu {currentCard + 1} dari {selectedModule.conceptCards.length}
               </div>
@@ -577,35 +421,18 @@ const AILiteracyWizard = () => {
             
             <div className="w-full bg-neutral-200 rounded-full h-2">
               <div
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentCard + 1) / selectedModule.conceptCards.length) * 100}%` }}
               ></div>
             </div>
           </div>
 
-          {/* Video Section */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
-              <h2 className="text-xl font-bold flex items-center">
-                <Video className="h-5 w-5 mr-2" />
-                Video Pembelajaran
-              </h2>
-            </div>
-            <div className="p-6">
-              <div className="bg-neutral-100 rounded-lg p-8 text-center">
-                <PlayCircle className="h-16 w-16 text-neutral-400 mx-auto mb-4" />
-                <p className="text-neutral-600">Video pembelajaran akan tersedia segera</p>
-                <p className="text-sm text-neutral-500 mt-2">Sementara ini, mari fokus pada kartu konsep di bawah</p>
-              </div>
-            </div>
-          </div>
-
           {/* Concept Card */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
+          <div className="bg-gradient-to-b from-white to-gray-50 rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.12)] transition-all duration-300">
+            <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <Lightbulb className="h-5 w-5 mr-2" />
-                Kartu Analogi Interaktif
+                Flashcard Analogi Interaktif
               </h2>
             </div>
             
@@ -619,24 +446,26 @@ const AILiteracyWizard = () => {
                   className="text-center"
                 >
                   {/* Icon */}
-                  <div className={`w-24 h-24 bg-gradient-to-r ${selectedModule.conceptCards[currentCard].color} rounded-full flex items-center justify-center mx-auto mb-6 text-white`}>
+                  <div className={`w-24 h-24 bg-gradient-to-r ${selectedModule.conceptCards[currentCard].color} rounded-full flex items-center justify-center mx-auto mb-6 text-white shadow-lg`}>
                     {selectedModule.conceptCards[currentCard].icon}
                   </div>
 
                   {/* Key Sentence */}
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-6 leading-relaxed">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-6 leading-relaxed whitespace-pre-line">
                     {selectedModule.conceptCards[currentCard].keySentence}
                   </h3>
 
                   {/* Analogy */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-                    <h4 className="font-semibold text-blue-900 mb-3 flex items-center justify-center">
-                      <Lightbulb className="h-4 w-4 mr-2" />
-                      Analogi Sederhana
-                    </h4>
-                    <p className="text-blue-800 text-lg leading-relaxed">
-                      {selectedModule.conceptCards[currentCard].analogy}
-                    </p>
+                  <div className="relative bg-blue-50 border-2 border-transparent bg-gradient-to-r from-blue-200 via-purple-200 to-blue-200 p-[1px] rounded-lg mb-8">
+                    <div className="bg-blue-50 rounded-lg p-6">
+                      <h4 className="font-semibold text-blue-900 mb-3 flex items-center justify-center">
+                        <Lightbulb className="h-4 w-4 mr-2" />
+                        Analogi Sederhana
+                      </h4>
+                      <p className="text-gray-600 text-lg leading-relaxed font-normal">
+                        {selectedModule.conceptCards[currentCard].analogy}
+                      </p>
+                    </div>
                   </div>
 
                   {/* Navigation */}
@@ -665,7 +494,7 @@ const AILiteracyWizard = () => {
                       <button
                         onClick={() => {
                           completeCard(currentCard)
-                          proceedToQuiz()
+                          goToQuiz()
                         }}
                         className="bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
                       >
@@ -688,23 +517,51 @@ const AILiteracyWizard = () => {
     const currentQuestion = selectedModule.quiz[currentQuiz]
     
     return (
-      <div className="min-h-screen pt-8 bg-gradient-to-br from-green-50 to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen pt-8 bg-gradient-to-br from-green-50 via-white to-blue-50 relative">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-[0.01]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cpath d='M40 0l4 20 20-4-4 20 20 4-20 4 4 20-20-4-4 20-4-20-20 4 4-20-20-4 20-4-4-20 20 4z'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Progress Header */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={() => setCurrentStep('learning')}
-                  className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
-                >
-                  <ArrowLeft className="h-5 w-5 text-neutral-600" />
-                </button>
-                <div>
-                  <h1 className="text-2xl font-bold text-neutral-900">{selectedModule.title}</h1>
-                  <p className="text-neutral-600">Langkah 2: Kuis Skenario Dunia Nyata</p>
-                </div>
+              <h1 className="text-3xl font-bold text-neutral-900">
+                ❓ Uji Pemahaman
+              </h1>
+              <button
+                onClick={() => setCurrentStep('flashcards')}
+                className="text-neutral-500 hover:text-neutral-700 flex items-center"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Kembali ke Flashcard
+              </button>
+            </div>
+            
+            <div className="text-lg text-neutral-600 mb-4">
+              <strong>{selectedModule.title}</strong>
+            </div>
+
+            {/* Step Indicator */}
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="flex items-center text-green-600">
+                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
+                <span className="font-medium">Tonton</span>
               </div>
+              <div className="flex-1 h-1 bg-green-200 rounded"></div>
+              <div className="flex items-center text-green-600">
+                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-2">✓</div>
+                <span className="font-medium">Pahami</span>
+              </div>
+              <div className="flex-1 h-1 bg-green-200 rounded"></div>
+              <div className="flex items-center text-blue-600">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-2">3</div>
+                <span className="font-semibold">Uji</span>
+              </div>
+            </div>
+
+            {/* Quiz Progress */}
+            <div className="flex items-center justify-between mb-6">
               <div className="text-sm text-neutral-600">
                 Pertanyaan {currentQuiz + 1} dari {selectedModule.quiz.length}
               </div>
@@ -719,7 +576,7 @@ const AILiteracyWizard = () => {
           </div>
 
           {/* Quiz Content */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-b from-white to-gray-50 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.1)] overflow-hidden border border-white/50">
             <div className="bg-gradient-to-r from-green-500 to-teal-500 p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <HelpCircle className="h-5 w-5 mr-2" />
@@ -730,9 +587,11 @@ const AILiteracyWizard = () => {
             <div className="p-8">
               {/* Scenario */}
               {currentQuestion.scenario && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                  <h3 className="font-semibold text-blue-900 mb-3">📱 Skenario:</h3>
-                  <p className="text-blue-800 leading-relaxed">{currentQuestion.scenario}</p>
+                <div className="relative bg-blue-50 border-2 border-transparent bg-gradient-to-r from-blue-200 via-green-200 to-blue-200 p-[1px] rounded-lg mb-6">
+                  <div className="bg-blue-50 rounded-lg p-6">
+                    <h3 className="font-semibold text-blue-900 mb-3">📱 Skenario:</h3>
+                    <p className="text-blue-800 leading-relaxed">{currentQuestion.scenario}</p>
+                  </div>
                 </div>
               )}
 
@@ -842,8 +701,12 @@ const AILiteracyWizard = () => {
     const scorePercentage = (finalScore / totalQuestions) * 100
     
     return (
-      <div className="min-h-screen pt-8 bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen pt-8 bg-gradient-to-br from-green-50 via-purple-50 to-blue-50 relative">
+        {/* Celebration background texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cstar cx='60' cy='60' r='20' fill='%23FFD700'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
