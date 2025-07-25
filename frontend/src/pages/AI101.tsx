@@ -11,7 +11,7 @@ import AILiteracy from './ai101/AILiteracy'
 import AILiteracyWizard from './ai101/AILiteracyWizard'
 import PlatformComparison from './ai101/PlatformComparison'
 import PolicyExplainer from './ai101/PolicyExplainer'
-import AIEthicsCompass from './ai101/AIEthicsCompass'
+import AIEthicsSimulator from './ai101/AIEthicsSimulator'
 import AIWatch from './ai101/AIWatch'
 
 const AI101 = () => {
@@ -97,7 +97,7 @@ const AI101 = () => {
         <Route path="/literacy" element={<AILiteracyWizard />} />
         <Route path="/literacy-classic" element={<AILiteracy />} />
         <Route path="/comparison" element={<PlatformComparison />} />
-        <Route path="/policy" element={<AIEthicsCompass />} />
+        <Route path="/policy" element={<AIEthicsSimulator />} />
         <Route path="/policy-classic" element={<PolicyExplainer />} />
         <Route path="/watch" element={<AIWatch />} />
       </Routes>

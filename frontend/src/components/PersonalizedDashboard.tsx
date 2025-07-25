@@ -69,13 +69,13 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
       },
       {
         icon: <FileText className="h-8 w-8" />,
-        title: "Kompas Etika AI",
-        description: "Tidak memberikan jawaban 'boleh/tidak boleh', tapi mengajukan pertanyaan Sokratik untuk membantu Anda menemukan wisdom dalam setiap dilema etika AI.",
+        title: "AI Ethics & Policy Explainer",
+        description: "Simulasi interaktif 'Choose Your Own Adventure' - jadilah pemimpin inovasi yang harus membuat keputusan strategis berdasarkan Strategi AI Nasional Indonesia.",
         href: "/ai101/policy",
         color: "from-green-500 to-teal-500",
-        highlights: ["Socratic Method", "Personal Guidance", "Context-Aware", "Non-Judgmental"],
+        highlights: ["Interactive Simulation", "Real Dilemmas", "Policy-Based", "Leadership Skills"],
         isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 50,
-        lockReason: "Pahami dulu dasar AI sebelum mengeksplorasi etika",
+        lockReason: "Pahami dulu dasar AI sebelum mengeksplorasi etika kepemimpinan",
         difficulty: 'advanced',
         recommendedFor: ['professional', 'creator', 'curious']
       },
