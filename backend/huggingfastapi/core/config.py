@@ -12,3 +12,6 @@ IS_DEBUG: bool = config("IS_DEBUG", cast=bool, default=False)
 
 DEFAULT_MODEL_PATH: str = config("DEFAULT_MODEL_PATH")
 AI_DETECTION_MODEL : str =  config("AI_DETECTION_MODEL")
+
+# Text generation model configuration
+TEXT_GENERATION_MODEL: str = config("TEXT_GENERATION_MODEL", default="GoToCompany/gemma2-9b-cpt-sahabatai-v1-instruct")

@@ -32,6 +32,34 @@ Application parts are:
 
 Python 3.6+, [Make and Docker]
 
+## NEW: Text Generation Setup
+
+For the new text generation functionality with 8-bit quantization:
+
+```bash
+# Quick setup (recommended)
+./setup_text_generation.sh
+
+# Manual setup
+pip install bitsandbytes==0.44.1 accelerate==1.2.1
+python test_text_generation.py
+```
+
+📖 **See `TEXT_GENERATION_API.md` for detailed API documentation and usage examples.**
+
+### New API Endpoints
+
+- `POST /api/v1/generate-text` - General text generation
+- `POST /api/v1/chat` - Conversational chat interface
+
+### Memory Requirements
+- **RAM**: 10-12 GB
+- **VRAM**: 6-8 GB (with 8-bit quantization)
+
+## Requirements
+
+Python 3.6+, [Make and Docker]
+
 ## Installation
 Install the required packages in your local environment (ideally virtualenv, conda, etc.).
 <!-- ```bash
