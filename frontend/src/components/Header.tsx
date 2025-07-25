@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
       dropdown: [
         { name: 'AI Literacy', href: '/ai101/literacy' },
         { name: 'Platform Comparison', href: '/ai101/comparison' },
-        { name: 'AI Policy Explainer', href: '/ai101/policy' },
+        { name: 'AI Ethical & Policy Simulator', href: '/ai101/policy' },
         { name: 'AI Watch', href: '/ai101/watch' },
       ]
     },

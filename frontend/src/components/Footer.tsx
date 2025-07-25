@@ -40,7 +40,7 @@ const Footer = () => {
                 <ul className="ml-4 mt-2 space-y-1">
                   <li><a href="/ai101/literacy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Literacy</a></li>
                   <li><a href="/ai101/comparison" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">Platform Comparison</a></li>
-                  <li><a href="/ai101/policy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Policy</a></li>
+                  <li><a href="/ai101/policy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Ethical & Policy Simulator</a></li>
                   <li><a href="/ai101/watch" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Watch</a></li>
                 </ul>
               </li>
