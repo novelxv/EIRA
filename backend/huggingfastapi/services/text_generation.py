@@ -25,8 +25,6 @@ class TextGenerationModel:
             # Configure 8-bit quantization
             quantization_config = BitsAndBytesConfig(
                 load_in_8bit=True,
-                llm_int8_threshold=6.0,
-                llm_int8_has_fp16_weight=False,
             )
             
             # Create the pipeline with 8-bit quantization
@@ -34,7 +32,7 @@ class TextGenerationModel:
                 "text-generation",
                 model=self.model_id,
                 model_kwargs={
-                    "torch_dtype": torch.bfloat16,
+                    "torch_dtype": torch.float16,
                     "quantization_config": quantization_config,
                 },
                 device_map="auto",
