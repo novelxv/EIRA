@@ -1,0 +1,267 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "title": "AI - From Magic to Logic",
+      "iconName": "Brain",
+      "description": "Understand the basic concepts of AI and its application in everyday life",
+      "videoUrl": "https://example.com/ai-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "Artificial Intelligence is when a computer can perform smart tasks that usually require a human brain, like learning, reasoning, and making its own decisions.",
+          "analogy": "Think of AI like a super-smart \"Asisten Pribadi\" (Personal Assistant). It doesn't just follow a list of commands; it learns your habits and anticipates your needs.",
+          "iconName": "Brain",
+          "colorScheme": "from-blue-500 to-cyan-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "Most modern AI has two key \"superpowers\":\n1. Autonomy: The ability to act on its own in complex environments.\n2. Adaptivity: The ability to learn from experience and improve its performance.",
+          "analogy": "It's like a smart Gojek driver app. It finds a new route on its own to avoid a traffic jam (Autonomy). Over many trips, it learns you prefer roads with lots of \"warung makan\" (food stalls) (Adaptivity).",
+          "iconName": "Smartphone",
+          "colorScheme": "from-purple-500 to-pink-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "AI isn't just one single technology. It's a huge field where many different sciences and philosophies work together to solve problems.",
+          "analogy": "Think of building a magnificent \"Candi\" (temple). You need architects (for logic), artists (for creativity), engineers (for structure), and historians (for context). AI is similar, combining computer science, language studies, psychology, and more!",
+          "iconName": "Building",
+          "colorScheme": "from-green-500 to-teal-500"
+        },
+        {
+          "id": 4,
+          "keySentence": "Before it can help plan your big \"Mudik Lebaran\" trip, an AI first needs to 'see' and 'hear' the world.",
+          "analogy": "Seeing: When Google Maps \"sees\" a traffic jam (\"macet\") on the Pantura road map, it's using Computer Vision. Hearing & Reading: When you say, \"OK Google, cari resep opor ayam,\" it uses Natural Language Processing (NLP).",
+          "iconName": "Compass",
+          "colorScheme": "from-yellow-500 to-orange-500"
+        },
+        {
+          "id": 5,
+          "keySentence": "After understanding the situation, the AI uses its \"brain\" to reason and choose the best path forward.",
+          "analogy": "Reasoning: Choosing the best travel route by combining info on traffic, rest areas, and \"ganjil-genap\" (odd-even) rules uses Planning & Reasoning. Learning: When your travel app remembers you always choose a train that has a \"mushola\" (prayer room), it's using Machine Learning.",
+          "iconName": "Magic",
+          "colorScheme": "from-red-500 to-pink-500"
+        },
+        {
+          "id": 6,
+          "keySentence": "Machine Learning is the most common type of AI. It's an AI that learns from lots of examples (data), not by being programmed with strict rules.",
+          "analogy": "It's like learning to make your grandmother's famous Rendang. She doesn't give you a perfect recipe book. You just watch her cook it hundreds of times. Eventually, your brain learns the \"rasa\" (the feeling, the taste) and the patterns on its own.",
+          "iconName": "Rocket",
+          "colorScheme": "from-indigo-500 to-purple-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "Saat Anda buka Netflix dan film yang muncul selalu sesuai selera Anda, teknologi di baliknya adalah:",
+          "scenario": "Bayangkan Anda baru saja selesai menonton film aksi di Netflix. Besoknya, halaman utama Netflix penuh dengan rekomendasi film aksi dan thriller yang menarik.",
+          "options": [
+            "Karyawan Netflix yang memilih film untuk saya",
+            "AI yang belajar dari riwayat tontonan saya",
+            "Sistem random yang kebetulan cocok",
+            "Teman saya yang berbagi akun"
+          ],
+          "correct": 1,
+          "explanation": "Netflix menggunakan AI machine learning yang menganalisis pola tontonan Anda, rating yang Anda berikan, dan data pengguna serupa untuk memberikan rekomendasi yang personal."
+        },
+        {
+          "id": 2,
+          "question": "Manakah yang termasuk contoh Narrow AI dalam kehidupan sehari-hari?",
+          "scenario": "Anda sedang menggunakan smartphone dan berinteraksi dengan berbagai aplikasi yang menggunakan teknologi AI.",
+          "options": [
+            "Siri yang bisa menjawab semua pertanyaan dan melakukan semua tugas manusia",
+            "Google Translate yang khusus menerjemahkan bahasa",
+            "Robot yang bisa memasak, membersihkan, dan mengajar",
+            "Komputer quantum yang memecahkan semua masalah"
+          ],
+          "correct": 1,
+          "explanation": "Google Translate adalah contoh perfect Narrow AI - sangat ahli dalam satu tugas spesifik (menerjemahkan), tapi tidak bisa melakukan tugas lain di luar itu."
+        },
+        {
+          "id": 3,
+          "question": "Mengapa penting memahami AI di era digital ini?",
+          "scenario": "Sebagai mahasiswa/profesional muda, Anda sering mendengar istilah AI di berbagai tempat - dari media sosial hingga dunia kerja.",
+          "options": [
+            "Supaya bisa membuat robot seperti di film",
+            "Agar tidak ketinggalan teknologi dan bisa memanfaatkannya dengan bijak",
+            "Untuk menjadi programmer AI",
+            "Karena semua orang membicarakannya"
+          ],
+          "correct": 1,
+          "explanation": "Memahami AI membantu kita membuat keputusan yang lebih baik tentang teknologi yang kita gunakan sehari-hari, melindungi privasi, dan memanfaatkan AI untuk meningkatkan produktivitas."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Machine Learning & Deep Learning",
+      "iconName": "Network",
+      "description": "Memahami cara mesin belajar dari data dan membuat prediksi",
+      "videoUrl": "https://example.com/ml-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "Machine Learning adalah AI yang belajar dari contoh-contoh.",
+          "analogy": "Seperti mengajari anak kecil bedanya kucing dan anjing dengan menunjukkan ribuan foto.",
+          "iconName": "Network",
+          "colorScheme": "from-orange-500 to-red-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "Supervised Learning belajar dari data berlabel, Unsupervised Learning mencari pola sendiri.",
+          "analogy": "Supervised seperti belajar dengan kunci jawaban, Unsupervised seperti mencari pola dalam puzzle tanpa contoh.",
+          "iconName": "Target",
+          "colorScheme": "from-blue-500 to-purple-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "Deep Learning menggunakan neural network berlapis untuk memahami hal kompleks.",
+          "analogy": "Seperti sistem pencernaan yang memproses makanan berlapis: mulut → lambung → usus, setiap lapisan punya tugas khusus.",
+          "iconName": "Layers",
+          "colorScheme": "from-green-500 to-blue-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "Apa yang membedakan Deep Learning dari Machine Learning tradisional?",
+          "options": [
+            "Deep Learning lebih cepat",
+            "Deep Learning menggunakan neural network dengan banyak layer",
+            "Deep Learning tidak memerlukan data",
+            "Deep Learning hanya untuk gambar"
+          ],
+          "correct": 1,
+          "explanation": "Deep Learning menggunakan neural network dengan banyak layer (lapisan) untuk memproses informasi kompleks, sedangkan machine learning tradisional menggunakan algoritma yang lebih sederhana."
+        },
+        {
+          "id": 2,
+          "question": "Anda ingin membuat sistem yang bisa mengelompokkan pelanggan berdasarkan pola belanja mereka tanpa diberi tahu kategori sebelumnya. Jenis machine learning apa yang tepat?",
+          "scenario": "Sebuah toko online memiliki jutaan data transaksi pelanggan dan ingin memahami segmentasi pelanggan secara otomatis.",
+          "options": [
+            "Supervised Learning",
+            "Unsupervised Learning",
+            "Reinforcement Learning",
+            "Transfer Learning"
+          ],
+          "correct": 1,
+          "explanation": "Unsupervised Learning tepat untuk kasus ini karena tidak ada label kategori yang sudah ditentukan - algoritma akan mencari pola dan mengelompokkan pelanggan secara otomatis berdasarkan kesamaan perilaku belanja."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Natural Language Processing (NLP)",
+      "iconName": "MessageSquare",
+      "description": "Bagaimana AI memahami dan memproses bahasa manusia",
+      "videoUrl": "https://example.com/nlp-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "NLP memungkinkan komputer memahami, menganalisis, dan merespons bahasa manusia.",
+          "analogy": "Seperti penerjemah universal yang tidak hanya menerjemahkan kata, tapi juga memahami konteks dan emosi di baliknya.",
+          "iconName": "MessageSquare",
+          "colorScheme": "from-indigo-500 to-purple-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "Tokenization memecah teks menjadi unit-unit kecil yang bisa diproses komputer.",
+          "analogy": "Seperti memotong kalimat panjang menjadi kata-kata individual, lalu kata menjadi huruf, supaya komputer bisa 'mengunyah' informasi satu per satu.",
+          "iconName": "FileText",
+          "colorScheme": "from-teal-500 to-green-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "Sentiment Analysis mengidentifikasi emosi dan opini dalam teks.",
+          "analogy": "Seperti psikolog yang bisa membaca perasaan seseorang dari cara mereka menulis - apakah sedang senang, sedih, atau marah.",
+          "iconName": "Lightbulb",
+          "colorScheme": "from-yellow-500 to-orange-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "Manakah aplikasi NLP yang paling sering Anda gunakan tanpa sadar?",
+          "scenario": "Anda sedang mengetik pesan di WhatsApp dan tiba-tiba muncul saran kata yang tepat, atau saat menulis email dan grammar checker memberikan koreksi otomatis.",
+          "options": [
+            "Autocorrect dan predictive text di keyboard",
+            "Kalkulator di smartphone",
+            "Kamera untuk foto selfie",
+            "Musik streaming"
+          ],
+          "correct": 0,
+          "explanation": "Autocorrect dan predictive text menggunakan NLP untuk memahami konteks kalimat Anda dan memprediksi kata yang mungkin akan Anda ketik selanjutnya."
+        },
+        {
+          "id": 2,
+          "question": "Sebuah perusahaan ingin menganalisis ribuan review produk untuk memahami kepuasan pelanggan. Teknologi NLP apa yang paling tepat?",
+          "options": [
+            "Machine Translation",
+            "Sentiment Analysis",
+            "Text Summarization",
+            "Speech Recognition"
+          ],
+          "correct": 1,
+          "explanation": "Sentiment Analysis dapat mengidentifikasi apakah review bersifat positif, negatif, atau netral, serta mengekstrak emosi spesifik dari teks review pelanggan."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Computer Vision",
+      "iconName": "Eye",
+      "description": "Bagaimana AI 'melihat' dan memahami gambar serta video",
+      "videoUrl": "https://example.com/cv-basics.mp4",
+      "conceptCards": [
+        {
+          "id": 1,
+          "keySentence": "Computer Vision memungkinkan komputer 'melihat' dan memahami konten visual seperti manusia.",
+          "analogy": "Seperti memberikan mata dan otak visual pada komputer, sehingga bisa membedakan kucing dari anjing dalam foto.",
+          "iconName": "Eye",
+          "colorScheme": "from-pink-500 to-rose-500"
+        },
+        {
+          "id": 2,
+          "keySentence": "Image Recognition mengidentifikasi objek, wajah, atau pola dalam gambar.",
+          "analogy": "Seperti detektif yang sangat jeli - bisa mengenali wajah seseorang dari ribuan foto dalam hitungan detik.",
+          "iconName": "Lightbulb",
+          "colorScheme": "from-cyan-500 to-blue-500"
+        },
+        {
+          "id": 3,
+          "keySentence": "Object Detection tidak hanya mengenali objek, tapi juga menunjukkan lokasi tepat objek tersebut.",
+          "analogy": "Seperti guru yang tidak hanya tahu ada siswa yang tidak memperhatikan, tapi juga bisa menunjuk tepat di mana siswa itu duduk.",
+          "iconName": "Target",
+          "colorScheme": "from-violet-500 to-purple-500"
+        }
+      ],
+      "quiz": [
+        {
+          "id": 1,
+          "question": "Saat Anda upload foto di Instagram dan otomatis ter-tag teman Anda, teknologi apa yang bekerja?",
+          "scenario": "Anda mengupload foto liburan bersama 5 teman. Instagram secara otomatis mendeteksi wajah mereka dan menyarankan untuk tag mereka.",
+          "options": [
+            "GPS Location Tracking",
+            "Face Recognition dalam Computer Vision",
+            "Audio Analysis",
+            "Manual tagging oleh Instagram"
+          ],
+          "correct": 1,
+          "explanation": "Instagram menggunakan Face Recognition, bagian dari Computer Vision, untuk mendeteksi dan mengenali wajah orang dalam foto, lalu mencocokkannya dengan database foto profil pengguna."
+        },
+        {
+          "id": 2,
+          "question": "Mengapa mobil self-driving membutuhkan Computer Vision yang sangat canggih?",
+          "options": [
+            "Untuk memainkan musik yang tepat",
+            "Untuk mendeteksi dan menghindari rintangan, rambu, pejalan kaki secara real-time",
+            "Untuk navigasi GPS",
+            "Untuk berkomunikasi dengan mobil lain"
+          ],
+          "correct": 1,
+          "explanation": "Mobil self-driving harus 'melihat' dan memahami lingkungan sekitar secara real-time - mendeteksi pejalan kaki, mobil lain, rambu lalu lintas, dan rintangan untuk membuat keputusan berkendara yang aman."
+        }
+      ]
+    }
+  ]
+}
