@@ -18,13 +18,11 @@ from huggingfastapi.core.messages import NO_VALID_PAYLOAD
 from huggingfastapi.core.config import (
     DEFAULT_MODEL_PATH,
     AI_DETECTION_MODEL,
+    GEMINI_API_KEY
 )
 
 # Additional imports for evaluators
 import google.generativeai as genai
-
-# Get GEMINI_API_KEY from environment
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 if TYPE_CHECKING:
     from huggingfastapi.services.text_generation import TextGenerationModel
