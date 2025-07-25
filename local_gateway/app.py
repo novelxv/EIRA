@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # --- Konfigurasi ---
 # URL API tujuan yang akan Anda panggil
-BASE_TARGET_API_URL = "https://8fbddf283704.ngrok-free.app"
+BASE_TARGET_API_URL = "https://508c20e2d15d.ngrok-free.app/"
 API_TOKEN = "85ce9e41-8848-45b7-a608-e3ad168d378c"
 
 
