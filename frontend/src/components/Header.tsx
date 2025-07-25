@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, LogIn, User, LogOut } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
+import { signOutUser } from '../services/authService'
 
-const Header = () => {
+interface HeaderProps {
+  onLoginClick: () => void
+}
+
+const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { currentUser, isLoggedIn } = useAuth()
   const location = useLocation()
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser()
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,14 +117,61 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Try Evaluator Button */}
-          <div className="hidden lg:flex">
-            <Link
-              to="/prompt-evaluator"
-              className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Try Evaluator
-            </Link>
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {!isLoggedIn ? (
+              <>
+                <button
+                  onClick={onLoginClick}
+                  className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors duration-300"
+                >
+                  <LogIn className="h-4 w-4" />
+                  <span>Login</span>
+                </button>
+                <Link
+                  to="/prompt-evaluator"
+                  className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Try Evaluator
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/prompt-evaluator"
+                  className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Try Evaluator
+                </Link>
+                <div className="relative group">
+                  <button className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors duration-300">
+                    <User className="h-4 w-4" />
+                    <span>{currentUser?.displayName || currentUser?.email || 'Account'}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+                  
+                  {/* User Dropdown */}
+                  <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <div className="bg-white rounded-xl shadow-lg border border-neutral-200 py-2 min-w-48">
+                      <button className="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200">
+                        Profile
+                      </button>
+                      <button className="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200">
+                        Settings
+                      </button>
+                      <hr className="my-1 border-neutral-200" />
+                      <button 
+                        onClick={handleLogout}
+                        className="flex items-center space-x-2 w-full text-left px-4 py-2 text-sm text-neutral-700 hover:text-red-600 hover:bg-red-50 transition-colors duration-200"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -165,15 +227,58 @@ const Header = () => {
                   </div>
                 ))}
                 
-                {/* Mobile Try Evaluator Button */}
-                <div className="pt-4 border-t border-neutral-200">
-                  <Link
-                    to="/prompt-evaluator"
-                    className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Try Evaluator
-                  </Link>
+                {/* Mobile Actions */}
+                <div className="pt-4 border-t border-neutral-200 space-y-3">
+                  {!isLoggedIn ? (
+                    <>
+                      <button
+                        onClick={() => {
+                          onLoginClick()
+                          setIsOpen(false)
+                        }}
+                        className="flex items-center space-x-2 w-full px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
+                      >
+                        <LogIn className="h-5 w-5" />
+                        <span className="font-medium">Login</span>
+                      </button>
+                      <Link
+                        to="/prompt-evaluator"
+                        className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Try Evaluator
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/prompt-evaluator"
+                        className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Try Evaluator
+                      </Link>
+                      <div className="space-y-1">
+                        <button className="flex items-center space-x-2 w-full px-4 py-2 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200">
+                          <User className="h-5 w-5" />
+                          <span>Profile</span>
+                        </button>
+                        <button className="flex items-center space-x-2 w-full px-4 py-2 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200">
+                          <span>Settings</span>
+                        </button>
+                        <button 
+                          onClick={() => {
+                            handleLogout()
+                            setIsOpen(false)
+                          }}
+                          className="flex items-center space-x-2 w-full px-4 py-2 text-neutral-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                        >
+                          <LogOut className="h-5 w-5" />
+                          <span>Logout</span>
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </nav>
             </motion.div>

@@ -32,102 +32,119 @@ interface Platform {
 }
 
 const PlatformComparison = () => {
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['ChatGPT', 'Gemini'])
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['Claude 4', 'GPT-4.5/o3'])
   const [filterCategory, setFilterCategory] = useState<string>('all')
 
   const platforms: Platform[] = [
     {
-      name: 'ChatGPT',
-      logo: '🤖',
-      rating: 4.5,
+      name: 'Claude 4',
+      logo: '💻',
+      rating: 4.7,
       speed: 4,
-      price: 'Freemium',
-      strengths: ['Conversational AI terbaik', 'Natural language processing', 'Creative writing', 'Code generation'],
-      weaknesses: ['Limited real-time data', 'Can hallucinate', 'Token limits'],
-      bestFor: ['Writing', 'Brainstorming', 'Customer service', 'Education'],
-      capabilities: {
-        textGeneration: 95,
-        codeGeneration: 85,
-        imageAnalysis: 70,
-        dataAnalysis: 75,
-        multimodal: 80
-      }
-    },
-    {
-      name: 'Gemini',
-      logo: '🔷',
-      rating: 4.3,
-      speed: 5,
-      price: 'Freemium',
-      strengths: ['Fast response', 'Google integration', 'Multimodal capabilities', 'Real-time data'],
-      weaknesses: ['Less conversational', 'Limited creativity', 'Newer platform'],
-      bestFor: ['Research', 'Data analysis', 'Quick queries', 'Integration'],
-      capabilities: {
-        textGeneration: 85,
-        codeGeneration: 80,
-        imageAnalysis: 85,
-        dataAnalysis: 90,
-        multimodal: 85
-      }
-    },
-    {
-      name: 'Claude',
-      logo: '🎭',
-      rating: 4.4,
-      speed: 4,
-      price: 'Freemium',
-      strengths: ['Constitutional AI', 'Long context window', 'Helpful and harmless', 'Code analysis'],
-      weaknesses: ['Limited availability', 'Conservative responses', 'Slower than competitors'],
-      bestFor: ['Complex analysis', 'Ethical reasoning', 'Long documents', 'Research'],
+      price: 'Paid',
+      strengths: ['Coding & Software Engineering', 'SWE-bench: 72.7%', 'AIME 2025: 90%', 'Large context window (64k output)'],
+      weaknesses: ['Premium pricing ($15-75/1M tokens)', 'Less multimodal than competitors', 'Not specialized for real-time'],
+      bestFor: ['Software Development', 'Code Review', 'Complex Programming', 'Technical Writing'],
       capabilities: {
         textGeneration: 90,
-        codeGeneration: 88,
+        codeGeneration: 95,
         imageAnalysis: 75,
         dataAnalysis: 85,
         multimodal: 70
       }
     },
     {
-      name: 'Grok',
-      logo: '🚀',
-      rating: 3.8,
-      speed: 4,
+      name: 'Grok 3',
+      logo: '🧠',
+      rating: 4.6,
+      speed: 5,
       price: 'Paid',
-      strengths: ['Real-time X integration', 'Humorous responses', 'Current events', 'Less restrictions'],
-      weaknesses: ['Limited availability', 'Inconsistent quality', 'Newer platform'],
-      bestFor: ['Social media analysis', 'Current events', 'Casual conversation'],
+      strengths: ['Mathematical Reasoning (93.3% AIME)', 'Real-time processing', '1M token context', 'LiveCodeBench: 79.4%'],
+      weaknesses: ['Premium pricing ($3-15/1M tokens)', 'Limited to X platform ecosystem', 'Newer platform'],
+      bestFor: ['Mathematical Problems', 'Real-time Analysis', 'Complex Reasoning', 'Large Context Tasks'],
       capabilities: {
-        textGeneration: 75,
-        codeGeneration: 70,
-        imageAnalysis: 65,
-        dataAnalysis: 80,
-        multimodal: 60
+        textGeneration: 85,
+        codeGeneration: 85,
+        imageAnalysis: 80,
+        dataAnalysis: 95,
+        multimodal: 75
       }
     },
     {
-      name: 'Perplexity',
-      logo: '🔍',
-      rating: 4.2,
-      speed: 4,
+      name: 'Gemini 2.5 Pro',
+      logo: '🔷',
+      rating: 4.5,
+      speed: 5,
       price: 'Freemium',
-      strengths: ['Search-focused', 'Citations included', 'Real-time data', 'Research assistant'],
-      weaknesses: ['Limited creativity', 'Shorter responses', 'Less conversational'],
-      bestFor: ['Research', 'Fact-checking', 'Academic work', 'Information gathering'],
+      strengths: ['Video Understanding (84.8% VideoMME)', 'Top WebDev Arena ranking', '1M token context', 'Deep Think mode'],
+      weaknesses: ['Enterprise pricing for advanced features', 'Complex pricing tiers', 'Google ecosystem dependency'],
+      bestFor: ['Video Analysis', 'Web Development', 'Long Document Processing', 'Multimodal Tasks'],
+      capabilities: {
+        textGeneration: 85,
+        codeGeneration: 90,
+        imageAnalysis: 90,
+        dataAnalysis: 85,
+        multimodal: 95
+      }
+    },
+    {
+      name: 'DeepSeek R1',
+      logo: '🐳',
+      rating: 4.4,
+      speed: 4,
+      price: 'Free',
+      strengths: ['Cost-effective reasoning', 'AIME: 87.5%, MATH-500: 97.3%', 'Free access', 'Strong mathematical capabilities'],
+      weaknesses: ['Limited multimodal capabilities', 'Smaller context window', 'Less general-purpose optimization'],
+      bestFor: ['Budget-conscious projects', 'Mathematical reasoning', 'Academic research', 'Cost optimization'],
       capabilities: {
         textGeneration: 80,
-        codeGeneration: 65,
-        imageAnalysis: 70,
-        dataAnalysis: 95,
-        multimodal: 75
+        codeGeneration: 75,
+        imageAnalysis: 60,
+        dataAnalysis: 90,
+        multimodal: 50
+      }
+    },
+    {
+      name: 'Llama 4',
+      logo: '🦙',
+      rating: 4.3,
+      speed: 4,
+      price: 'Free',
+      strengths: ['Open-source', 'Native multimodal fusion', '1M token context', 'Competitive with GPT-4o'],
+      weaknesses: ['Requires technical setup', 'Hardware requirements', 'Community support dependency'],
+      bestFor: ['Open-source projects', 'Custom implementations', 'Research', 'Self-hosted solutions'],
+      capabilities: {
+        textGeneration: 85,
+        codeGeneration: 80,
+        imageAnalysis: 85,
+        dataAnalysis: 80,
+        multimodal: 90
+      }
+    },
+    {
+      name: 'GPT-4.5/o3',
+      logo: '✍️',
+      rating: 4.6,
+      speed: 4,
+      price: 'Paid',
+      strengths: ['General-purpose conversational AI', 'Enhanced reasoning', 'Robust multimodal', 'Well-established ecosystem'],
+      weaknesses: ['Premium pricing', 'Token limitations', 'Context window constraints', 'API rate limits'],
+      bestFor: ['General conversation', 'Creative writing', 'Business applications', 'Customer service'],
+      capabilities: {
+        textGeneration: 95,
+        codeGeneration: 80,
+        imageAnalysis: 85,
+        dataAnalysis: 80,
+        multimodal: 85
       }
     }
   ]
 
   const categories = [
-    { id: 'all', label: 'Semua Platform' },
-    { id: 'free', label: 'Gratis' },
+    { id: 'all', label: 'All Platforms' },
+    { id: 'free', label: 'Free' },
     { id: 'freemium', label: 'Freemium' },
-    { id: 'paid', label: 'Berbayar' }
+    { id: 'paid', label: 'Paid' }
   ]
 
   const filteredPlatforms = platforms.filter(platform => {
@@ -170,13 +187,13 @@ const PlatformComparison = () => {
         >
           <div className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-6">
             <BarChart3 className="h-4 w-4 mr-2" />
-            Perbandingan Platform AI
+            AI Platform Comparison
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Bandingkan</span> Platform AI
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Compare</span> AI Platforms
           </h1>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-            Temukan platform AI yang tepat untuk kebutuhan Anda dengan perbandingan komprehensif
+            Find the right AI platform for your needs with comprehensive comparison
           </p>
         </motion.div>
 
@@ -261,7 +278,7 @@ const PlatformComparison = () => {
 
               <div className="space-y-2 text-sm">
                 <div>
-                  <span className="font-medium text-green-700">✓ Kelebihan:</span>
+                  <span className="font-medium text-green-700">✓ Strengths:</span>
                   <ul className="mt-1 text-neutral-600">
                     {platform.strengths.slice(0, 2).map((strength, i) => (
                       <li key={i}>• {strength}</li>
@@ -273,7 +290,7 @@ const PlatformComparison = () => {
               <div className="mt-4 pt-4 border-t border-neutral-200">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600">
-                    {selectedPlatforms.includes(platform.name) ? 'Terpilih' : 'Klik untuk pilih'}
+                    {selectedPlatforms.includes(platform.name) ? 'Selected' : 'Click to select'}
                   </span>
                   {selectedPlatforms.includes(platform.name) && (
                     <CheckCircle className="h-5 w-5 text-purple-500" />
@@ -292,13 +309,13 @@ const PlatformComparison = () => {
             className="bg-white rounded-xl shadow-lg overflow-hidden mb-12"
           >
             <div className="p-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-              <h2 className="text-2xl font-bold">Perbandingan Detail</h2>
-              <p className="opacity-90">Platform yang dipilih: {selectedPlatformData.map(p => p.name).join(', ')}</p>
+              <h2 className="text-2xl font-bold">Detailed Comparison</h2>
+              <p className="opacity-90">Selected platforms: {selectedPlatformData.map(p => p.name).join(', ')}</p>
             </div>
 
             {/* Capabilities Comparison */}
             <div className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Kemampuan Platform</h3>
+              <h3 className="text-lg font-semibold mb-4">Platform Capabilities</h3>
               <div className="space-y-4">
                 {Object.keys(selectedPlatformData[0]?.capabilities || {}).map(capability => (
                   <div key={capability} className="space-y-2">
@@ -332,7 +349,7 @@ const PlatformComparison = () => {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-neutral-200">
-                      <th className="text-left py-3 pr-4 font-semibold text-neutral-900">Aspek</th>
+                      <th className="text-left py-3 pr-4 font-semibold text-neutral-900">Aspect</th>
                       {selectedPlatformData.map(platform => (
                         <th key={platform.name} className="text-left py-3 px-4 font-semibold text-neutral-900">
                           {platform.name}
@@ -362,7 +379,7 @@ const PlatformComparison = () => {
                       ))}
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-medium text-neutral-700">Harga</td>
+                      <td className="py-3 pr-4 font-medium text-neutral-700">Price</td>
                       {selectedPlatformData.map(platform => (
                         <td key={platform.name} className="py-3 px-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriceColor(platform.price)}`}>
@@ -372,7 +389,7 @@ const PlatformComparison = () => {
                       ))}
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-medium text-neutral-700">Kelebihan</td>
+                      <td className="py-3 pr-4 font-medium text-neutral-700">Strengths</td>
                       {selectedPlatformData.map(platform => (
                         <td key={platform.name} className="py-3 px-4">
                           <ul className="text-sm text-neutral-600 space-y-1">
@@ -387,7 +404,7 @@ const PlatformComparison = () => {
                       ))}
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-medium text-neutral-700">Kekurangan</td>
+                      <td className="py-3 pr-4 font-medium text-neutral-700">Weaknesses</td>
                       {selectedPlatformData.map(platform => (
                         <td key={platform.name} className="py-3 px-4">
                           <ul className="text-sm text-neutral-600 space-y-1">
@@ -402,7 +419,7 @@ const PlatformComparison = () => {
                       ))}
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-medium text-neutral-700">Cocok untuk</td>
+                      <td className="py-3 pr-4 font-medium text-neutral-700">Best for</td>
                       {selectedPlatformData.map(platform => (
                         <td key={platform.name} className="py-3 px-4">
                           <div className="flex flex-wrap gap-1">
@@ -428,15 +445,15 @@ const PlatformComparison = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-8 text-white text-center"
         >
-          <h2 className="text-2xl font-bold mb-4">Butuh Rekomendasi?</h2>
+          <h2 className="text-2xl font-bold mb-4">Need Recommendations?</h2>
           <p className="mb-6 opacity-90">
-            Gunakan Prompt Evaluator untuk menguji platform mana yang paling sesuai dengan kebutuhan Anda
+            Use the Prompt Evaluator to test which platform best suits your needs
           </p>
           <a
             href="/prompt-evaluator"
             className="bg-white text-purple-600 hover:text-purple-700 font-medium px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center"
           >
-            Coba Prompt Evaluator
+            Try Prompt Evaluator
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
         </motion.div>
