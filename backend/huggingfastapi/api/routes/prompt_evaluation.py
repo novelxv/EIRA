@@ -122,7 +122,7 @@ def post_evaluate_prompt_goto(
             raise HTTPException(status_code=400, detail="Prompt too long (max 3000 characters)")
 
         # Get text generation model instance from app state
-        text_gen_model: TextGenerationModel = request.app.state.text_gen_model
+        text_gen_model: TextGenerationModel = request.app.state.text_goto_model
         if text_gen_model is None:
             raise HTTPException(status_code=500, detail="Text generation model not initialized")
         
