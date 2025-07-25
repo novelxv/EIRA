@@ -339,7 +339,7 @@ EVALUATION:
 
 # Flask API Implementation
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=['http://localhost:5173'])
 
 # Global evaluator instance
 evaluator = None
@@ -373,20 +373,22 @@ def evaluate_prompt_endpoint():
         logger.info(f"API Request: {prompt[:50]}...")
         result = eval_instance.evaluate_prompt(prompt)
         
-        # Return response
+        # Return response with success flag
         response = result.to_dict()
+        response['success'] = True
         logger.info(f"API Response: Score {response['overall_score']}")
         
         return jsonify(response)
 
     except ValueError as e:
         logger.error(f"Validation error: {e}")
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e), 'success': False}), 400
     except Exception as e:
         logger.error(f"Server error: {e}")
         return jsonify({
             'error': 'Internal server error',
-            'message': 'Evaluation failed. Please try again.'
+            'message': 'Evaluation failed. Please try again.',
+            'success': False
         }), 500
 
 @app.route('/health', methods=['GET'])
@@ -401,6 +403,7 @@ def health_check():
         'model': 'gemini-2.5-pro',
         'gemini_connected': eval_instance.model is not None,
         'timestamp': datetime.now().isoformat(),
+        'success': True,
         'endpoints': {
             'evaluate': 'POST /evaluate',
             'health': 'GET /health'
@@ -494,4 +497,4 @@ if __name__ == '__main__':
     print("=" * 50)
     
     # Run the Flask app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)
