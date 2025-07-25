@@ -34,6 +34,26 @@ const AIWatch = () => {
       "Content created by artificial intelligence systems, including text, images, videos, or audio that is produced without direct human creation.",
     "Synthetic media":
       "Media content that has been artificially generated or manipulated using AI technologies, including deepfakes, voice synthesis, and generated images.",
+    "Kemendikbudristek":
+      "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi - Indonesia's Ministry of Education, Culture, Research, and Technology.",
+    "ChatGPT":
+      "An AI-powered conversational tool developed by OpenAI that can generate human-like text responses and assist with various writing tasks.",
+    "AI literacy":
+      "The ability to understand, use, and critically evaluate artificial intelligence technologies and their implications in various contexts.",
+    "Academic integrity":
+      "The commitment to honest and ethical conduct in academic work, including proper attribution of sources and original thinking.",
+    "GANN":
+      "Generative Adversarial Neural Network - a type of AI architecture where two neural networks compete against each other to create realistic synthetic content.",
+    "Deepfake":
+      "AI-generated media that replaces a person's likeness with someone else's, often used to create fake videos or images that appear authentic.",
+    "WhatsApp":
+      "A popular messaging application widely used in Indonesia for personal and business communication.",
+    "TikTok":
+      "A social media platform for sharing short videos, very popular among Indonesian youth and content creators.",
+    "Face detection":
+      "AI technology that can identify and locate human faces in images or videos, often used as a component in deepfake creation.",
+    "Digital literacy":
+      "The ability to find, evaluate, utilize, share, and create content using information technologies and the internet."
   }
 
   const renderTextWithTooltips = (text: string) => {
@@ -107,9 +127,6 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
       sources: [
         "https://www.orfonline.org/expert-speak/debating-the-ethics-of-deepfakes",
         "https://www.bbc.com/indonesia/articles/czel388wydlo",
-        "https://twitter.com/MurtadhaOne1/status/1787737745513802120",
-        "https://twitter.com/racikan_twt/status/1787853401165078785",
-        "https://twitter.com/AnKiiim_/status/1787810136373168352",
       ],
       tags: ["Deepfake", "Satire", "Freedom of Speech", "UU ITE", "Political Expression", "AI Ethics", "Indonesia"],
     },
@@ -146,6 +163,43 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
         ],
         tags: ["AI in Education", "Academic Integrity", "Student Ethics", "Digital Literacy", "Indonesia"]
     },
+    {
+        id: "003",
+        title: "Deepfake Scam Impersonating President Prabowo Subianto",
+        category: "Scam / Deepfake",
+        date: "2025-02-07",
+        status: "Resolved",
+        summary:
+            "Scammers created deepfake videos impersonating President Prabowo Subianto and Minister Sri Mulyani, asking citizens via WhatsApp to pay administrative fees for alleged financial aid. The fraudulent videos circulated widely across social media and resulted in arrests by the Bareskrim Cyber Crime division.",
+        details: `Beginning in late 2024 and early 2025, Bareskrim Polri uncovered a deepfake scam operation that exploited AI‑generated videos portraying President Prabowo Subianto and Minister Sri Mulyani. Victims across multiple provinces received messages via WhatsApp or TikTok urging them to pay Rp 250,000–500,000 as ‘processing fees’ to qualify for non‑existent government aid. By February–March 2025, the police had arrested two suspects, AMA (29) and JS (25), and traced the fraud back to at least 100 victims. Forensic analysis confirmed the videos were 100% fake, using face detection and Generative Adversarial Neural Network (GANN) techniques. The operation reportedly amassed over Rp 30 million in illicit gains.`,
+        keyLearnings: [
+            "Deepfake technology can be weaponized for large‑scale financial scams.",
+            "Highly realistic AI videos do not guarantee authenticity; digital literacy is critical.",
+            "Even face recognition and smartphone videos can be manipulated convincingly.",
+            "Improved platform moderation and public awareness campaigns are essential to protect less digital‑savvy users."
+        ],
+        stakeholders: [
+            "General Indonesian public",
+            "President Prabowo Subianto (impersonated)",
+            "Minister Sri Mulyani (impersonated)",
+            "Victims across multiple provinces",
+            "Bareskrim Polri – Cyber Crime Unit",
+            "TikTok, Instagram, WhatsApp platforms",
+            "Fact-check organizations and media outlets"
+        ],
+        actions: [
+            "Police arrested two suspects and recovered partial funds.",
+            "Platforms removed some deepfake content and issued warnings.",
+            "Government agencies (Kominfo, Bareskrim) published alerts.",
+            "Media fact-check teams debunked fraudulent videos."
+        ],
+        sources: [
+            "https://news.detik.com/berita/d-7884867/babak-baru-perkara-deepfake-catut-prabowo",
+            "https://news.detik.com/berita/d-7767817/bareskrim-lakukan-analisis-forensik-deepfake-catut-prabowo-100-palsu",
+            "https://news.detik.com/berita/d-7746358/penipu-modus-deepfake-catut-prabowo-raup-untung-rp-30-juta-dalam-4-bulan"
+        ],
+        tags: ["Deepfake Scam", "Financial Fraud", "AI Forensics", "Indonesia", "Digital Literacy"]
+    }
   ]
 
   const categories = [
