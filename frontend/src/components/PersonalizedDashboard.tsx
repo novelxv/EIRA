@@ -9,7 +9,6 @@ import {
   ArrowRight,
   Lightbulb,
   Shield,
-  Lock,
   Star,
   Brain,
   Rocket,
@@ -30,8 +29,6 @@ interface FeatureCard {
   href: string
   color: string
   highlights: string[]
-  isLocked: boolean
-  lockReason?: string
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   recommendedFor: UserPersona[]
   progress?: number
@@ -50,7 +47,6 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         href: "/ai101/literacy",
         color: "from-blue-500 to-cyan-500",
         highlights: ["Wizard Learning Flow", "Interactive Analogy Cards", "Real-World Quiz", "Step Completion"],
-        isLocked: false,
         difficulty: 'beginner',
         recommendedFor: ['beginner', 'curious', 'professional', 'creator'],
         progress: userProfile.progress.ai101
@@ -62,8 +58,6 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         href: "/ai101/comparison",
         color: "from-purple-500 to-pink-500",
         highlights: ["Interactive Table", "Benchmarks", "Pros & Cons", "Recommendations"],
-        isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 30,
-        lockReason: "Complete 30% of AI Literacy first to unlock this module",
         difficulty: 'intermediate',
         recommendedFor: ['curious', 'professional', 'creator']
       },
@@ -74,8 +68,6 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         href: "/ai101/policy",
         color: "from-green-500 to-teal-500",
         highlights: ["Interactive Simulation", "Real Dilemmas", "Policy-Based", "Leadership Skills"],
-        isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 50,
-        lockReason: "Understand AI basics first before exploring leadership ethics",
         difficulty: 'advanced',
         recommendedFor: ['professional', 'creator', 'curious']
       },
@@ -86,8 +78,6 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         href: "/ai101/watch",
         color: "from-orange-500 to-red-500",
         highlights: ["Trend Analysis", "Case Studies", "Critical Thinking", "Real Examples"],
-        isLocked: userProfile.persona === 'beginner' && userProfile.progress.ai101 < 70,
-        lockReason: "Advanced module - unlock after mastering basic concepts",
         difficulty: 'advanced',
         recommendedFor: ['professional', 'curious']
       }
@@ -251,36 +241,21 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   className={`relative bg-white rounded-2xl border transition-all hover:shadow-lg group ${
-                    feature.isLocked 
-                      ? 'border-slate-200 opacity-75' 
-                      : isRecommended 
-                        ? 'border-purple-200 shadow-md' 
-                        : 'border-slate-200'
+                    isRecommended 
+                      ? 'border-purple-200 shadow-md' 
+                      : 'border-slate-200'
                   }`}
                 >
                   {/* Recommended Badge */}
-                  {isRecommended && !feature.isLocked && (
+                  {isRecommended && (
                     <div className="absolute -top-3 left-6 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium rounded-full">
                       <span className="text-white">⭐ Recommended for You</span>
                     </div>
                   )}
 
-                  {/* Lock Overlay */}
-                  {feature.isLocked && (
-                    <div className="absolute inset-0 bg-slate-50/90 rounded-2xl flex items-center justify-center z-10">
-                      <div className="text-center">
-                        <Lock className="h-12 w-12 text-slate-400 mx-auto mb-3" />
-                        <p className="text-slate-600 font-medium mb-1">Module Locked</p>
-                        <p className="text-sm text-slate-500 max-w-xs">
-                          {feature.lockReason}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
                   <div className="p-8">
-                    {/* Progress Bar for unlocked modules */}
-                    {!feature.isLocked && feature.progress !== undefined && feature.progress > 0 && (
+                    {/* Progress Bar */}
+                    {feature.progress !== undefined && feature.progress > 0 && (
                       <div className="mb-6">
                         <div className="flex justify-between text-sm text-slate-600 mb-2">
                           <span>Progress</span>
@@ -336,23 +311,13 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
                       ))}
                     </div>
 
-                    {!feature.isLocked ? (
-                      <Link
-                        to={feature.href}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neutral-900 to-neutral-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all group-hover:gap-3"
-                      >
-                        {feature.progress && feature.progress > 0 ? 'Continue' : 'Start Learning'}
-                        <ArrowRight className="h-5 w-5" />
-                      </Link>
-                    ) : (
-                      <button
-                        disabled
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 rounded-xl font-semibold cursor-not-allowed"
-                      >
-                        <Lock className="h-5 w-5" />
-                        Locked
-                      </button>
-                    )}
+                    <Link
+                      to={feature.href}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neutral-900 to-neutral-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all group-hover:gap-3"
+                    >
+                      {feature.progress && feature.progress > 0 ? 'Lanjutkan' : 'Mulai Belajar'}
+                      <ArrowRight className="h-5 w-5" />
+                    </Link>
                   </div>
                 </motion.div>
               )
