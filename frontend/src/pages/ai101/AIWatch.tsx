@@ -7,7 +7,7 @@ import { ExpandableText } from "@/components/expandable-text"
 interface CaseStudy {
   id: string
   title: string
-  category: "Deepfake" | "Misinformation" | "AI Bias" | "Privacy" | "Ethics"
+  categories: string[]
   date: string
   status: "Ongoing" | "Resolved" | "Monitored"
   summary: string
@@ -85,7 +85,7 @@ const AIWatch = () => {
     {
       id: "001",
       title: "ITB Student Arrested for AI-Generated Meme of Jokowi and Prabowo Kissing",
-      category: "Deepfake",
+      categories: ["Deepfake", "Ethics"],
       date: "2025-05-06",
       status: "Resolved",
       summary:
@@ -133,7 +133,7 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
     {
         id: "002",
         title: "Widespread Use of AI by Students for Assignments",
-        category: "Education / Ethics",
+        categories: ["Education", "Ethics"],
         date: "2024-05-31",
         status: "Ongoing",
         summary:
@@ -166,7 +166,7 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
     {
         id: "003",
         title: "Deepfake Scam Impersonating President Prabowo Subianto",
-        category: "Scam / Deepfake",
+        categories: ["Deepfake", "Scam"],
         date: "2025-02-07",
         status: "Resolved",
         summary:
@@ -209,6 +209,8 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
     { id: "AI Bias", label: "AI Bias" },
     { id: "Privacy", label: "Privacy" },
     { id: "Ethics", label: "Ethics" },
+    { id: "Education", label: "Education" },
+    { id: "Scam", label: "Scam" },
   ]
 
   const impacts = [
@@ -219,7 +221,7 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
   ]
 
   const filteredCases = cases.filter((c) => {
-    const categoryMatch = filterCategory === "all" || c.category === filterCategory
+    const categoryMatch = filterCategory === "all" || c.categories.includes(filterCategory)
     // const impactMatch = filterImpact === "all" || c.impact === filterImpact
     return categoryMatch
   })
@@ -262,6 +264,10 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
         return "text-blue-700 bg-blue-100"
       case "Ethics":
         return "text-green-700 bg-green-100"
+      case "Education":
+        return "text-indigo-700 bg-indigo-100"
+      case "Scam":
+        return "text-pink-700 bg-pink-100"
       default:
         return "text-neutral-700 bg-neutral-100"
     }
@@ -333,13 +339,12 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
                 onClick={() => setSelectedCase(case_)}
               >
                 <div className="mb-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(case_.category)}`}>
-                      {case_.category}
-                    </span>
-                    {/* <span className={`px-2 py-1 rounded-full text-xs font-medium ${getImpactColor(case_.impact)}`}>
-                      {case_.impact}
-                    </span> */}
+                  <div className="flex items-center space-x-2 mb-2 flex-wrap gap-1">
+                    {case_.categories.map((category, catIndex) => (
+                      <span key={catIndex} className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(category)}`}>
+                        {category}
+                      </span>
+                    ))}
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2">{case_.title}</h3>
                   <p className="text-sm text-neutral-600 line-clamp-3">{case_.summary}</p>
@@ -369,13 +374,15 @@ Furthermore, the incident highlights the need for clearer guidelines on what con
                 <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-3">
+                      <div className="flex items-center space-x-2 mb-3 flex-wrap gap-1">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
                           Case #{selectedCase.id}
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
-                          {selectedCase.category}
-                        </span>
+                        {selectedCase.categories.map((category, catIndex) => (
+                          <span key={catIndex} className={`px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white`}>
+                            {category}
+                          </span>
+                        ))}
                       </div>
                       <h2 className="text-2xl font-bold mb-2">{selectedCase.title}</h2>
                       <p className="opacity-90">{selectedCase.summary}</p>
