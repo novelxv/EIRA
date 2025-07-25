@@ -76,20 +76,10 @@ const PromptEvaluator = () => {
       description: "Comprehensive guide covering prompt engineering techniques and evaluation"
     },
     {
-      title: "The Art of Prompt Design (Google AI)",
-      url: "https://developers.googleblog.com/2023/06/prompting-guide-101.html",
-      description: "Google's research on effective prompt construction"
+      title: "Prompt Engineering Guide (Google Cloud)",
+      url: "https://cloud.google.com/discover/what-is-prompt-engineering",
+      description: "Official Google Cloud explanation of prompt engineering"
     },
-    {
-      title: "Anthropic's Constitutional AI Paper",
-      url: "https://arxiv.org/abs/2212.08073",
-      description: "Research on AI safety and bias reduction in prompts"
-    },
-    {
-      title: "Microsoft's Responsible AI Guidelines",
-      url: "https://www.microsoft.com/en-us/ai/responsible-ai",
-      description: "Framework for ethical AI implementation and prompt design"
-    }
   ]
 
   const evaluationCriteria = {
@@ -200,7 +190,7 @@ This improved version is more specific, provides clear context, and minimizes bi
               <div className="text-left">
                 <h3 className="font-semibold text-blue-900 mb-2">Research-Based Evaluation</h3>
                 <p className="text-blue-800 text-sm mb-3">
-                  Our evaluation methodology is based on established research from leading AI organizations including OpenAI, Google AI, Anthropic, and Microsoft.
+                  Our evaluation methodology is based on established research from leading AI organizations including OpenAI and Google Cloud.
                 </p>
                 <button
                   onClick={() => setShowSources(!showSources)}
@@ -240,14 +230,14 @@ This improved version is more specific, provides clear context, and minimizes bi
                           ))}
                         </ul>
                       </div>
-                      <div className="text-xs text-purple-600 font-medium">{criteria.source}</div>
+                      {/* <div className="text-xs text-purple-600 font-medium">{criteria.source}</div> */}
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Sources */}
-              <div>
+              <div className="mb-6">
                 <h3 className="text-lg font-medium text-neutral-800 mb-4">Research Sources</h3>
                 <div className="space-y-3">
                   {evaluationSources.map((source, index) => (
@@ -270,6 +260,16 @@ This improved version is more specific, provides clear context, and minimizes bi
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Close Button */}
+              <div className="flex justify-center pt-4 border-t border-neutral-200">
+                <button
+                  onClick={() => setShowSources(false)}
+                  className="px-6 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-medium rounded-lg transition-colors duration-200"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </motion.div>
@@ -311,7 +311,7 @@ This improved version is more specific, provides clear context, and minimizes bi
                     </>
                   ) : (
                     <>
-                      <Zap className="h-4 w-4 mr-2" />
+                      <Zap className="h-4 w-4 mr-2 inline-flex items-center" />
                       Evaluate Prompt
                     </>
                   )}
@@ -534,23 +534,23 @@ This improved version is more specific, provides clear context, and minimizes bi
                 <ul className="space-y-2 text-sm text-neutral-600">
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Be specific and detailed (OpenAI)</span>
+                    <span>Be specific and detailed</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Provide context and examples (Google)</span>
+                    <span>Provide context and examples</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Define output format clearly (DAIR.AI)</span>
+                    <span>Define output format clearly</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Avoid bias and assumptions (Anthropic)</span>
+                    <span>Avoid bias and assumptions</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Use role-playing when appropriate (Microsoft)</span>
+                    <span>Use role-playing when appropriate</span>
                   </li>
                 </ul>
               </div>
