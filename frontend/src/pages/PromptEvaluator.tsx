@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   Target, 
@@ -14,7 +14,10 @@ import {
   Copy,
   Download,
   BookOpen,
-  ExternalLink
+  ExternalLink,
+  Wifi,
+  WifiOff,
+  AlertCircle
 } from 'lucide-react'
 
 interface EvaluationResult {
@@ -28,6 +31,13 @@ interface EvaluationResult {
   strengths: string[]
   weaknesses: string[]
   improved_prompt: string
+  success?: boolean
+}
+
+interface ApiStatus {
+  isConnected: boolean
+  isChecking: boolean
+  lastChecked: Date | null
 }
 
 const PromptEvaluator = () => {
@@ -36,6 +46,15 @@ const PromptEvaluator = () => {
   const [result, setResult] = useState<EvaluationResult | null>(null)
   const [selectedExample, setSelectedExample] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
+  const [apiStatus, setApiStatus] = useState<ApiStatus>({
+    isConnected: false,
+    isChecking: false,
+    lastChecked: null
+  })
+  const [error, setError] = useState<string | null>(null)
+  const [usingFallback, setUsingFallback] = useState(false)
+
+  const API_BASE_URL = 'http://localhost:5000'
 
   const examplePrompts = [
     {
@@ -105,22 +124,88 @@ const PromptEvaluator = () => {
     }
   }
 
-  const evaluatePrompt = async () => {
-    if (!prompt.trim()) return
+  // Check API health on component mount
+  useEffect(() => {
+    checkApiHealth()
+  }, [])
 
-    setIsEvaluating(true)
+  const checkApiHealth = async () => {
+    setApiStatus(prev => ({ ...prev, isChecking: true }))
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+      const response = await fetch(`${API_BASE_URL}/health`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setApiStatus({
+          isConnected: data.success === true,
+          isChecking: false,
+          lastChecked: new Date()
+        })
+      } else {
+        throw new Error('API health check failed')
+      }
+    } catch (error) {
+      console.warn('API health check failed:', error)
+      setApiStatus({
+        isConnected: false,
+        isChecking: false,
+        lastChecked: new Date()
+      })
+    }
+  }
+
+  const callEvaluationAPI = async (promptText: string): Promise<EvaluationResult> => {
+    const response = await fetch(`${API_BASE_URL}/evaluate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prompt: promptText }),
+      signal: AbortSignal.timeout(30000) // 30 second timeout
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+      throw new Error(errorData.error || `HTTP ${response.status}`)
+    }
+
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.error || 'Evaluation failed')
+    }
+
+    return data
+  }
+
+  const generateMockEvaluation = (promptText: string): EvaluationResult => {
+    // Enhanced mock generation based on prompt analysis
+    const wordCount = promptText.split(' ').length
+    const hasSpecificTerms = /\b(specific|detailed|example|format|tone|audience|goal)\b/i.test(promptText)
+    const hasBiasTerms = /\b(men|women|better|worse|naturally|always|never)\b/i.test(promptText)
+    const hasContext = promptText.includes('as a') || promptText.includes('for')
     
-    // Mock evaluation result
-    const mockResult: EvaluationResult = {
-      overall_score: Math.floor(Math.random() * 30) + 70, // 70-100
-      clarity: Math.floor(Math.random() * 30) + 70,
-      specificity: Math.floor(Math.random() * 30) + 60,
-      ethics: Math.floor(Math.random() * 20) + 80,
-      effectiveness: Math.floor(Math.random() * 25) + 65,
-      bias_risk: Math.floor(Math.random() * 40) + 10,
+    const clarityScore = Math.min(95, 60 + (hasContext ? 20 : 0) + (wordCount > 10 ? 15 : 0))
+    const specificityScore = Math.min(95, 40 + (hasSpecificTerms ? 30 : 0) + (wordCount > 20 ? 20 : 0))
+    const ethicsScore = Math.max(20, 90 - (hasBiasTerms ? 60 : 0))
+    const effectivenessScore = Math.min(95, 50 + (hasContext ? 25 : 0) + (hasSpecificTerms ? 20 : 0))
+    const biasRisk = hasBiasTerms ? Math.min(85, 60 + Math.random() * 25) : Math.max(5, Math.random() * 30)
+    
+    const overallScore = (clarityScore * 0.25 + specificityScore * 0.30 + ethicsScore * 0.20 + effectivenessScore * 0.25) - (biasRisk * 0.15)
+
+    return {
+      overall_score: Math.round(Math.max(15, Math.min(95, overallScore))),
+      clarity: Math.round(clarityScore),
+      specificity: Math.round(specificityScore),
+      ethics: Math.round(ethicsScore),
+      effectiveness: Math.round(effectivenessScore),
+      bias_risk: Math.round(biasRisk),
       suggestions: [
         "Add more specific context about the target audience",
         "Include desired output format (length, structure, tone)",
@@ -129,21 +214,63 @@ const PromptEvaluator = () => {
       ],
       strengths: [
         "Clear and easy-to-understand language usage",
-        "Well-identified prompt purpose"
+        hasContext ? "Good role definition provided" : "Well-identified prompt purpose"
       ],
       weaknesses: [
-        "Lacks specificity in requirement details",
+        !hasSpecificTerms ? "Lacks specificity in requirement details" : "Could be more detailed",
         "No guidance for tone or style"
       ],
       improved_prompt: `Based on your prompt, here's an improved version:
 
-"${prompt.slice(0, 50)}..." → [Improved version would be generated here based on the analysis]
+**Original:** "${promptText.slice(0, 100)}${promptText.length > 100 ? '...' : ''}"
 
-This improved version is more specific, provides clear context, and minimizes bias risk.`
+**Improved:** As a [role], create a [specific output] about [topic] for [target audience]. Include [specific requirements] and ensure [constraints]. The output should be [format specifications] with [tone/style] approach.
+
+This improved version provides clearer context, specific requirements, and reduces ambiguity.`,
+      success: true
     }
-    
-    setResult(mockResult)
-    setIsEvaluating(false)
+  }
+
+  const evaluatePrompt = async () => {
+    if (!prompt.trim()) return
+
+    setIsEvaluating(true)
+    setError(null)
+    setUsingFallback(false)
+
+    try {
+      let evaluationResult: EvaluationResult
+
+      // Try API first if it's connected
+      if (apiStatus.isConnected) {
+        try {
+          evaluationResult = await callEvaluationAPI(prompt)
+          console.log('✅ Evaluation completed via API')
+        } catch (apiError) {
+          console.warn('❌ API call failed, falling back to mock:', apiError)
+          setUsingFallback(true)
+          evaluationResult = generateMockEvaluation(prompt)
+          
+          // Update API status
+          setApiStatus(prev => ({ ...prev, isConnected: false }))
+        }
+      } else {
+        // Use fallback directly if API is known to be down
+        console.log('📴 Using fallback evaluation (API unavailable)')
+        setUsingFallback(true)
+        evaluationResult = generateMockEvaluation(prompt)
+        
+        // Add small delay for better UX
+        await new Promise(resolve => setTimeout(resolve, 1500))
+      }
+
+      setResult(evaluationResult)
+    } catch (error) {
+      console.error('Evaluation error:', error)
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+    } finally {
+      setIsEvaluating(false)
+    }
   }
 
   const getScoreColor = (score: number) => {
@@ -182,6 +309,76 @@ This improved version is more specific, provides clear context, and minimizes bi
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
             Analyze the effectiveness, ethics, and clarity of your prompts using research-backed evaluation criteria.
           </p>
+
+          {/* API Status Indicator */}
+          <div className="mb-6">
+            <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${
+              apiStatus.isConnected 
+                ? 'bg-green-100 text-green-700' 
+                : 'bg-yellow-100 text-yellow-700'
+            }`}>
+              {apiStatus.isChecking ? (
+                <>
+                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                  Checking connection...
+                </>
+              ) : apiStatus.isConnected ? (
+                <>
+                  <Wifi className="h-4 w-4 mr-2" />
+                  AI Evaluator Connected
+                </>
+              ) : (
+                <>
+                  <WifiOff className="h-4 w-4 mr-2" />
+                  Using Offline Mode
+                </>
+              )}
+              {!apiStatus.isChecking && (
+                <button
+                  onClick={checkApiHealth}
+                  className="ml-2 text-xs underline hover:no-underline"
+                >
+                  Retry
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Error Display */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-red-50 border border-red-200 rounded-lg p-4 max-w-2xl mx-auto mb-6"
+            >
+              <div className="flex items-start space-x-3">
+                <AlertCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-red-900 mb-1">Evaluation Error</h3>
+                  <p className="text-red-800 text-sm">{error}</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Fallback Notification */}
+          {usingFallback && !error && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-2xl mx-auto mb-6"
+            >
+              <div className="flex items-start space-x-3">
+                <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-yellow-900 mb-1">Offline Mode</h3>
+                  <p className="text-yellow-800 text-sm">
+                    Using local evaluation. Results may be less accurate than AI-powered analysis.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
           
           {/* Methodology Note */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-4xl mx-auto">
@@ -306,8 +503,8 @@ This improved version is more specific, provides clear context, and minimizes bi
                 >
                   {isEvaluating ? (
                     <>
-                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      Analyzing...
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin inline-flex items-center" />
+                      {apiStatus.isConnected ? 'Analyzing with AI...' : 'Analyzing...'}
                     </>
                   ) : (
                     <>
@@ -434,7 +631,7 @@ This improved version is more specific, provides clear context, and minimizes bi
                   <div className="bg-white rounded-xl shadow-lg p-6">
                     <h3 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center">
                       <XCircle className="h-5 w-5 mr-2 text-red-500" />
-                      Area Perbaikan
+                      Areas of Improvements
                     </h3>
                     <ul className="space-y-2">
                       {result.weaknesses.map((weakness, index) => (
@@ -451,7 +648,7 @@ This improved version is more specific, provides clear context, and minimizes bi
                 <div className="bg-white rounded-xl shadow-lg p-6">
                   <h3 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center">
                     <Lightbulb className="h-5 w-5 mr-2 text-yellow-500" />
-                    Saran Perbaikan
+                    Suggestions for Improvement
                   </h3>
                   <ul className="space-y-3">
                     {result.suggestions.map((suggestion, index) => (
