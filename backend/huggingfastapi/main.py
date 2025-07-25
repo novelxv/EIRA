@@ -25,7 +25,7 @@ def get_app() -> FastAPI:
     fast_app.add_event_handler("startup", start_app_handler(fast_app))
     fast_app.add_event_handler("shutdown", stop_app_handler(fast_app))
 
-    return fast_apco
+    return fast_app
 
 
 app = get_app()

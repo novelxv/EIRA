@@ -25,7 +25,7 @@ install: generate_dot_env
 
 run: 
 	- python -c "import subprocess;print(subprocess.run(['hostname','-I'],capture_output=True,text=True).stdout.strip())"
-	PYTHONPATH=huggingfastapi/ uvicorn huggingfastapi.main:app --reload --host 0.0.0.0
+	PYTHONPATH=huggingfastapi/ uvicorn huggingfastapi.main:app --reload --host 0.0.0.0 --port 5000
 
 build: generate_dot_env
 	docker compose build

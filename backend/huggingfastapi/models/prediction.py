@@ -37,3 +37,8 @@ class EvaluationResult(BaseModel):
     # def to_dict(self) -> Dict:
     #     """Convert to dictionary for JSON serialization"""
     #     return asdict(self)
+    
+# ✅ Model respons baru yang ditambahkan
+class EvaluationResponse(EvaluationResult):
+    """Final API response including a success flag."""
+    success: bool
