@@ -8,5 +8,5 @@ transformers[torch]==4.53.3
 sentencepiece==0.2.0
 
 # For 8-bit quantization
-bitsandbytes==0.44.1
-accelerate==1.2.1
+bitsandbytes==0.46.1
+accelerate==1.9.0
