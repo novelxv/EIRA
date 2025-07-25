@@ -346,10 +346,13 @@ EVALUATION:
 
             # Generate evaluation using Gemini
             response = self._generate_with_retry(evaluation_prompt)
-            logger.info(f"Received evaluation response from Gemini: {response.text}", )
+            
+            # Extract text from response properly
+            response_text = self._extract_response_text(response)
+            logger.info(f"Received evaluation response from Gemini: {response_text[:200]}...")
             
             # Parse the JSON response
-            evaluation_data = self._parse_evaluation_response(response.text)
+            evaluation_data = self._parse_evaluation_response(response_text)
             
             # Calculate overall score using research-backed weights
             overall_score = self._calculate_overall_score(evaluation_data)
@@ -395,6 +398,60 @@ EVALUATION:
                 logger.warning(f"Attempt {attempt + 1} failed, retrying: {e}")
                 import time
                 time.sleep(1)
+
+    def _extract_response_text(self, response) -> str:
+        """Extract text from Gemini response safely"""
+        try:
+            # Try the simple accessor first
+            if hasattr(response, 'text') and response.text:
+                return response.text
+        except Exception as e:
+            logger.debug(f"Simple text accessor failed: {e}")
+        
+        try:
+            # Use the more complex accessor for multi-part responses
+            if hasattr(response, 'candidates') and response.candidates:
+                candidate = response.candidates[0]
+                if hasattr(candidate, 'content') and candidate.content:
+                    if hasattr(candidate.content, 'parts') and candidate.content.parts:
+                        # Concatenate all text parts
+                        text_parts = []
+                        for part in candidate.content.parts:
+                            if hasattr(part, 'text') and part.text:
+                                text_parts.append(part.text)
+                        if text_parts:
+                            return ''.join(text_parts)
+        except Exception as e:
+            logger.error(f"Complex text accessor failed: {e}")
+        
+        try:
+            # Try alternative accessor patterns
+            if hasattr(response, 'parts') and response.parts:
+                text_parts = []
+                for part in response.parts:
+                    if hasattr(part, 'text') and part.text:
+                        text_parts.append(part.text)
+                if text_parts:
+                    return ''.join(text_parts)
+        except Exception as e:
+            logger.debug(f"Alternative parts accessor failed: {e}")
+        
+        # Fallback: convert response to string and try to extract meaningful content
+        try:
+            response_str = str(response)
+            logger.warning(f"Using string conversion as fallback. Response: {response_str[:200]}...")
+            
+            # If the string representation contains JSON, try to extract it
+            if '{' in response_str and '}' in response_str:
+                return response_str
+            elif response_str.strip():
+                return response_str.strip()
+            else:
+                raise Exception("Empty response after string conversion")
+                
+        except Exception as e:
+            logger.error(f"String conversion failed: {e}")
+            raise Exception(f"Unable to extract text from Gemini response: {e}")
 
     def _parse_evaluation_response(self, response_text: str) -> Dict[str, Any]:
         """
