@@ -123,17 +123,11 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               <>
                 <button
                   onClick={onLoginClick}
-                  className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-primary-600 transition-colors duration-300"
+                  className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogIn className="h-4 w-4" />
                   <span>Login</span>
                 </button>
-                <Link
-                  to="/prompt-evaluator"
-                  className="px-4 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  Try Evaluator
-                </Link>
               </>
             ) : (
               <>
@@ -230,18 +224,11 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
                           onLoginClick()
                           setIsOpen(false)
                         }}
-                        className="flex items-center space-x-2 w-full px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
+                        className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center flex items-center justify-center space-x-2"
                       >
                         <LogIn className="h-5 w-5" />
-                        <span className="font-medium">Login</span>
+                        <span>Login</span>
                       </button>
-                      <Link
-                        to="/prompt-evaluator"
-                        className="block w-full px-4 py-3 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-medium text-center"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Try Evaluator
-                      </Link>
                     </>
                   ) : (
                     <>
