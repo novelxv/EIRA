@@ -30,6 +30,13 @@ const Home = () => {
       description: "Analyze the effectiveness and ethics of your AI prompts",
       color: "from-purple-500 to-pink-500",
       href: "/prompt-evaluator"
+    },
+    {
+      icon: <Shield className="h-8 w-8" />,
+      title: "Content Detector",
+      description: "Detect whether text, images, or videos are AI-generated",
+      color: "from-green-500 to-teal-500",
+      href: "/content-detector"
     }
   ]
 
@@ -81,6 +88,10 @@ const Home = () => {
                 </Link>
                 <Link to="/prompt-evaluator" className="btn-secondary inline-flex items-center justify-center">
                   Try Prompt Evaluator
+                </Link>
+                <Link to="/content-detector" className="btn-secondary inline-flex items-center justify-center">
+                  {/* <Shield className="ml-2 h-4 w-4" /> */}
+                  Detect AI Content
                 </Link>
               </div>
 
@@ -190,8 +201,8 @@ const Home = () => {
           </motion.div>
 
           <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 gap-12 max-w-4xl">
-              {features.slice(0, 2).map((feature, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+              {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
@@ -311,6 +322,13 @@ const Home = () => {
                 className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium px-8 py-4 rounded-xl transition-all duration-300 inline-flex items-center justify-center"
               >
                 Evaluate My Prompts
+              </Link>
+              <Link 
+                to="/content-detector" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium px-8 py-4 rounded-xl transition-all duration-300 inline-flex items-center justify-center"
+              >
+                <Shield className="mr-2 h-5 w-5" />
+                Detect AI Content
               </Link>
             </div>
           </motion.div>

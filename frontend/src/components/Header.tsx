@@ -46,7 +46,8 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
         { name: 'AI Watch', href: '/ai101/watch' },
       ]
     },
-    { name: 'Prompt Evaluator', href: '/prompt-evaluator' }
+    { name: 'Prompt Evaluator', href: '/prompt-evaluator' },
+    { name: 'Content Detector', href: '/content-detector' }
   ]
 
   return (

@@ -49,6 +49,11 @@ const Footer = () => {
                   <span>Prompt Evaluator</span>
                 </a>
               </li>
+              <li>
+                <a href="/content-detector" className="text-neutral-400 hover:text-primary-400 transition-colors flex items-center space-x-2">
+                  <span>Content Detector</span>
+                </a>
+              </li>
             </ul>
           </div>
 
