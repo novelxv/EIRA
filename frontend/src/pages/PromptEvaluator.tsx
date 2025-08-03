@@ -489,6 +489,78 @@ This improved version provides clearer context, specific requirements, and reduc
               </div>
             </div>
           </div>
+        </motion.div>
+
+        {/* Sources Modal/Section */}
+        {showSources && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-neutral-900 mb-6">Evaluation Methodology & Sources</h2>
+              
+              {/* Evaluation Criteria */}
+              <div className="mb-8">
+                <h3 className="text-lg font-medium text-neutral-800 mb-4">Evaluation Criteria</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {Object.entries(evaluationCriteria).map(([key, criteria]) => (
+                    <div key={key} className="border border-neutral-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-neutral-900 capitalize mb-2">{key}</h4>
+                      <p className="text-sm text-neutral-600 mb-3">{criteria.description}</p>
+                      <div className="mb-3">
+                        <span className="text-xs font-medium text-neutral-500 uppercase tracking-wide">Factors:</span>
+                        <ul className="list-disc list-inside text-sm text-neutral-600 mt-1">
+                          {criteria.factors.map((factor, index) => (
+                            <li key={index}>{factor}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* <div className="text-xs text-purple-600 font-medium">{criteria.source}</div> */}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sources */}
+              <div className="mb-6">
+                <h3 className="text-lg font-medium text-neutral-800 mb-4">Research Sources</h3>
+                <div className="space-y-3">
+                  {evaluationSources.map((source, index) => (
+                    <div key={index} className="border border-neutral-200 rounded-lg p-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-neutral-900 mb-1">{source.title}</h4>
+                          <p className="text-sm text-neutral-600 mb-2">{source.description}</p>
+                          <a
+                            href={source.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-purple-600 hover:text-purple-800 text-sm"
+                          >
+                            <span>View Source</span>
+                            <ExternalLink className="h-4 w-4 ml-1" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Close Button */}
+              <div className="flex justify-center pt-4 border-t border-neutral-200">
+                <button
+                  onClick={() => setShowSources(false)}
+                  className="px-6 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-medium rounded-lg transition-colors duration-200"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
           {/* Model Selection */}
           <motion.div
@@ -572,78 +644,7 @@ This improved version provides clearer context, specific requirements, and reduc
               </div>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Sources Modal/Section */}
-        {showSources && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
-          >
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-neutral-900 mb-6">Evaluation Methodology & Sources</h2>
-              
-              {/* Evaluation Criteria */}
-              <div className="mb-8">
-                <h3 className="text-lg font-medium text-neutral-800 mb-4">Evaluation Criteria</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {Object.entries(evaluationCriteria).map(([key, criteria]) => (
-                    <div key={key} className="border border-neutral-200 rounded-lg p-4">
-                      <h4 className="font-semibold text-neutral-900 capitalize mb-2">{key}</h4>
-                      <p className="text-sm text-neutral-600 mb-3">{criteria.description}</p>
-                      <div className="mb-3">
-                        <span className="text-xs font-medium text-neutral-500 uppercase tracking-wide">Factors:</span>
-                        <ul className="list-disc list-inside text-sm text-neutral-600 mt-1">
-                          {criteria.factors.map((factor, index) => (
-                            <li key={index}>{factor}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* <div className="text-xs text-purple-600 font-medium">{criteria.source}</div> */}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Sources */}
-              <div className="mb-6">
-                <h3 className="text-lg font-medium text-neutral-800 mb-4">Research Sources</h3>
-                <div className="space-y-3">
-                  {evaluationSources.map((source, index) => (
-                    <div key={index} className="border border-neutral-200 rounded-lg p-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-neutral-900 mb-1">{source.title}</h4>
-                          <p className="text-sm text-neutral-600 mb-2">{source.description}</p>
-                          <a
-                            href={source.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-purple-600 hover:text-purple-800 text-sm"
-                          >
-                            <span>View Source</span>
-                            <ExternalLink className="h-4 w-4 ml-1" />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Close Button */}
-              <div className="flex justify-center pt-4 border-t border-neutral-200">
-                <button
-                  onClick={() => setShowSources(false)}
-                  className="px-6 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-medium rounded-lg transition-colors duration-200"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Input Section */}
@@ -1004,7 +1005,7 @@ This improved version provides clearer context, specific requirements, and reduc
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   )
 }
 
