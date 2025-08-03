@@ -80,6 +80,16 @@ const PersonalizedDashboard = ({ userProfile, onResetPersonalization }: Personal
         highlights: ["Trend Analysis", "Case Studies", "Critical Thinking", "Real Examples"],
         difficulty: 'advanced',
         recommendedFor: ['professional', 'curious']
+      },
+      {
+        icon: <Rocket className="h-8 w-8" />,
+        title: "AI in Sectors",
+        description: "Panduan lengkap implementasi AI untuk berbagai sektor bisnis di Indonesia. Fokus pada UMKM dengan tools praktis dan ROI yang terukur.",
+        href: "/ai101/sectors",
+        color: "from-indigo-500 to-blue-500",
+        highlights: ["Sector-Specific", "UMKM Focus", "ROI Calculator", "Implementation Guide"],
+        difficulty: 'intermediate',
+        recommendedFor: ['professional', 'creator', 'curious']
       }
     ]
 
