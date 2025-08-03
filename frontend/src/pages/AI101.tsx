@@ -13,6 +13,7 @@ import PlatformComparison from './ai101/PlatformComparison'
 import PolicyExplainer from './ai101/PolicyExplainer'
 import AIEthicsSimulator from './ai101/AIEthicsSimulator'
 import AIWatch from './ai101/AIWatch'
+import AIInSectors from './ai101/AIInSectors'
 
 const AI101 = () => {
   const location = useLocation()
@@ -100,6 +101,7 @@ const AI101 = () => {
         <Route path="/policy" element={<AIEthicsSimulator />} />
         <Route path="/policy-classic" element={<PolicyExplainer />} />
         <Route path="/watch" element={<AIWatch />} />
+        <Route path="/sectors" element={<AIInSectors />} />
       </Routes>
     )
   }

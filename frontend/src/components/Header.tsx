@@ -44,6 +44,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
         { name: 'Platform Comparison', href: '/ai101/comparison' },
         { name: 'AI Ethical & Policy Simulator', href: '/ai101/policy' },
         { name: 'AI Watch', href: '/ai101/watch' },
+        { name: 'AI in Sectors', href: '/ai101/sectors' },
       ]
     },
     { name: 'Prompt Evaluator', href: '/prompt-evaluator' },

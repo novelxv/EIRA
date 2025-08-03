@@ -42,6 +42,7 @@ const Footer = () => {
                   <li><a href="/ai101/comparison" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">Platform Comparison</a></li>
                   <li><a href="/ai101/policy" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Ethical & Policy Simulator</a></li>
                   <li><a href="/ai101/watch" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI Watch</a></li>
+                  <li><a href="/ai101/sectors" className="text-neutral-500 hover:text-primary-400 transition-colors text-sm">AI in Sectors</a></li>
                 </ul>
               </li>
               <li>
