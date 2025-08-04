@@ -184,12 +184,12 @@ const ContentDetector = () => {
                     >
                       {isAnalyzing ? (
                         <>
-                          <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                          <RefreshCw className="h-4 w-4 mr-2 animate-spin inline-flex items-center" />
                           Analyzing...
                         </>
                       ) : (
                         <>
-                          <Shield className="h-4 w-4 mr-2" />
+                          <Shield className="h-4 w-4 mr-2 inline-flex items-center" />
                           Analyze Text
                         </>
                       )}
