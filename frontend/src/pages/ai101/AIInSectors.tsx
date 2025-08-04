@@ -15,158 +15,162 @@ import {
   Lightbulb,
   Target,
   DollarSign,
-  Globe
+  Globe,
+  BookOpen,
+  FileText,
+  GraduationCap,
+  Palette
 } from 'lucide-react'
 
 const AIInSectors = () => {
   const [activeUseCase, setActiveUseCase] = useState<string | null>(null)
 
-  const umkmUseCases = [
+  const studentUseCases = [
     {
-      id: 'marketing',
-      title: 'Marketing Digital Otomatis',
-      icon: <MessageSquare className="h-6 w-6" />,
-      description: 'Otomatisasi konten media sosial dan customer engagement',
+      id: 'study',
+      title: 'Asisten Belajar Pintar',
+      icon: <BookOpen className="h-6 w-6" />,
+      description: 'AI sebagai tutor personal untuk membantu memahami pelajaran',
       benefits: [
-        'Buat konten Instagram/TikTok otomatis',
-        'Chatbot untuk WhatsApp Business',
-        'Email marketing personal',
-        'Analisis performa posting'
+        'Penjelasan konsep yang sulit dengan bahasa sederhana',
+        'Latihan soal dengan pembahasan detail',
+        'Ringkasan materi pelajaran otomatis',
+        'Quiz interaktif untuk persiapan ujian'
       ],
       tools: [
-        { name: 'ChatGPT', use: 'Membuat caption menarik', cost: 'Gratis' },
-        { name: 'Canva AI', use: 'Design poster otomatis', cost: '$12/bulan' },
-        { name: 'Meta Business', use: 'Automated ads', cost: 'Gratis + ad spend' }
+        { name: 'ChatGPT', use: 'Tutor matematika & sains', cost: 'Gratis' },
+        { name: 'Photomath', use: 'Solver soal matematika', cost: 'Gratis + Premium $9.99/bulan' },
+        { name: 'Quillbot', use: 'Parafrase dan grammar check', cost: 'Gratis + Premium $8.33/bulan' }
       ],
-      roi: '150-300% peningkatan engagement'
+      roi: '40-60% peningkatan pemahaman materi'
     },
     {
-      id: 'inventory',
-      title: 'Manajemen Stok Pintar',
-      icon: <BarChart3 className="h-6 w-6" />,
-      description: 'Prediksi demand dan optimasi stok dengan AI',
+      id: 'homework',
+      title: 'Bantuan Tugas & Proyek',
+      icon: <FileText className="h-6 w-6" />,
+      description: 'AI untuk membantu mengerjakan tugas sekolah dengan lebih efisien',
       benefits: [
-        'Prediksi penjualan harian/mingguan',
-        'Alert stok menipis otomatis',
-        'Rekomendasi pembelian optimal',
-        'Analisis produk terlaris'
+        'Research assistant untuk tugas essay',
+        'Ide kreatif untuk proyek sekolah',
+        'Proofreading dan editing tulisan',
+        'Membuat outline dan struktur karya tulis'
       ],
       tools: [
-        { name: 'Google Sheets + AI', use: 'Formula prediksi sederhana', cost: 'Gratis' },
-        { name: 'Zoho Inventory', use: 'AI forecasting', cost: '$39/bulan' },
-        { name: 'TradeGecko', use: 'Demand planning', cost: '$99/bulan' }
+        { name: 'Notion AI', use: 'Writing assistant & brainstorming', cost: '$8/bulan untuk siswa' },
+        { name: 'Grammarly', use: 'Grammar & style checker', cost: 'Gratis + Premium $12/bulan' },
+        { name: 'Perplexity AI', use: 'Research dengan sumber terpercaya', cost: 'Gratis + Pro $20/bulan' }
       ],
-      roi: '20-30% pengurangan waste stok'
+      roi: '50% lebih cepat menyelesaikan tugas'
     },
     {
-      id: 'customer',
-      title: 'Customer Service 24/7',
-      icon: <Users className="h-6 w-6" />,
-      description: 'Chatbot pintar yang memahami pelanggan Indonesia',
-      benefits: [
-        'Respon instan ke customer',
-        'Jawab FAQ secara otomatis',
-        'Proses order sederhana',
-        'Eskalasi ke manusia jika perlu'
-      ],
-      tools: [
-        { name: 'WhatsApp Business API', use: 'Chatbot WhatsApp', cost: 'Dari $0.005/pesan' },
-        { name: 'Botika', use: 'Local Indonesian bot', cost: '$15/bulan' },
-        { name: 'Tawk.to', use: 'Website chat', cost: 'Gratis' }
-      ],
-      roi: '50% pengurangan waktu handling customer'
-    },
-    {
-      id: 'finance',
-      title: 'Keuangan & Akuntansi',
-      icon: <DollarSign className="h-6 w-6" />,
-      description: 'Otomatisasi pencatatan dan analisis keuangan',
-      benefits: [
-        'Auto-kategorisasi transaksi',
-        'Laporan keuangan instan',
-        'Prediksi cash flow',
-        'Tax calculation otomatis'
-      ],
-      tools: [
-        { name: 'Jurnal by Mekari', use: 'AI bookkeeping', cost: '$8/bulan' },
-        { name: 'Accurate', use: 'Smart accounting', cost: '$20/bulan' },
-        { name: 'Wave Accounting', use: 'AI categorization', cost: 'Gratis' }
-      ],
-      roi: '80% lebih cepat dalam pembukuan'
-    },
-    {
-      id: 'production',
-      title: 'Optimasi Produksi',
-      icon: <TrendingUp className="h-6 w-6" />,
-      description: 'Efisiensi produksi dengan computer vision dan IoT',
-      benefits: [
-        'Quality control otomatis',
-        'Monitoring proses real-time',
-        'Predictive maintenance',
-        'Waste reduction'
-      ],
-      tools: [
-        { name: 'Google Vision AI', use: 'Quality inspection', cost: '$1.50/1000 images' },
-        { name: 'AWS IoT', use: 'Production monitoring', cost: 'Pay as use' },
-        { name: 'Custom solution', use: 'Tailored system', cost: '$500-2000' }
-      ],
-      roi: '15-25% efisiensi produksi'
-    },
-    {
-      id: 'ecommerce',
-      title: 'E-commerce Optimization',
+      id: 'language',
+      title: 'Belajar Bahasa Asing',
       icon: <Globe className="h-6 w-6" />,
-      description: 'Optimasi toko online dengan AI recommendations',
+      description: 'AI untuk meningkatkan kemampuan bahasa Inggris dan bahasa asing lainnya',
       benefits: [
-        'Product recommendations',
-        'Dynamic pricing',
-        'Personalized shopping',
-        'Fraud detection'
+        'Conversation practice dengan AI',
+        'Koreksi pronunciation real-time',
+        'Vocabulary building yang adaptive',
+        'Writing practice dengan feedback'
       ],
       tools: [
-        { name: 'Shopify AI', use: 'Smart recommendations', cost: '$29/bulan' },
-        { name: 'Tokopedia Ads', use: 'AI-powered ads', cost: 'Pay per click' },
-        { name: 'Google Analytics', use: 'Behavior analysis', cost: 'Gratis' }
+        { name: 'Duolingo', use: 'Belajar bahasa dengan AI tutor', cost: 'Gratis + Plus $6.99/bulan' },
+        { name: 'HelloTalk AI', use: 'Chat practice dengan native speaker', cost: 'Gratis + VIP $6.99/bulan' },
+        { name: 'ELSA Speak', use: 'AI pronunciation coach', cost: 'Premium $8.33/bulan' }
       ],
-      roi: '25-40% peningkatan conversion rate'
+      roi: '3x lebih cepat improvement bahasa'
+    },
+    {
+      id: 'creativity',
+      title: 'Kreativitas & Seni Digital',
+      icon: <Palette className="h-6 w-6" />,
+      description: 'AI untuk mengeksplorasi kreativitas dalam seni, desain, dan konten digital',
+      benefits: [
+        'Generate ide kreatif untuk project seni',
+        'Editing foto dan video otomatis',
+        'Membuat poster dan desain grafis',
+        'Komposisi musik dan sound effect'
+      ],
+      tools: [
+        { name: 'Canva AI', use: 'Design poster & presentasi', cost: 'Gratis + Pro $12.99/bulan' },
+        { name: 'Midjourney', use: 'AI art generation', cost: '$10/bulan' },
+        { name: 'Runway ML', use: 'Video editing dengan AI', cost: '$12/bulan' }
+      ],
+      roi: 'Unlimited creative possibilities'
+    },
+    {
+      id: 'career',
+      title: 'Persiapan Karir & Kuliah',
+      icon: <Target className="h-6 w-6" />,
+      description: 'AI untuk membantu planning masa depan dan persiapan kuliah',
+      benefits: [
+        'Career guidance berdasarkan minat & bakat',
+        'Mock interview dengan AI',
+        'Review CV dan personal statement',
+        'Rekomendasi jurusan dan universitas'
+      ],
+      tools: [
+        { name: 'LinkedIn Learning', use: 'Skill development courses', cost: '$29.99/bulan' },
+        { name: 'InterviewBuddy AI', use: 'Practice interview', cost: '$19/bulan' },
+        { name: 'Zety Resume Builder', use: 'AI-powered CV maker', cost: '$5.95/bulan' }
+      ],
+      roi: '80% lebih siap untuk masa depan'
+    },
+    {
+      id: 'productivity',
+      title: 'Manajemen Waktu & Produktivitas',
+      icon: <Clock className="h-6 w-6" />,
+      description: 'AI untuk mengatur jadwal belajar dan meningkatkan produktivitas',
+      benefits: [
+        'Smart scheduling untuk belajar',
+        'Reminder tugas dan deadline otomatis',
+        'Time tracking untuk aktivitas belajar',
+        'Focus mode dengan background noise'
+      ],
+      tools: [
+        { name: 'Notion', use: 'All-in-one workspace', cost: 'Gratis untuk siswa' },
+        { name: 'Forest App', use: 'Focus timer dengan gamification', cost: '$3.99 sekali bayar' },
+        { name: 'Motion', use: 'AI calendar assistant', cost: '$19/bulan' }
+      ],
+      roi: '60% peningkatan produktivitas belajar'
     }
   ]
 
   const implementationSteps = [
     {
       step: 1,
-      title: 'Assessment & Planning',
-      description: 'Identifikasi kebutuhan dan prioritas bisnis',
-      duration: '1-2 minggu',
+      title: 'Kenali Kebutuhan Belajar',
+      description: 'Identifikasi mata pelajaran dan skill yang ingin ditingkatkan',
+      duration: '1 minggu',
       activities: [
-        'Audit proses bisnis saat ini',
-        'Identifikasi pain points utama',
-        'Set budget dan timeline',
-        'Training basic AI literacy'
+        'Evaluasi nilai dan performa akademik saat ini',
+        'Tentukan mata pelajaran yang paling challenging',
+        'Set goals yang realistis dan terukur',
+        'Diskusi dengan guru dan orang tua'
       ]
     },
     {
       step: 2,
-      title: 'Pilot Implementation',
-      description: 'Mulai dengan 1-2 use case prioritas',
-      duration: '2-4 minggu',
+      title: 'Mulai dengan Tools Gratis',
+      description: 'Eksperimen dengan AI tools yang tersedia gratis',
+      duration: '2-3 minggu',
       activities: [
-        'Setup tools dan platform',
-        'Training team terkait',
-        'Test dengan data real',
-        'Monitoring performa awal'
+        'Download dan coba aplikasi gratis',
+        'Belajar basic prompt engineering',
+        'Praktek dengan tugas sekolah real',
+        'Evaluasi mana yang paling membantu'
       ]
     },
     {
       step: 3,
-      title: 'Scale & Optimize',
-      description: 'Perluas ke area lain dan optimasi',
-      duration: '1-3 bulan',
+      title: 'Integrasikan ke Rutine Belajar',
+      description: 'Jadikan AI sebagai bagian dari kebiasaan belajar harian',
+      duration: '1-2 bulan',
       activities: [
-        'Expand ke use case lain',
-        'Integrasi antar sistem',
-        'Advanced analytics',
-        'ROI measurement'
+        'Buat jadwal penggunaan AI tools',
+        'Kombinasikan dengan metode belajar tradisional',
+        'Track progress dan improvement',
+        'Share pengalaman dengan teman'
       ]
     }
   ]
@@ -181,15 +185,15 @@ const AIInSectors = () => {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
-            <Store className="h-4 w-4 mr-2" />
+            <GraduationCap className="h-4 w-4 mr-2" />
             AI in Sectors
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
-            AI untuk <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">UMKM Indonesia</span>
+            AI untuk <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Pelajar SMA</span>
           </h1>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-            Panduan lengkap implementasi AI untuk Usaha Mikro, Kecil, dan Menengah. 
-            Mulai dari yang sederhana, terjangkau, dan sesuai konteks Indonesia.
+            Panduan lengkap menggunakan AI untuk meningkatkan prestasi akademik, 
+            kreativitas, dan persiapan masa depan sebagai pelajar SMA modern.
           </p>
         </motion.div>
 
@@ -200,10 +204,10 @@ const AIInSectors = () => {
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12"
         >
           {[
-            { label: 'UMKM di Indonesia', value: '65 Juta+', icon: <Store className="h-5 w-5" /> },
-            { label: 'Kontribusi GDP', value: '60.5%', icon: <TrendingUp className="h-5 w-5" /> },
-            { label: 'Penyerapan Tenaga Kerja', value: '97%', icon: <Users className="h-5 w-5" /> },
-            { label: 'Potensi ROI dengan AI', value: '200%+', icon: <Target className="h-5 w-5" /> }
+            {label: 'Siswa SMA di Indonesia', value: '4.8 Juta', icon: <Users className="h-5 w-5" /> },
+            { label: 'Menggunakan Smartphone', value: '95%', icon: <Smartphone className="h-5 w-5" /> },
+            { label: 'Akses Internet Harian', value: '8+ Jam', icon: <Globe className="h-5 w-5" /> },
+            { label: 'Potensi Peningkatan Nilai', value: '25%+', icon: <TrendingUp className="h-5 w-5" /> }
           ].map((stat, index) => (
             <div key={index} className="bg-white rounded-xl p-6 shadow-lg text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mb-4">
@@ -222,11 +226,11 @@ const AIInSectors = () => {
           className="mb-16"
         >
           <h2 className="text-3xl font-bold text-neutral-900 mb-8 text-center">
-            6 Area Implementasi AI untuk UMKM
+            6 Cara AI Membantu Pelajar SMA
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {umkmUseCases.map((useCase, index) => (
+            {studentUseCases.map((useCase, index) => (
               <motion.div
                 key={useCase.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -254,7 +258,7 @@ const AIInSectors = () => {
                   </div>
                   
                   <div className="bg-green-50 rounded-lg p-3 mb-4">
-                    <div className="text-green-800 font-medium text-sm">Expected ROI:</div>
+                    <div className="text-green-800 font-medium text-sm">Expected Impact:</div>
                     <div className="text-green-700 text-sm">{useCase.roi}</div>
                   </div>
                   
@@ -311,7 +315,7 @@ const AIInSectors = () => {
           className="mb-16"
         >
           <h2 className="text-3xl font-bold text-neutral-900 mb-8 text-center">
-            Roadmap Implementasi AI
+            Roadmap Belajar dengan AI
           </h2>
           
           <div className="space-y-8">
@@ -360,46 +364,46 @@ const AIInSectors = () => {
           <div className="text-center mb-8">
             <Lightbulb className="h-12 w-12 text-blue-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-              Tips Sukses Implementasi AI untuk UMKM
+              Tips Sukses Belajar dengan AI
             </h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
             {[
               {
-                title: 'Mulai dari yang Sederhana',
+                title: 'Smart Study Habits',
                 tips: [
-                  'Pilih 1 area dengan ROI paling tinggi terlebih dahulu',
-                  'Gunakan tools gratis atau murah di awal',
-                  'Focus pada proses yang sudah berjalan baik',
-                  'Ukur hasil secara konsisten'
+                  'Gunakan AI sebagai supplement, bukan pengganti belajar',
+                  'Selalu verify informasi dari AI dengan sumber terpercaya',
+                  'Praktek active learning, jangan hanya copy-paste',
+                  'Set time limit untuk penggunaan AI tools'
                 ]
               },
               {
-                title: 'Persiapan Tim & Mindset',
+                title: 'Academic Integrity',
                 tips: [
-                  'Training basic AI literacy untuk tim',
-                  'Set ekspektasi yang realistis',
-                  'Siapkan data yang bersih dan terstruktur',
-                  'Budget untuk learning curve 2-3 bulan'
+                  'Pahami aturan sekolah tentang penggunaan AI',
+                  'Gunakan AI untuk brainstorming, bukan mencontek',
+                  'Selalu cite sources dan acknowledge AI assistance',
+                  'Develop critical thinking, jangan tergantung total'
                 ]
               },
               {
-                title: 'Pilih Tools yang Tepat',
+                title: 'Budget-Friendly Approach',
                 tips: [
-                  'Prioritaskan tools dengan support Bahasa Indonesia',
-                  'Pastikan ada customer support lokal',
-                  'Pilih yang mudah integrasi dengan sistem existing',
-                  'Consider mobile-first solutions'
+                  'Mulai dengan tools gratis sebelum upgrade premium',
+                  'Manfaatkan student discount yang tersedia',
+                  'Share subscription dengan teman (jika diperbolehkan)',
+                  'Fokus pada tools yang multi-purpose'
                 ]
               },
               {
-                title: 'Monitoring & Scaling',
+                title: 'Future-Ready Skills',
                 tips: [
-                  'Track KPI yang jelas dan measurable',
-                  'Regular review bulanan progress',
-                  'Scale gradually ke area lain',
-                  'Build internal AI capability'
+                  'Pelajari basic prompt engineering',
+                  'Develop AI literacy dan digital citizenship',
+                  'Stay updated dengan perkembangan AI terbaru',
+                  'Build portfolio digital untuk kuliah/karir'
                 ]
               }
             ].map((section, index) => (
@@ -425,21 +429,21 @@ const AIInSectors = () => {
           className="bg-blue-500 rounded-2xl p-8 text-center text-white"
         >
           <h2 className="text-2xl font-bold mb-4">
-            Siap Mulai Transformasi Digital UMKM Anda?
+            Siap Jadi Pelajar SMA yang Future-Ready?
           </h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            Mulai dengan assessment gratis kebutuhan AI untuk bisnis Anda. 
-            Dapatkan rekomendasi tools dan roadmap implementasi yang sesuai.
+            Mulai gunakan AI untuk boost prestasi akademik dan persiapan masa depan. 
+            Jadi generasi yang tidak hanya menggunakan AI, tapi memahami dan menguasainya!
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 hover:bg-blue-50 font-medium px-6 py-3 rounded-lg transition-colors inline-flex items-center justify-center">
               <Target className="h-5 w-5 mr-2" />
-              Mulai Assessment
+              Mulai Belajar Sekarang
             </button>
             <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-medium px-6 py-3 rounded-lg transition-all duration-300 inline-flex items-center justify-center">
               <MessageSquare className="h-5 w-5 mr-2" />
-              Konsultasi Gratis
+              Join Study Group
             </button>
           </div>
         </motion.div>
